@@ -7,8 +7,10 @@
     h2 {
         font-size: 3rem;
     }
+    
     a {
         cursor: auto;
+        text-decoration: none;
     }
 
     /*  ################################################################ 
@@ -32,8 +34,8 @@
         align-items: center;
     }
 
-    .menuLinksDesktop > a:nth-child(-n + 4) {
-        margin-right: 6%;
+    .menuLinksDesktop > .linkNav {
+        margin-right: 4%;
     }
 
     .menuLinksDesktop .connect {
@@ -261,7 +263,7 @@
     transition: all 0.35s ease;
 }
 
-.menuLinksDesktop a:nth-child(-n + 4) {
+.menuLinksDesktop .linkNav {
     display: inline-block;
     padding: 0.5em 17px;
     color: rgba(255, 255, 255, 0.5);
@@ -270,7 +272,7 @@
     text-decoration: none;
 }
 
-.menuLinksDesktop a:nth-child(-n + 4):before {
+.menuLinksDesktop .linkNav:before {
     left: 20%;
     right: 20%;
     top: 50%;
@@ -287,15 +289,15 @@
     cursor: pointer;
 }
 
-.menuLinksDesktop a:hover,
-.menuLinksDesktop a.active,
-.menuLinksDesktop .current a {
+.menuLinksDesktop .linkNav:hover,
+.menuLinksDesktop .linkNav.active,
+.menuLinksDesktop .current .linkNav {
     color: #ffffff;
 }
 
-.menuLinksDesktop a:hover:before,
-.menuLinksDesktop a.active:before,
-.menuLinksDesktop .current a:before {
+.menuLinksDesktop .linkNav:hover:before,
+.menuLinksDesktop .linkNav.active:before,
+.menuLinksDesktop .current .linkNav:before {
     left: 0;
     right: 0;
     opacity: 1;

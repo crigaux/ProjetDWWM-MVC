@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../public/assets/css/desktop.css">
     <?= isset($isOnMenu) ? '<link rel="stylesheet" href="../../public/assets/css/menu.css">' : '' ; ?>
     <?= isset($isOnReview) ? '<link rel="stylesheet" href="../../public/assets/css/review.css">' : '' ; ?>
+    <?= isset($isOnAccount) ? '<link rel="stylesheet" href="../../public/assets/css/account.css">' : '' ; ?>
     <title>L'annexe</title>
 </head>
 <body>
@@ -31,34 +32,25 @@
             </div>
         </div>
     </div>
-    <header>
+    <!-- Barre de navigation -->
 
-        <!-- Barre de navigation -->
-
-        <nav>
-            <a href="/accueil#reservation"><button>Réservation</button></a>
-            <div class="burgerMenuIcon">
-                <div class="menu">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"> </div>
-                </div>
+    <nav>
+        <a href="/accueil#reservation"><button>Réservation</button></a>
+        <div class="burgerMenuIcon">
+            <div class="menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"> </div>
             </div>
-            <div class="menuLinksDesktop">
-                <a href="../accueil" class="linkNav"><h3>Accueil</h3></a>
-                <a href="../menu" class="linkNav"><h3>Menu</h3></a>
-                <a href="../commentaires" class="linkNav"><h3>Commentaires</h3></a>
-                <a href="../commentaires" class="linkNav"><h3>Galerie</h3></a>
-                <div class="connect">
-                    <a href="../connexion"><button>Connexion</button></a>
-                    <!-- <a href="../inscription"><button>Inscription</button></a> -->
-                </div>
+        </div>
+        <div class="menuLinksDesktop">
+            <a href="../accueil" class="linkNav"><h3>Accueil</h3></a>
+            <a href="../menu" class="linkNav"><h3>Menu</h3></a>
+            <a href="../commentaires" class="linkNav"><h3>Commentaires</h3></a>
+            <a href="../commentaires" class="linkNav"><h3>Galerie</h3></a>
+            <div class="connect">
+                <a href="../connexion"><button>Connexion</button></a>
+                <!-- <a href="../inscription"><button>Inscription</button></a> -->
             </div>
-        </nav>
-
-        <!-- Bannière -->
-        <a href="../accueil"><h1>L'ANNEXE</h1></a>
-        <div class="whiteBrushBottom"></div>
-
-    </header>
-    <main>
+        </div>
+    </nav>

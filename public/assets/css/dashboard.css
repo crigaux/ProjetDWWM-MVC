@@ -1,0 +1,166 @@
+@font-face {
+    font-family: 'UnicaOne';
+    src: url('../fonts/UnicaOne/UnicaOne-Regular.ttf');
+}
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+}
+
+h1 {
+    font-size: 1rem;
+}
+
+main {
+    height: 90vh;
+    width: 90vw;
+    background-color: #f3f3f3;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+    position: relative;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul li {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-left: 0.5rem;
+}
+
+.sidebar ul li a:hover {
+    color: #A57D5C;
+    text-decoration: underline;
+}
+
+.sidebar ul li:hover svg {
+    fill: #A57D5C;
+}
+
+.sidebar ul li:hover a {
+    fill: #A57D5C;
+    text-decoration: underline;
+}
+
+.sidebar svg {
+    height: 20px;
+    width: 20px;
+    fill: #333;
+}
+
+.logo {
+    font-family: 'UnicaOne';
+    position: absolute;
+    top: 30px;
+    font-size: 1.5rem;
+}
+
+.dashboardContent {
+    width: 76%;
+    margin-left: 2%;
+    height: 96%;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.title {
+    font-family: 'UnicaOne';
+    height: 10%;
+    border-radius: 20px;
+    background-color: #333;
+    color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    height: 80%;
+    margin-top: 5%;
+    overflow: scroll;
+}
+
+table {
+    width: 80%;
+}
+
+th {
+    font-size: 1.5rem;
+    font-family: 'UnicaOne';
+    text-transform: uppercase;
+}
+
+td {
+    text-align: center;
+    background-color: #d3d3d377;
+    border-radius: 20px;
+}
+
+td.name {
+    width: 15%;
+}
+
+td.price {
+    width: 5%;
+}
+
+td.desc {
+    width: 35%;
+}
+
+td.img {
+    width: 15%;
+}
+
+td.edit {
+    width: 10%;
+}
+
+td.edit svg {
+    margin: 0 0.4rem;
+    height: 15px;
+    cursor: pointer;
+}
+
+td.edit svg:hover {
+    fill: #A57D5C;
+}

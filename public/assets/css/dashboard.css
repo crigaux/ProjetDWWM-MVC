@@ -3,6 +3,11 @@
     src: url('../fonts/UnicaOne/UnicaOne-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat/Montserrat-VariableFont_wght.ttf');
+}
+
 *, ::before, ::after {
     margin: 0;
     padding: 0;
@@ -14,11 +19,16 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #333;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('../img/banner.png');
 }
 
 h1 {
     font-size: 1rem;
+}
+
+.dashboardContent h2 {
+    font-family: 'UnicaOne';
+    text-transform: uppercase;
 }
 
 main {
@@ -88,7 +98,7 @@ main {
     font-family: 'UnicaOne';
     position: absolute;
     top: 30px;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
 }
 
 .dashboardContent {
@@ -114,53 +124,201 @@ main {
 .content {
     display: flex;
     justify-content: center;
-    height: 80%;
-    margin-top: 5%;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 90%;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 table {
     width: 80%;
+    height: auto;
+    padding-top: 2rem;
+    border-spacing: 0 0.5rem;
+}
+
+tr {
+    height: 50px;
+    border: 1px solid black;
+}
+
+tr.colored {
+    height: 60px;
+    border: #333 1px solid;
+}
+
+tr.colored:hover {
+    background-color: #333;
+    color: #f3f3f3;
+}
+
+tr.colored:hover svg {
+    fill: #f3f3f3;
+}
+
+tr.colored td {
+    border-bottom: #333 2px solid;
+    border-top: #333 2px solid;
+}
+
+tr.colored td:first-child {
+    border-left: #333 2px solid;
+}
+
+tr.colored td:last-child {
+    border-right: #333 2px solid;
 }
 
 th {
     font-size: 1.5rem;
-    font-family: 'UnicaOne';
-    text-transform: uppercase;
 }
 
 td {
     text-align: center;
-    background-color: #d3d3d377;
-    border-radius: 20px;
+    width: auto;
+    padding: 0rem 1rem;
 }
 
-td.name {
-    width: 15%;
-}
-
-td.price {
-    width: 5%;
-}
-
-td.desc {
-    width: 35%;
-}
-
-td.img {
-    width: 15%;
+td.comment {
+    max-height: 80px;
+    line-height: 1rem;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
 }
 
 td.edit {
-    width: 10%;
+    width: 50px;
 }
 
 td.edit svg {
-    margin: 0 0.4rem;
+    margin: 0.3rem 0.4rem;
     height: 15px;
     cursor: pointer;
 }
 
 td.edit svg:hover {
     fill: #A57D5C;
+}
+
+td.edit svg:nth-child(2):hover {
+    fill: rgb(220, 0, 0);
+}
+
+.content form {
+    margin-top: 2rem;
+}
+
+.dbModif {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    margin: 10vh 1rem 0 1rem;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 70vh;
+    width: 430px;
+    background-color: #333333;
+}
+
+.dbModif textarea, input {
+    font-family: 'Montserrat';
+    background-color: rgba(255, 255, 255, 0.059);
+    border: none;
+    border-bottom: 1px gray solid;
+    color: #f3f3f3;
+    padding: 0.2rem;
+    margin: 0.5rem 0;
+    text-align: center;
+    font-size: 1rem;
+    width: 90%;
+}
+
+.dbModif textarea {
+    height: 150px;
+    resize: none;
+}
+
+.dbModif input {
+    height: 40px;
+}
+
+button:nth-child(2) {
+    background-color: #f3f3f3;
+    border-color: #A57D5C;
+    color: #A57D5C;
+    margin-left: 1rem;
+}
+
+button:nth-child(2):hover {
+    background-color: #A57D5C;
+    color: #f3f3f3;
+}
+
+@media (max-width: 1100px) {
+    main {
+        flex-direction: column;
+    }
+
+    .logo{
+        position: initial;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 35%;
+        flex-direction: column;
+        padding: 0;
+    }
+    
+    .sidebar ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding-top: 0.5rem;
+    }
+
+    .sidebar ul li {
+        margin: 0.5rem 0.6rem;
+        width: 40%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .sidebar ul li a {
+        font-size: 0.9rem;
+        width: 50%;
+    }
+
+    .dashboardContent {
+        width: 95%;
+        height: 65%;
+        margin: 0;
+    }
+
+    .content {
+        height: 80%;
+        font-size: 0.7rem;
+    }
+
+    .dbModif {
+        height: 40vh;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+    .logo {
+        font-size: 4rem;
+    }
+
+    .sidebar ul li a {
+        font-size: 1.5rem;
+    }
 }

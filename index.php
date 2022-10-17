@@ -1,3 +1,3 @@
 <?php
-    header('Location: /controllers/homeController.php');
+    header('Location: /accueil');
     exit();

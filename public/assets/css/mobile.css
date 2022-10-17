@@ -319,6 +319,12 @@ select {
     border-radius: 5px;
 }
 
+input[type='checkbox'] {
+    accent-color: #A57D5C;
+    cursor: pointer;
+    height: 25px;
+}
+
 option {
     background-color: #000;
     color: #f3f3f3;
@@ -749,6 +755,14 @@ footer .legal {
     width: 15px;
     height: 25px;
     cursor: pointer;
+}
+
+.inscriptionForm label > a {
+    text-decoration: underline;
+}
+
+.inscriptionForm label > a:hover {
+    color: #A57D5C;
 }
 
 legend {

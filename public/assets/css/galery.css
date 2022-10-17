@@ -1,0 +1,38 @@
+*, ::after, ::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.galeryContainer {
+    width: 90%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 1.5rem 0 1.5rem 5%;
+}
+
+.galeryContainer img {
+    margin: 1rem 0;
+    height: 42vw;
+    width: 42vw;
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    cursor: pointer;
+}
+
+@media (min-width: 900px) {
+    .galeryContainer {
+        width: 70%;
+        margin-left: 15%;
+    }
+
+    .galeryContainer img {
+        margin: 1rem 0;
+        height: 20vw;
+        width: 20vw;
+        object-fit: cover;
+    }
+}

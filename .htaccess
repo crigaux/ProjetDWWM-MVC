@@ -6,6 +6,7 @@ RewriteRule ^404$ controllers/404controller.php
 RewriteRule ^accueil$ controllers/homeController.php
 RewriteRule ^menu$ controllers/menuController.php
 RewriteRule ^commentaires$ controllers/reviewController.php
+RewriteRule ^galerie$ controllers/galeryController.php
 RewriteRule ^connexion$ controllers/connectionController.php
 RewriteRule ^inscription$ controllers/registerController.php
 RewriteRule ^oubli-mot-de-passe$ controllers/forgotPwdController.php

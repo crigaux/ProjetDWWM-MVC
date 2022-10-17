@@ -32,7 +32,7 @@
 
         <select name="time" pattern="^(matin)|(soir)$" required>
             <option value="0">Choisissez votre créneaux</option>
-            <option value="1">Matin</option>
+            <option value="1">Midi</option>
             <option value="2">Soir</option>
         </select>
         <div class="errorMessage"><?= $errors['time'] ?? '' ?></div>

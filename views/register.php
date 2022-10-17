@@ -12,14 +12,10 @@
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmation*" value="<?=$confirmPassword ?? ''?>">
                 <div class="errorMessage"><?= $errors['confirmPassword'] ?? '' ?></div>
                 <fieldset>
-                    <input type="checkbox" name="cgu" class="checkbox" id="cgu" value="1" value="<?=$cgu ?? ''?>">
-                    <label for="cgu">CGU*</label>
+                    <input type="checkbox" name="cgu" class="checkbox" value="1" value="<?=$cgu ?? ''?>">
+                    <label><a href="">CGU*</a></label>
                 </fieldset>
                 <div class="errorMessage"><?= $errors['cgu'] ?? '' ?></div>
-                <!-- <fieldset>
-                    <input type="checkbox" class="checkbox">
-                    <span>CGU</span>
-                </fieldset> -->
                 <button type="submit">Inscription</button>
                 <a href="../connexion">Déjà inscrit ?</a>
             </form>

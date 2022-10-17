@@ -1,4 +1,4 @@
-let links = document.querySelectorAll('.menuLinksDesktop a:nth-child(-n + 3)');
+let links = document.querySelectorAll('.menuLinksDesktop a:nth-child(-n + 4)');
 
 string = window.location.href;
 let index = string.lastIndexOf('/');

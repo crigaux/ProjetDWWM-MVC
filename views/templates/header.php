@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../public/assets/css/desktop.css">
     <?= isset($isOnMenu) ? '<link rel="stylesheet" href="../../public/assets/css/menu.css">' : '' ; ?>
     <?= isset($isOnReview) ? '<link rel="stylesheet" href="../../public/assets/css/review.css">' : '' ; ?>
+    <?= isset($isOnGalery) ? '<link rel="stylesheet" href="../../public/assets/css/galery.css">' : '' ; ?>
     <title>L'annexe</title>
 </head>
 <body>
@@ -48,7 +49,7 @@
                 <a href="../accueil" class="linkNav"><h3>Accueil</h3></a>
                 <a href="../menu" class="linkNav"><h3>Menu</h3></a>
                 <a href="../commentaires" class="linkNav"><h3>Commentaires</h3></a>
-                <a href="../commentaires" class="linkNav"><h3>Galerie</h3></a>
+                <a href="../galerie" class="linkNav"><h3>Galerie</h3></a>
                 <div class="connect">
                     <a href="../connexion"><button>Connexion</button></a>
                     <!-- <a href="../inscription"><button>Inscription</button></a> -->

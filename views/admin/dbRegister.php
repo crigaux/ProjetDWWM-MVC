@@ -15,6 +15,7 @@
                             </td>
                         </tr>
                     <?php } ?>
+                    <tr class="addButton"><td colspan="6"><a href=""><button>AJOUTER</button></a></td></tr>
                 </table>
             </div>
         </div>

@@ -71,6 +71,7 @@ function passwordTest(password, confirmPassword){
         test(password, confirmPassword)
     })
 
+    // Stop l'affichage du message d'aide du mot de passe si le focus est perdu
     password.addEventListener('focusout', () => {
         passwordMessage.style='display:none';
     })

@@ -4,6 +4,12 @@
             </div>
             <div class="content">
                 <table>
+                    <tr>
+                        <th></th>
+                        <th>Nom</th>
+                        <th>Commentaire</th>
+                        <th></th>
+                    </tr>
                     <?php for ($i=1; $i < 8; $i++) { ?>
                         <tr class="colored" id="<?= $i ?>">
                             <td class="activeReview"><input type="checkbox" name="activeReview"></td>

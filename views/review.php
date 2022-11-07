@@ -19,6 +19,7 @@
     <div class="addReview">
         <form method="POST">
             <legend>Poster un commentaire</legend>
+            <input type="text" name="nom" placeholder="Votre nom*" required>
             <input type="text" name="title" placeholder="Titre*" required>
             <textarea name="review" cols="30" rows="10" required placeholder="Écrivez votre commentaire ici*"></textarea>
             <button type="submit">Envoyer</button>

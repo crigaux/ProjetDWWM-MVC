@@ -140,12 +140,21 @@
         font-size: 3.5rem;
     }
 
+    .reservation .dish {
+        width: 60%;
+    }
+
     .reservation form {
         width: 60%;
     }
 
-    .reservation button {
-        width: 20%;
+    .reservationType {
+        width: 50%;
+    }
+
+    .reservationType button {
+        margin: 1rem 3rem;
+        width: 45%;
     }
 
     /*  ################################################################ 

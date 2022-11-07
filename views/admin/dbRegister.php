@@ -4,6 +4,12 @@
             </div>
             <div class="content">
                 <table>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>E-mail</th>
+                        <th></th>
+                    </tr>
                     <?php for ($i=1; $i < 8; $i++) { ?>
                         <tr class="colored" id="<?= $i ?>">
                             <td class="lastname">Nom</td>

@@ -313,6 +313,49 @@ header .whiteBrush {
     font-family: 'Montserrat';
 }
 
+.reservation .reservationToGo {
+    display: none;
+}
+
+.reservation .dish {
+    display: flex;
+    width: 80%;
+}
+
+.reservation .dish select {
+    margin: 1rem 0;
+}
+
+.reservation .dish select:nth-child(1) {
+    width: 80%;
+    margin-right: 1rem;
+}
+
+.reservation .dish select:nth-child(2) {
+    width: 20%;
+}
+
+.reservationType {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservationType button.inactive {
+    background-color: #d3d3d3a3;
+}
+
+.reservationType button.inactive:hover {
+    background-color: #d3d3d3db;
+}
+
+.reservationType button {
+    width: 40%;
+    cursor: pointer;
+    margin: 0 0.5rem;
+}
+
 input,
 textarea,
 select {
@@ -335,14 +378,58 @@ option {
     color: #f3f3f3;
 }
 
-.reservation button {
-    width: 30%;
-    cursor: pointer;
-}
-
 .reservation form input:focus,
 .reservation form textarea:focus {
     outline: none;
+}
+
+.reservation .addDish {
+    width: 80%;
+}
+
+.reservation .dishes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.del {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(176, 0, 0, 0.815);
+    border: none;
+    border-bottom: 1px gray solid;
+    border-radius: 50%;
+    width: 35px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: white;
+    margin: 1rem 0 0 1rem;
+}
+
+.del svg {
+    width: 15px;
+    height: 15px;
+    fill: white;
+}
+
+.reservation .addDish {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.059);
+    border: none;
+    border-bottom: 1px gray solid;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    font-size: 2.5rem;
+    color: white;
 }
 
 .reservation .errorMessage {
@@ -383,14 +470,6 @@ option {
     border-radius: 10px;
     border: 2px #d3d3d3;
     height: 280px;
-}
-
-.ourForces .featureContainer div:hover {
-    transform: translateY(-5px);
-    border: 2px #d3d3d3 solid;
-    border-radius: 10px;
-    transition: 0.5s;
-    box-shadow: 1px 2px 2px #333;
 }
 
 .ourForces .featureContainer div img {

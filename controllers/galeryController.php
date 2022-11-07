@@ -4,15 +4,12 @@
 
     function galeryDisplay(){
         $dir_path = "../public/assets/galery/";
-        $extensions_array = array('jpg', 'jpeg', 'png', 'svg');
     
         if(is_dir($dir_path)) {
             $files = scandir($dir_path);
     
             for ($i=0; $i < count($files); $i++) { 
                 if($files[$i] != '.' && $files[$i] != '..') {
-                    $file = pathinfo($files[$i]);
-                    $extension = $file['extension'];
                     echo "<div><img src=\"$dir_path$files[$i]\"></div>";
                 }
             }

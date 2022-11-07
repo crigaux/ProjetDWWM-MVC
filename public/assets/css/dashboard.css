@@ -111,21 +111,20 @@ main {
 
 .title {
     font-family: 'UnicaOne';
-    height: 10%;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #333;
     color: #f3f3f3;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
+    padding: 0.5rem 0;
 }
 
 .content {
     display: flex;
     justify-content: center;
     overflow-y: scroll;
-    overflow-x: hidden;
     height: 90%;
     background-color: rgba(255, 255, 255, 0);
 }
@@ -137,13 +136,20 @@ table {
     border-spacing: 0 0.5rem;
 }
 
+th {
+    font-size: 0.9rem;
+    background-color: #333333;
+    color: white;
+    padding: 0.5rem 0.5rem;
+}
+
 tr {
-    height: 50px;
+    width: 100%;
+    max-height: 80px;
     border: 1px solid black;
 }
 
 tr.colored {
-    height: 60px;
     border: #333 1px solid;
 }
 
@@ -169,10 +175,6 @@ tr.colored td:last-child {
     border-right: #333 2px solid;
 }
 
-th {
-    font-size: 1.5rem;
-}
-
 td {
     text-align: center;
     width: auto;
@@ -180,13 +182,7 @@ td {
 }
 
 td.comment {
-    max-height: 80px;
     line-height: 1rem;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 4;
 }
 
 td.edit {
@@ -231,9 +227,9 @@ td.edit svg:nth-child(2):hover {
     border: none;
     border-bottom: 1px gray solid;
     color: #f3f3f3;
-    padding: 0.2rem;
+    padding: 0.5rem;
     margin: 0.5rem 0;
-    text-align: center;
+    /* text-align: center; */
     font-size: 1rem;
     width: 90%;
 }
@@ -270,7 +266,7 @@ button:nth-child(2):hover {
     
     .sidebar {
         width: 100%;
-        height: 35%;
+        height: 30%;
         flex-direction: column;
         padding: 0;
     }
@@ -289,7 +285,6 @@ button:nth-child(2):hover {
         width: 40%;
         display: flex;
         justify-content: flex-start;
-        align-items: center;
     }
 
     .sidebar ul li a {
@@ -320,5 +315,23 @@ button:nth-child(2):hover {
 
     .sidebar ul li a {
         font-size: 1.5rem;
+    }
+
+    .content {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .content {
+        justify-content: flex-start;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    th {
+        font-size: 0.7rem;
     }
 }

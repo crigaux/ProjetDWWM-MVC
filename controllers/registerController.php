@@ -12,6 +12,7 @@
         $password = filter_input(INPUT_POST, 'password');
         $confirmPassword = filter_input(INPUT_POST, 'confirmPassword');
         $cgu = filter_input(INPUT_POST, 'cgu', FILTER_SANITIZE_NUMBER_INT);
+        $newsletter = filter_input(INPUT_POST, 'newsletter', FILTER_SANITIZE_NUMBER_INT);
 
         if(testInput($name, NAME_REGEX) != 'true') {
             $errors['name'] = testInput($name, NAME_REGEX);
@@ -38,6 +39,12 @@
             $errors['cgu'] = 'champ obligatoire';
         } else if($cgu != 1 && $cgu != NULL) {
             $errors['cgu'] = 'format non reconnu';
+        }
+
+        if($newsletter == NULL) {
+            $errors['newsletter'] = 'champ obligatoire';
+        } else if($newsletter != 1 && $cnewslettergu != NULL) {
+            $errors['newsletter'] = 'format non reconnu';
         }
 
         if(empty($errors)) {

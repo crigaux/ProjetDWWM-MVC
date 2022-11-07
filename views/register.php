@@ -16,6 +16,11 @@
                     <label><a href="">CGU*</a></label>
                 </fieldset>
                 <div class="errorMessage"><?= $errors['cgu'] ?? '' ?></div>
+                <fieldset>
+                    <input type="checkbox" name="newsletter" class="checkbox" value="1" value="<?=$newsletter ?? ''?>">
+                    <label><a href="">Recevoir notre newsletter*</a></label>
+                </fieldset>
+                <div class="errorMessage"><?= $errors['newsletter'] ?? '' ?></div>
                 <button type="submit">Inscription</button>
                 <a href="../connexion">Déjà inscrit ?</a>
             </form>

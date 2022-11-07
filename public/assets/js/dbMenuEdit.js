@@ -13,12 +13,12 @@ if(slug == 'dbMenuController.php') {
         btn.addEventListener('click', () => {
             container.innerHTML = 
             `
-            <form class="dbModif" method="POST">
+            <form class="dbModif" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="${btn.parentElement.parentElement.id}">
                 <input type="text" name="menuName" value="${btn.parentElement.parentElement.children[1].textContent}">
                 <input type="number" name="menuPrice" value="${btn.parentElement.parentElement.children[2].textContent}">
                 <textarea name="menuDesc">${btn.parentElement.parentElement.children[3].textContent}</textarea>
-                <input type="text" name="menuImg" value="${btn.parentElement.parentElement.children[4].textContent}">
+                <input type="file" name="menuImg" value="${btn.parentElement.parentElement.children[4].textContent}">
                 <div>
                     <button type="submit">Modifier</button>
                     <button>Retour</button>
@@ -53,9 +53,9 @@ if(slug == 'dbMenuController.php') {
             `
             <form class="dbModif" method="POST">
                 <input type="hidden" name="id" value="${btn.parentElement.parentElement.id}">
-                <input type="text" name="customerFirstname" value="${btn.parentElement.parentElement.children[1].textContent}">
-                <input type="text" name="customerLastname" value="${btn.parentElement.parentElement.children[2].textContent}">
-                <input type="email" name="customerEmail" value="${btn.parentElement.parentElement.children[3].textContent}">
+                <input type="text" name="customerFirstname" value="${btn.parentElement.parentElement.children[0].textContent}">
+                <input type="text" name="customerLastname" value="${btn.parentElement.parentElement.children[1].textContent}">
+                <input type="email" name="customerEmail" value="${btn.parentElement.parentElement.children[2].textContent}">
                 <div>
                     <button type="submit">Modifier</button>
                     <button>Retour</button>
@@ -72,12 +72,12 @@ if(slug == 'dbMenuController.php') {
             `
             <form class="dbModif" method="POST">
                 <input type="hidden" name="id" value="${btn.parentElement.parentElement.id}">
-                <input type="text" name="ReservationName" value="${btn.parentElement.parentElement.children[1].textContent}">
-                <input type="text" name="ReservationPhone" value="${btn.parentElement.parentElement.children[2].textContent}">
-                <input type="number" name="ReservationNb" value="${btn.parentElement.parentElement.children[3].textContent}">
-                <input type="text" name="ReservationDate" value="${btn.parentElement.parentElement.children[4].textContent}">
-                <input type="text" name="ReservationSlot" value="${btn.parentElement.parentElement.children[5].textContent}">
-                <textarea name="ReservationComment">${btn.parentElement.parentElement.children[6].textContent}</textarea>
+                <input type="text" name="ReservationName" value="${btn.parentElement.parentElement.children[0].textContent}">
+                <input type="text" name="ReservationPhone" value="${btn.parentElement.parentElement.children[1].textContent}">
+                <input type="number" name="ReservationNb" value="${btn.parentElement.parentElement.children[2].textContent}">
+                <input type="text" name="ReservationDate" value="${btn.parentElement.parentElement.children[3].textContent}">
+                <input type="text" name="ReservationSlot" value="${btn.parentElement.parentElement.children[4].textContent}">
+                <textarea name="ReservationComment">${btn.parentElement.parentElement.children[5].textContent}</textarea>
                 <div>
                     <button type="submit">Modifier</button>
                     <button>Retour</button>

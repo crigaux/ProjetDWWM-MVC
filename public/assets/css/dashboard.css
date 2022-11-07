@@ -101,6 +101,11 @@ main {
     font-size: 2.5rem;
 }
 
+.logo a {
+    text-decoration: none;
+    color: #333;
+}
+
 .dashboardContent {
     width: 76%;
     margin-left: 2%;
@@ -146,6 +151,7 @@ th {
 tr {
     width: 100%;
     max-height: 80px;
+    height: fit-content;
     border: 1px solid black;
 }
 
@@ -175,14 +181,31 @@ tr.colored td:last-child {
     border-right: #333 2px solid;
 }
 
+tr.addButton td{
+    padding: 0;
+}
+
+th {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+}
+
 td {
     text-align: center;
     width: auto;
-    padding: 0rem 1rem;
+    padding: 1rem 1rem;
+    height:fit-content;
+    font-size: 0.8rem;
 }
 
 td.comment {
-    line-height: 1rem;
+    max-height: 80px;
+    /* line-height: 1rem;
+    -webkit-box-orient: vertical;
+    display: -webkit-box; */
+    overflow: scroll !important;
+    /* text-overflow: ellipsis;
+    -webkit-line-clamp: 4; */
 }
 
 td.edit {
@@ -258,6 +281,7 @@ button:nth-child(2):hover {
 @media (max-width: 1100px) {
     main {
         flex-direction: column;
+        padding: 0.5rem 0;
     }
 
     .logo{
@@ -299,8 +323,11 @@ button:nth-child(2):hover {
     }
 
     .content {
-        height: 80%;
+        height: 90%;
         font-size: 0.7rem;
+        justify-content: start;
+        overflow-x: scroll;
+        border-radius: 20px;
     }
 
     .dbModif {
@@ -311,6 +338,10 @@ button:nth-child(2):hover {
 @media (min-width: 768px) and (max-width: 1100px) {
     .logo {
         font-size: 4rem;
+    }
+
+    .content {
+        justify-content: center;
     }
 
     .sidebar ul li a {
@@ -333,5 +364,9 @@ button:nth-child(2):hover {
 
     th {
         font-size: 0.7rem;
+    }
+
+    table {
+        width: 100%;
     }
 }

@@ -51,7 +51,7 @@ if(slug == 'dbMenuController.php') {
         btn.addEventListener('click', () => {
             container.innerHTML = 
             `
-            <form class="dbModif" method="POST">
+            <form class="dbModif" method="POST" novalidate>
                 <input type="hidden" name="id" value="${btn.parentElement.parentElement.id}">
                 <input type="text" name="customerFirstname" value="${btn.parentElement.parentElement.children[0].textContent}">
                 <input type="text" name="customerLastname" value="${btn.parentElement.parentElement.children[1].textContent}">

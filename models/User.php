@@ -283,7 +283,7 @@
 			$sth->bindValue(':id', $id, PDO::PARAM_STR);
 
 			if($sth->execute()) {
-				return ($sth->fetch() === false) ? false : (self::validate($id)) ? true : false;
+				return ($sth->fetch() === false) ? false : ((self::validate($id)) ? true : false);
 			}
 		}
 }

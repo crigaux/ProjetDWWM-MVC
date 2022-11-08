@@ -12,7 +12,7 @@
             $phoneNb = trim(filter_input(INPUT_POST, 'phoneNb', FILTER_SANITIZE_NUMBER_INT));
             $nbOfClients = filter_input(INPUT_POST, 'nbOfClients', FILTER_SANITIZE_NUMBER_INT);
             $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_NUMBER_INT);
-            $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_NUMBER_INT);
+            $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_SPECIAL_CHARS);
             $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_SPECIAL_CHARS));
             
             if(testInput($name, NAME_REGEX) != 'true') {

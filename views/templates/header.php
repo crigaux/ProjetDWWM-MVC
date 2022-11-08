@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/7194bdd5cb.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="../../public/assets/img/logo.svg">
     <link rel="stylesheet" href="../../public/assets/css/mobile.css">
     <link rel="stylesheet" href="../../public/assets/css/desktop.css">
     <?= isset($isOnMenu) ? '<link rel="stylesheet" href="../../public/assets/css/menu.css">' : '' ; ?>

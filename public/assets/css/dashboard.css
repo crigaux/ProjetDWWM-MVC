@@ -134,6 +134,18 @@ main {
     background-color: rgba(255, 255, 255, 0);
 }
 
+.activeDishes:disabled {
+    accent-color: #A57D5C;
+}
+
+.added {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: green;
+    margin-top: 1rem;
+}
+
 table {
     width: 80%;
     height: auto;
@@ -264,18 +276,6 @@ td.edit svg:nth-child(2):hover {
 
 .dbModif input {
     height: 40px;
-}
-
-button:nth-child(2) {
-    background-color: #f3f3f3;
-    border-color: #A57D5C;
-    color: #A57D5C;
-    margin-left: 1rem;
-}
-
-button:nth-child(2):hover {
-    background-color: #A57D5C;
-    color: #f3f3f3;
 }
 
 @media (max-width: 1100px) {

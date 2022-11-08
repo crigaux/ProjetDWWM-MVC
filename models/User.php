@@ -93,7 +93,7 @@
 		 * @return true si l'utilisateur a bien été créé, @return false sinon
 		 *
 		 */
-		public function create() :mixed{
+		public function create():bool{
 			$query = 
 			"INSERT INTO `users` (`lastname`, `firstname`, `email`, `password`, `phone`, `admin`, `newsletter`) 
 			VALUES (':lastname', ':firstname', ':email', ':password', ':phone', ':admin', ':newsletter');";
@@ -121,7 +121,7 @@
 		 * @return PDOStatement si l'utilisateur existe, @return false sinon.
 		 *
 		 */
-		public static function get(int $id) :mixed {
+		public static function get(int $id):mixed {
 			$query = "SELECT * FROM `users` WHERE `id` = ':id';";
 
 			$pdo = Database::getInstance();
@@ -130,24 +130,24 @@
 			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 
 			if($sth->execute()) {
-				return ($sth->fetch() === false) ? false : $sth->fetch();
+				return $sth->fetch();
 			}
 		}
 
 		/**
 		 * Méthode de récupération de tous les utilisateurs
 		 *
-		 * @return PDOStatement si il y a des utilisateurs, @return false sinon.
+		 * @return array si il y a des utilisateurs, @return false sinon.
 		 *
 		 */
-		public static function getAll() :mixed {
+		public static function getAll():mixed {
 			$query = "SELECT * FROM `users`;";
 
 			$pdo = Database::getInstance();
 			$sth = $pdo->prepare($query);
 
 			if($sth->execute()) {
-				return ($sth->fetchAll() === false) ? false : $sth->fetchAll();
+				return $sth->fetchAll();
 			}
 		}
 
@@ -159,7 +159,7 @@
 		 * @return true si l'utilisateur a bien été mis à jour, @return false sinon
 		 *
 		 */
-		public function update($id) :mixed {
+		public function update($id):bool {
 			$query = 
 			"UPDATE `users` 
 			SET `lastname` = ':lastname', `firstname` = ':firstname', `email` = ':email', `password` = ':password', `phone` = ':phone', `admin` = ':admin', `newsletter` = ':newsletter' 
@@ -189,7 +189,7 @@
 		 * @return true si l'utilisateur a bien été supprimé, @return false sinon
 		 *
 		 */
-		public static function delete(int $id) :mixed {
+		public static function delete(int $id):bool {
 			$query = "DELETE FROM `users` WHERE `id` = ':id';";
 
 			$pdo = Database::getInstance();
@@ -210,7 +210,7 @@
 		 * @return true si l'utilisateur a bien été validé, @return false sinon
 		 *
 		 */
-		public static function validate(int $id) :mixed {
+		public static function validate(int $id):bool {
 			$query = "UPDATE `users` SET `validated_at` = NOW() WHERE `id` = ':id';";
 
 			$pdo = Database::getInstance();
@@ -231,7 +231,7 @@
 		 * @return true si l'utilisateur existe, @return false sinon.
 		 *
 		 */
-		public static function isExist(string $email) :mixed {
+		public static function isExist(string $email):bool {
 			$query = "SELECT * FROM `users` WHERE `email` = ':email';";
 
 			$pdo = Database::getInstance();
@@ -252,7 +252,7 @@
 		 * @return PDOStatement (le mot de passe) si l'email existe, @return false sinon.
 		 *
 		 */
-		public static function passwordVerification(string $email) :mixed {
+		public static function passwordVerification(string $email):mixed {
 			$query = "SELECT `password` FROM `users` WHERE `email` = ':email';";
 
 			$pdo = Database::getInstance();
@@ -261,7 +261,7 @@
 			$sth->bindValue(':email', $email, PDO::PARAM_STR);
 
 			if($sth->execute()) {
-				return ($sth->fetch() === false) ? false : $sth->fetch();
+				return $sth->fetch();
 			}
 		}
 
@@ -274,16 +274,18 @@
 		 * @return true si le compte existe et a été vérifié, @return false sinon.
 		 *
 		 */
-		public static function idExist(int $id) :mixed {
+		public static function idExist(int $id):bool {
 			$query = "SELECT * FROM `users` WHERE `id` = ':id';";
 
 			$pdo = Database::getInstance();
 			$sth = $pdo->prepare($query);
 
-			$sth->bindValue(':id', $id, PDO::PARAM_STR);
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 
 			if($sth->execute()) {
-				return ($sth->fetch() === false) ? false : ((self::validate($id)) ? true : false);
+				if (empty($sth->fetch())){
+					return ((self::validate($id)) ? true : false);
+				}
 			}
 		}
 }

@@ -6,7 +6,7 @@
 		private string $title;
 		private string $price;
 		private string $description;
-		private bool $active;
+		private int $active;
 		private int $id_users;
 		private int $id_dishes_types;
 		private object $pdo;
@@ -83,23 +83,25 @@
 			if($sth->execute()) {
 				return ($sth->rowCount() == 1) ?  true : false;
 			}
+			return false;
 		}
 
 		/**
 		 * Méthode permettant de récupérer tous les plats
 		 * 
-		 * @return array
+		 * @return array ou false si aucun plat n'a été trouvé
 		 */
-		public static function getAllStarters():array {
+		public static function getAll(int $type):mixed {
 			$pdo = Database::getInstance();
 
-			$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 1;";
+			$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :type;";
 
 			$sth = $pdo->prepare($query);
-
+			$sth->bindValue(':type', $type, PDO::PARAM_INT);
 			if($sth->execute()) {
 				return $sth->fetchAll();
 			}
+			return false;
 		}
 
 		/**
@@ -107,7 +109,7 @@
 		 * 
 		 * @return object si le plat existe, false sinon
 		 */
-		public static function getDishById(int $id):mixed {
+		public static function getById(int $id):mixed {
 			$pdo = Database::getInstance();
 
 			$query = "SELECT * FROM `dishes` WHERE `id` = :id;";
@@ -119,5 +121,53 @@
 			if($sth->execute()) {
 				return $sth->fetch();
 			}
+			return false;
+		}
+
+		/**
+		 * Méthode permettant de modifier un plat
+		 * 
+		 * @return true si le plat a été modifié, false sinon
+		 */
+		public function update($id):bool {
+			$query = 
+			"UPDATE `dishes` 
+			SET `title` = :title, `price` = :price, `description` = :description, `active` = :active, `id_users` = :id_users, `id_dishes_types` = :id_dishes_types 
+			WHERE `id` = :id;";
+
+			$sth = $this->pdo->prepare($query);
+
+			$sth->bindValue(':title', $this->title);
+			$sth->bindValue(':price', $this->price);
+			$sth->bindValue(':description', $this->description);
+			$sth->bindValue(':active', $this->active, PDO::PARAM_INT);
+			$sth->bindValue(':id_users', $this->id_users, PDO::PARAM_INT);
+			$sth->bindValue(':id_dishes_types', $this->id_dishes_types, PDO::PARAM_INT);
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return ($sth->rowCount() == 1) ?  true : false;
+			}
+			return false;
+		}
+
+		/**
+		 * Méthode permettant de supprimer un plat
+		 * 
+		 * @return true si le plat a été supprimé, false sinon
+		 */
+		public static function delete(int $id):bool {
+			$pdo = Database::getInstance();
+
+			$query = "DELETE FROM `dishes` WHERE `id` = :id;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return ($sth->rowCount() == 1) ?  true : false;
+			}
+			return false;
 		}
 	}

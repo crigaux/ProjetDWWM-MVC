@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'UnicaOne';
-    src: url('../fonts/UnicaOne/UnicaOne-Regular.ttf');
+    src: url('/public/assets/fonts/UnicaOne/UnicaOne-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('../fonts/Montserrat/Montserrat-VariableFont_wght.ttf');
+    src: url('/public/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf');
 }
 
 *, ::before, ::after {
@@ -138,12 +138,22 @@ main {
     accent-color: #A57D5C;
 }
 
-.added {
+.messageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     font-size: 1.2rem;
     font-weight: 600;
-    color: green;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    height: fit-content;
+}
+
+.message {
+    background-color: #41D888;
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    color: #f3f3f3;
 }
 
 table {
@@ -151,13 +161,7 @@ table {
     height: auto;
     padding-top: 2rem;
     border-spacing: 0 0.5rem;
-}
-
-th {
-    font-size: 0.9rem;
-    background-color: #333333;
-    color: white;
-    padding: 0.5rem 0.5rem;
+    white-space: nowrap;
 }
 
 tr {
@@ -198,7 +202,9 @@ tr.addButton td{
 }
 
 th {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    background-color: #333333;
+    color: white;
     padding: 0.5rem 1rem;
 }
 
@@ -207,17 +213,12 @@ td {
     width: auto;
     padding: 1rem 1rem;
     height:fit-content;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 td.comment {
     max-height: 80px;
-    /* line-height: 1rem;
-    -webkit-box-orient: vertical;
-    display: -webkit-box; */
-    overflow: scroll !important;
-    /* text-overflow: ellipsis;
-    -webkit-line-clamp: 4; */
+    white-space: normal;
 }
 
 td.edit {
@@ -256,7 +257,7 @@ td.edit svg:nth-child(2):hover {
     background-color: #333333;
 }
 
-.dbModif textarea, input {
+.dbModif textarea, input, select{
     font-family: 'Montserrat';
     background-color: rgba(255, 255, 255, 0.059);
     border: none;
@@ -264,7 +265,6 @@ td.edit svg:nth-child(2):hover {
     color: #f3f3f3;
     padding: 0.5rem;
     margin: 0.5rem 0;
-    /* text-align: center; */
     font-size: 1rem;
     width: 90%;
 }
@@ -276,6 +276,77 @@ td.edit svg:nth-child(2):hover {
 
 .dbModif input {
     height: 40px;
+}
+
+.btnDeleteConf {
+    all: unset;
+}
+
+.btnDeleteConf:hover {
+    all: unset;
+}
+
+.btnDeleteConf svg:hover {
+    fill: rgb(193, 0, 0) !important;
+}
+
+.modale {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transform: scale(0);
+}
+
+.modaleContent {
+    width: 400px;
+    background-color: #333333;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modaleContent h2 {
+    font-family: 'UnicaOne';
+    font-size: 2rem;
+    color: #f3f3f3;
+    margin: 1rem 0;
+    text-transform: uppercase;
+}
+
+.modaleBtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modaleBtn a {
+    color: #f3f3f3;
+    text-decoration: none;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.modaleBtn a:hover {
+    color: rgba(175, 0, 0, 0.811);
+}
+
+.modale.active {
+    transform: scale(100%);
+}
+
+.error {
+    color: rgba(175, 0, 0, 0.811);
 }
 
 @media (max-width: 1100px) {
@@ -363,7 +434,12 @@ td.edit svg:nth-child(2):hover {
     }
 
     th {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
+    }
+
+    td {
+        font-size: 0.8rem;
+        padding: 0.5rem;
     }
 
     table {

@@ -89,14 +89,14 @@
 		/**
 		 * Méthode permettant de récupérer tous les plats
 		 * 
-		 * @return array ou false si aucun plat n'a été trouvé
+		 * @return array ou @return false si aucun plat n'a été trouvé
 		 */
 		public static function getAll(int $type):mixed {
 			$pdo = Database::getInstance();
 
 			$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :type;";
-
 			$sth = $pdo->prepare($query);
+
 			$sth->bindValue(':type', $type, PDO::PARAM_INT);
 			if($sth->execute()) {
 				return $sth->fetchAll();

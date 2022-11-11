@@ -14,88 +14,90 @@
 
 <section id="reservation" class="reservation">
     <div class="whiteBrushTop"></div>
-    <h2>Reservation</h2>
-    <div class="stars">&#x2605;<span>&#x2605;</span>&#x2605;</div>
+    <div class="container">
+        <h2>Reservation</h2>
+        <div class="stars">&#x2605;<span>&#x2605;</span>&#x2605;</div>
 
-    <div class="reservationType">
-        <button>Sur place</button>
-        <button class="inactive">À emporter</button>
-    </div>
-
-    <form method="POST" action="../accueil#reservation" class="reservationOnSpot">
-        <input type="text" placeholder="Nom" name="name" value="<?= $name ?? ''?>" pattern="^[A-Za-z-' ]+$" required>
-        <div class="errorMessage"><?= $errors['name'] ?? '' ?></div>
-
-        <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? ''?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
-        <div class="errorMessage"><?= $errors['phoneNb'] ?? '' ?></div>
-
-        <input type="number" min="1" max="4" step="1" placeholder="Nombre de personne" name="nbOfClients" value="<?= $nbOfClients ?? ''?>" pattern="^[1-4]$" required>
-        <div class="errorMessage"><?= $errors['nbOfClients'] ?? '' ?></div>
-
-        <input type="date" name="date" value="<?= $date ?? ''?>" pattern="^<?=date('Y', time())?>-<?=date('m', time())?>-[0-3][0-9]$" required>
-        <div class="errorMessage"><?= $errors['date'] ?? '' ?></div>
-
-        <select name="time" pattern="^(matin)|(soir)$" required>
-            <option value="0">Choisissez votre créneaux</option>
-            <option value="1">Midi</option>
-            <option value="2">Soir</option>
-        </select>
-        <div class="errorMessage"><?= $errors['time'] ?? '' ?></div>
-
-        <textarea cols="30" rows="5" placeholder="Commentaire (horaire, régime particulier, notre équipe vous répondra au plus vite.)" name="message"><?= $message ?? ''?></textarea>
-        
-        <input type="hidden" name="form" value="1">
-
-        <button type="submit">Réserver</button>
-    </form>
-
-    <form method="POST" action="../accueil#reservation" class="reservationToGo">
-        <input type="text" placeholder="Nom" name="name" value="<?= $name ?? ''?>" pattern="^[A-Za-z-' ]+$" required>
-        <div class="errorMessage"><?= $errors['name'] ?? '' ?></div>
-
-        <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? ''?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
-        <div class="errorMessage"><?= $errors['phoneNb'] ?? '' ?></div>
-
-        <input type="date" name="date" value="<?= $date ?? ''?>" pattern="^<?=date('Y', time())?>-<?=date('m', time())?>-[0-3][0-9]$" required>
-        <div class="errorMessage"><?= $errors['date'] ?? '' ?></div>
-
-        <select name="time" pattern="^(matin)|(soir)$" required>
-            <option value="0" disabled selected>Choisissez votre créneaux</option>
-            <option value="1">Midi</option>
-            <option value="2">Soir</option>
-        </select>
-        <div class="errorMessage"><?= $errors['time'] ?? '' ?></div>
-
-        <div class="dishes">
-            <div class="dish">
-                <select name="dish1">
-                    <option>Plat 1</option>
-                    <option>Plat 2</option>
-                    <option>Plat 3</option>
-                    <option>Plat 4</option>
-                    <option>Plat 5</option>
-                    <option>Plat 6</option>
-                </select>
-                <select name="quantity1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                </select>
-                <div class="del">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-                </div>
-            </div>
+        <div class="reservationType">
+            <button>Sur place</button>
+            <button class="inactive">À emporter</button>
         </div>
 
-        <div class="addDish">+</div>
+        <form method="POST" action="../accueil#reservation" class="reservationOnSpot">
+            <input type="text" placeholder="Nom" name="name" value="<?= $name ?? ''?>" pattern="^[A-Za-z-' ]+$" required>
+            <div class="errorMessage"><?= $errors['name'] ?? '' ?></div>
 
-        <input type="hidden" name="form" value="1">
+            <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? ''?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
+            <div class="errorMessage"><?= $errors['phoneNb'] ?? '' ?></div>
 
-        <button type="submit">Réserver</button>
-    </form>
+            <input type="number" min="1" max="4" step="1" placeholder="Nombre de personne" name="nbOfClients" value="<?= $nbOfClients ?? ''?>" pattern="^[1-4]$" required>
+            <div class="errorMessage"><?= $errors['nbOfClients'] ?? '' ?></div>
+
+            <input type="date" name="date" value="<?= $date ?? ''?>" pattern="^<?=date('Y', time())?>-<?=date('m', time())?>-[0-3][0-9]$" required>
+            <div class="errorMessage"><?= $errors['date'] ?? '' ?></div>
+
+            <select name="time" pattern="^(matin)|(soir)$" required>
+                <option value="0">Choisissez votre créneaux</option>
+                <option value="1">Midi</option>
+                <option value="2">Soir</option>
+            </select>
+            <div class="errorMessage"><?= $errors['time'] ?? '' ?></div>
+
+            <textarea cols="30" rows="5" placeholder="Commentaire (horaire, régime particulier, notre équipe vous répondra au plus vite.)" name="message"><?= $message ?? ''?></textarea>
+            
+            <input type="hidden" name="form" value="1">
+
+            <button type="submit">Réserver</button>
+        </form>
+
+        <form method="POST" action="../accueil#reservation" class="reservationToGo">
+            <input type="text" placeholder="Nom" name="name" value="<?= $name ?? ''?>" pattern="^[A-Za-z-' ]+$" required>
+            <div class="errorMessage"><?= $errors['name'] ?? '' ?></div>
+
+            <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? ''?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
+            <div class="errorMessage"><?= $errors['phoneNb'] ?? '' ?></div>
+
+            <input type="date" name="date" value="<?= $date ?? ''?>" pattern="^<?=date('Y', time())?>-<?=date('m', time())?>-[0-3][0-9]$" required>
+            <div class="errorMessage"><?= $errors['date'] ?? '' ?></div>
+
+            <select name="time" pattern="^(matin)|(soir)$" required>
+                <option value="0" disabled selected>Choisissez votre créneaux</option>
+                <option value="1">Midi</option>
+                <option value="2">Soir</option>
+            </select>
+            <div class="errorMessage"><?= $errors['time'] ?? '' ?></div>
+
+            <div class="dishes">
+                <div class="dish">
+                    <select name="dish1">
+                        <option>Plat 1</option>
+                        <option>Plat 2</option>
+                        <option>Plat 3</option>
+                        <option>Plat 4</option>
+                        <option>Plat 5</option>
+                        <option>Plat 6</option>
+                    </select>
+                    <select name="quantity1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                    </select>
+                    <div class="del">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="addDish">+</div>
+
+            <input type="hidden" name="form" value="1">
+
+            <button type="submit">Réserver</button>
+        </form>
+    </div>
     <div class="whiteBrushBottom"></div>
 </section>
 

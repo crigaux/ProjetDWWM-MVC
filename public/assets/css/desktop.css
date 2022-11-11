@@ -73,10 +73,17 @@
     ####################### Présentation Desktop #######################
     ################################################################*/
 
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     .presentation {
         display: flex;
         width: 90%;
-        margin-left: 5%;
+        max-width: 1400px;
+        /* margin-left: 5%; */
     }
 
     .presentation .about h2 {
@@ -128,12 +135,22 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 100%;
+    }
+
+    .reservation .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        max-width: 1400px;
     }
 
     .reservation form input,
     .reservation form select,
     .reservation form textarea {
-        width: 60%;
+        width: 100%;
     }
 
     .reservation h2 {
@@ -161,6 +178,10 @@
     ########################## Avantages Desktop #######################
     ################################################################*/
 
+    .ourForces {
+        max-width: 1400px;
+    }
+
     .ourForces h2 {
         font-size: 3.5rem;
     }
@@ -177,6 +198,9 @@
     ###################### Menu Preview Desktop ########################
     ################################################################*/
 
+    .menuPreview {
+        width: 100%;
+    }
     .menuPreview h2 {
         font-size: 3.5rem;
     }
@@ -251,7 +275,6 @@
 
     .presentation {
         width: 80%;
-        margin-left: 10%;
     }
 }
 

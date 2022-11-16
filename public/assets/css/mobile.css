@@ -630,6 +630,7 @@ footer {
     justify-content: center;
     align-items: center;
     color: #f3f3f3;
+    width: 100%;
 }
 
 footer h2 {

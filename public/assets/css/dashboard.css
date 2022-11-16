@@ -138,24 +138,6 @@ main {
     accent-color: #A57D5C;
 }
 
-.messageContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-top: 2rem;
-    height: fit-content;
-}
-
-.message {
-    background-color: #41D888;
-    padding: 1rem 2rem;
-    border-radius: 2px;
-    color: #f3f3f3;
-}
-
 table {
     width: 80%;
     height: auto;
@@ -202,7 +184,7 @@ tr.addButton td{
 }
 
 th {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     background-color: #333333;
     color: white;
     padding: 0.5rem 1rem;

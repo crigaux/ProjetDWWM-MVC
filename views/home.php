@@ -22,34 +22,40 @@
         <button class="inactive">À emporter</button>
     </div>
 
-    <form method="POST" action="../accueil#reservation" class="reservationOnSpot">
+    <!-- Message pour valider l'ajout d'un rendez vous -->
+    <?php $message = SessionFlash::get('added') ?>
+    <?= ($message == '') ? '' : '<div class="messageContainer"><div class="message">'.$message.'</div></div>'; ?>
+
+    <!-- Message prévenir que le nombre de clients est trop grand -->
+    <?php $message = SessionFlash::get('error') ?>
+    <?= ($message == '') ? '' : '<div class="errorContainer"><div class="error">'.$message.'</div></div>'; ?>
+
+    <form method="POST" action="/accueil#reservation" class="reservationOnSpot">
         <input type="text" placeholder="Nom" name="name" value="<?= $name ?? ''?>" pattern="^[A-Za-z-' ]+$" required>
         <div class="errorMessage"><?= $errors['name'] ?? '' ?></div>
 
         <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? ''?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
         <div class="errorMessage"><?= $errors['phoneNb'] ?? '' ?></div>
 
-        <input type="number" min="1" max="4" step="1" placeholder="Nombre de personne" name="nbOfClients" value="<?= $nbOfClients ?? ''?>" pattern="^[1-4]$" required>
+        <input type="number" min="1" max="8" step="1" placeholder="Nombre de personne (max 8 personnes)" name="nbOfClients" value="<?= $nbOfClients ?? ''?>" pattern="^[1-8]$" required>
         <div class="errorMessage"><?= $errors['nbOfClients'] ?? '' ?></div>
 
-        <input type="date" name="date" value="<?= $date ?? ''?>" pattern="^<?=date('Y', time())?>-<?=date('m', time())?>-[0-3][0-9]$" required>
+        <input type="date" name="date" value="<?= $date ?? ''?>" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2}$" required>
         <div class="errorMessage"><?= $errors['date'] ?? '' ?></div>
 
-        <select name="time" pattern="^(matin)|(soir)$" required>
+        <select name="time" pattern="^[1-2]$" required>
             <option value="0">Choisissez votre créneaux</option>
-            <option value="1">Midi</option>
-            <option value="2">Soir</option>
+            <option value="1" <?= $time == 1 ? 'selected' : '' ?>>Midi</option>
+            <option value="2" <?= $time == 2 ? 'selected' : '' ?>>Soir</option>
         </select>
         <div class="errorMessage"><?= $errors['time'] ?? '' ?></div>
-
-        <textarea cols="30" rows="5" placeholder="Commentaire (horaire, régime particulier, notre équipe vous répondra au plus vite.)" name="message"><?= $message ?? ''?></textarea>
         
         <input type="hidden" name="form" value="1">
 
         <button type="submit">Réserver</button>
     </form>
 
-    <form method="POST" action="../accueil#reservation" class="reservationToGo">
+    <form method="POST" action="/accueil#reservation" class="reservationToGo">
         <input type="text" placeholder="Nom" name="name" value="<?= $name ?? ''?>" pattern="^[A-Za-z-' ]+$" required>
         <div class="errorMessage"><?= $errors['name'] ?? '' ?></div>
 
@@ -68,7 +74,7 @@
 
         <div class="dishes">
             <div class="dish">
-                <select name="dish1">
+                <select name="dish[]">
                     <option>Plat 1</option>
                     <option>Plat 2</option>
                     <option>Plat 3</option>
@@ -76,7 +82,7 @@
                     <option>Plat 5</option>
                     <option>Plat 6</option>
                 </select>
-                <select name="quantity1">
+                <select name="quantity[]">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>

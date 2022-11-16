@@ -7,6 +7,8 @@
                 <div class="errorMessage"><?= $errors['firstname'] ?? '' ?></div>
                 <input type="email" name="email" placeholder="Adresse mail*" value="<?=$email ?? ''?>">
                 <div class="errorMessage"><?= $errors['email'] ?? '' ?></div>
+                <input type="phone" name="phone" placeholder="Adresse mail*" value="<?=$phone ?? ''?>">
+                <div class="errorMessage"><?= $errors['phone'] ?? '' ?></div>
                 <input type="password" id="password" name="password" placeholder="Mot de passe*" value="<?=$password ?? ''?>">
                 <div class="errorMessage"><?= $errors['password'] ?? '' ?></div>
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmation*" value="<?=$confirmPassword ?? ''?>">

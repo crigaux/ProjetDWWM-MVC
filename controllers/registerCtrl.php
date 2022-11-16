@@ -9,6 +9,7 @@
         $name = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS));
         $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS));
         $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS));
+        $phoneNb = trim(filter_input(INPUT_POST, 'phoneNb', FILTER_SANITIZE_NUMBER_INT));
         $password = filter_input(INPUT_POST, 'password');
         $confirmPassword = filter_input(INPUT_POST, 'confirmPassword');
         $cgu = filter_input(INPUT_POST, 'cgu', FILTER_SANITIZE_NUMBER_INT);
@@ -23,7 +24,9 @@
         if(testInput($email, MAIL_REGEX) != 'true') {
             $errors['email'] = testInput($email, MAIL_REGEX);
         }
-        var_dump(testInput($password, PWD_REGEX));
+        if(testInput($phoneNb, PHONE_REGEX) != 'true') {
+            $errors['phoneNb'] = testInput($phoneNb, PHONE_REGEX);
+        }
         if(testInput($password, PWD_REGEX) != 'true') {
             $errors['password'] = testInput($password, PWD_REGEX);
         }

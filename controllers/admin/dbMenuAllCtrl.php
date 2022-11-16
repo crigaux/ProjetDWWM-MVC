@@ -12,7 +12,7 @@ if(explode('/', $_SERVER['REQUEST_URI'])[3] == 'add'){
 
 			$type = intval($type);
 
-			$active = trim(filter_input(INPUT_POST, 'active', FILTER_SANITIZE_NUMBER_INT));
+			$active = intval(filter_input(INPUT_POST, 'active', FILTER_SANITIZE_NUMBER_INT));
 			$title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS));
 			$price = trim(filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
 			$desc = filter_input(INPUT_POST, 'desc', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -166,14 +166,18 @@ if(explode('/', $_SERVER['REQUEST_URI'])[3] == 'add'){
 		foreach ($dir_content as $dir_content_file) {
 			$position = strpos($dir_content_file, '.');
 			$file_name = substr($dir_content_file, 0, $position);
-			var_dump($file_name == strtolower(str_replace(' ', '', $dish->title)), '<br>');
 			if($file_name == strtolower(str_replace(' ', '', $dish->title))){
 				unlink($_SERVER['DOCUMENT_ROOT'] . "/public/assets/galery/".$dir_content_file);
 			}
 		}
-		Dish::delete($id);
-		SessionFlash::set('deleted', 'Le plat a bien été supprimé');
-		header('Location: /admin/menu');
-		exit();
+		if(Dish::delete($id)) {
+			SessionFlash::set('deleted', 'Le plat a bien été supprimé');
+			header('Location: /admin/menu');
+			exit();
+		} else {
+			SessionFlash::set('errorMessage', 'Le plat n\'a pas pu être supprimé');
+			header('Location: /admin/menu');
+			exit();
+		}
 	}
 }

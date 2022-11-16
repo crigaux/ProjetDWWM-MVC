@@ -9,7 +9,7 @@ require_once __DIR__.'/router.php';
 // Static GET
 // In the URL -> http://localhost
 // The output -> Home
-get('/accueil', 'controllers/homeCtrl.php');
+any('/accueil', 'controllers/homeCtrl.php');
 get('/', 'controllers/homeCtrl.php');
 get('/menu', 'controllers/menuCtrl.php');
 get('/commentaires', 'controllers/reviewCtrl.php');
@@ -21,12 +21,16 @@ any('/admin/menu', 'controllers/admin/dbMenuCtrl.php');
 any('/admin/commentaires', 'controllers/admin/dbReviewsCtrl.php');
 any('/admin/membres', 'controllers/admin/dbRegistersCtrl.php');
 any('/admin/reservations', 'controllers/admin/dbReservationsCtrl.php');
+any('/reservation/add', 'controllers/admin/dbReservationAllCtrl.php');
+// get('/accueil#reservation', 'controllers/homeCtrl.php#reservation');
 
 // Dynamic GET. Example with 1 variable
 // The $id will be available in user.php
 any('/admin/menu/edit/$id', 'controllers/admin/dbMenuAllCtrl.php');
 any('/admin/menu/add/$type', 'controllers/admin/dbMenuAllCtrl.php');
 any('/admin/menu/delete/$id', 'controllers/admin/dbMenuAllCtrl.php');
+any('/admin/reservation/edit/$id', 'controllers/admin/dbReservationAllCtrl.php');
+any('/admin/reservation/delete/$id', 'controllers/admin/dbReservationAllCtrl.php');
 
 // Dynamic GET. Example with 2 variables
 // The $name will be available in full_name.php

@@ -1031,6 +1031,42 @@ label {
     text-shadow: none;
 }
 
+.messageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    height: fit-content;
+}
+
+.message {
+    background-color: #41D888;
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    color: #f3f3f3;
+}
+
+.errorContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    height: fit-content;
+}
+
+.reservation .errorMessage {
+    background-color: #F94416;
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    color: #f3f3f3;
+}
+
 @media (min-width:500px) and (max-width:900px) {
     .overlay h3 {
         font-size: 2.5rem;

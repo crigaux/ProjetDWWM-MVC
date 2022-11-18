@@ -6,7 +6,7 @@ require_once __DIR__.'/router.php';
 // ##################################################
 // ##################################################
 
-// Static GET
+// Static GET OR POST
 // In the URL -> http://localhost
 // The output -> Home
 any('/accueil', 'controllers/homeCtrl.php');
@@ -22,17 +22,20 @@ any('/admin/commentaires', 'controllers/admin/dbReviewsCtrl.php');
 any('/admin/membres', 'controllers/admin/dbRegistersCtrl.php');
 any('/admin/reservations', 'controllers/admin/dbReservationsCtrl.php');
 any('/reservation/add', 'controllers/admin/dbReservationAllCtrl.php');
-// get('/accueil#reservation', 'controllers/homeCtrl.php#reservation');
+any('/admin/commandes', 'controllers/admin/dbOrdersCtrl.php');
+get('/getDishesAjax', 'helpers/ajax/dishes.php');
 
-// Dynamic GET. Example with 1 variable
+// Dynamic GET or POST. Example with 1 variable
 // The $id will be available in user.php
 any('/admin/menu/edit/$id', 'controllers/admin/dbMenuAllCtrl.php');
 any('/admin/menu/add/$type', 'controllers/admin/dbMenuAllCtrl.php');
 any('/admin/menu/delete/$id', 'controllers/admin/dbMenuAllCtrl.php');
 any('/admin/reservation/edit/$id', 'controllers/admin/dbReservationAllCtrl.php');
 any('/admin/reservation/delete/$id', 'controllers/admin/dbReservationAllCtrl.php');
+any('/admin/commande/edit/$id', 'controllers/admin/dbOrdersAll.php');
+any('/admin/commande/delete/$id', 'controllers/admin/dbOrdersAll.php');
 
-// Dynamic GET. Example with 2 variables
+// Dynamic GET or POST. Example with 2 variables
 // The $name will be available in full_name.php
 // The $last_name will be available in full_name.php
 // In the browser point to: localhost/user/X/Y
@@ -45,7 +48,7 @@ get('/patients/$del/$id', 'controllers/allPatientsController.php');
 // In the URL -> http://localhost/product/shoes/color/blue
 // The $type will be available in product.php
 // The $color will be available in product.php
-get('/product/$type/color/$color', 'product.php');
+// get('/product/$type/color/$color', 'product.php');
 
 // A route with a callback
 get('/callback', function(){

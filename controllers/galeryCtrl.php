@@ -3,7 +3,7 @@
     $isOnGalery = true;
 
     function galeryDisplay(){
-        $dir_path = "../public/assets/galery/";
+        $dir_path = "public/assets/galery/";
     
         if(is_dir($dir_path)) {
             $files = scandir($dir_path);
@@ -15,7 +15,6 @@
             }
         }
     }
-
     
     include(__DIR__ . '/../views/templates/header.php');
     include(__DIR__ . '/../views/galery.php');

@@ -158,7 +158,7 @@
     }
 
     .reservation .dish {
-        width: 60%;
+        width: 100%;
     }
 
     .reservation form {
@@ -166,7 +166,7 @@
     }
 
     .reservationType {
-        width: 50%;
+        width: 70%;
     }
 
     .reservationType button {

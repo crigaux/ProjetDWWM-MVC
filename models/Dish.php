@@ -91,13 +91,16 @@
 		 * 
 		 * @return array ou @return false si aucun plat n'a été trouvé
 		 */
-		public static function getAll(int $type):mixed {
+		public static function getAll(int $type = NULL):mixed {
 			$pdo = Database::getInstance();
-
-			$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :type;";
-			$sth = $pdo->prepare($query);
-
-			$sth->bindValue(':type', $type, PDO::PARAM_INT);
+			if($type == NULL) {
+				$query = "SELECT * FROM `dishes`";
+				$sth = $pdo->prepare($query);
+			} else {
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :id_dishes_types";
+				$sth = $pdo->prepare($query);
+				$sth->bindValue(':id_dishes_types', $type, PDO::PARAM_INT);
+			}
 			if($sth->execute()) {
 				return $sth->fetchAll();
 			}

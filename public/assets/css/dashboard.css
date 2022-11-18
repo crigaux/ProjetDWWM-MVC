@@ -61,6 +61,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
 }
 
 .sidebar ul li a {
@@ -129,9 +130,11 @@ main {
 .content {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     overflow-y: scroll;
     height: 90%;
     background-color: rgba(255, 255, 255, 0);
+    margin-bottom: 5%;
 }
 
 .activeDishes:disabled {
@@ -198,6 +201,10 @@ td {
     font-size: 1rem;
 }
 
+td.dish div {
+    margin: 0.5rem 0;
+}
+
 td.comment {
     max-height: 80px;
     white-space: normal;
@@ -221,6 +228,12 @@ td.edit svg:nth-child(2):hover {
     fill: rgb(220, 0, 0);
 }
 
+td.desc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .content form {
     margin-top: 2rem;
 }
@@ -234,7 +247,7 @@ td.edit svg:nth-child(2):hover {
     padding: 2rem 1rem;
     border-radius: 10px;
     border: 1px solid black;
-    height: 70vh;
+    min-height: 70vh;
     width: 430px;
     background-color: #333333;
 }
@@ -258,6 +271,20 @@ td.edit svg:nth-child(2):hover {
 
 .dbModif input {
     height: 40px;
+}
+
+.dbModif .ordersContainer{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dbModif .ordersContainer select {
+    width: 20%;
+}
+
+.dbModif .ordersContainer select:nth-child(odd) {
+    width: 75%;
 }
 
 .btnDeleteConf {
@@ -361,7 +388,7 @@ td.edit svg:nth-child(2):hover {
         margin: 0.5rem 0.6rem;
         width: 40%;
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
     }
 
     .sidebar ul li a {
@@ -376,15 +403,11 @@ td.edit svg:nth-child(2):hover {
     }
 
     .content {
-        height: 90%;
+        height: 85%;
         font-size: 0.7rem;
         justify-content: start;
         overflow-x: scroll;
         border-radius: 20px;
-    }
-
-    .dbModif {
-        height: 40vh;
     }
 }
 
@@ -426,5 +449,15 @@ td.edit svg:nth-child(2):hover {
 
     table {
         width: 100%;
+    }
+
+    .dbModif {
+        margin: auto;
+    }
+}
+
+@media (max-width: 380px) {
+    .sidebar ul li {
+        justify-content: flex-start;
     }
 }

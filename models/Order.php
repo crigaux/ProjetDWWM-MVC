@@ -1,7 +1,7 @@
 <?php
 	require_once(__DIR__ . '/../config/Database.php');
 
-	class User {
+	class Order {
 		private int $id;
 		private int $quantity;
 		private int $id_dishes;
@@ -47,7 +47,7 @@
 		 * @return true si la commande a été créée, @return false sinon
 		 */
 		public function create():bool {
-			$query = "INSERT INTO `orders` (`quantity`, `id_dishes`, `id_reservations`) VALUES (':quantity', ':id_dishes', ':id_reservations');";
+			$query = "INSERT INTO `orders` (`quantity`, `id_dishes`, `id_reservations`) VALUES (:quantity, :id_dishes, :id_reservations);";
 
 			$sth = $this->pdo->prepare($query);
 
@@ -57,129 +57,94 @@
 
 			if($sth->execute()) {
 				return ($sth->rowCount() == 1) ?  true : false;
-			}
-		}
-
-		/**
-		 * Méthode permettant de mettre à jour une commande
-		 * 
-		 * @param int $id
-		 * 
-		 * @return true si la commande a été mise à jour, @return false sinon
-		 */
-		public function update(int $id):bool {
-			$query = "UPDATE `orders` SET `quantity` = ':quantity', `id_dishes` = ':id_dishes', `id_reservations` = ':id_reservations' WHERE `id` = ':id';";
-
-			$sth = $this->pdo->prepare($query);
-
-			$sth->bindValue(':quantity', $this->quantity, PDO::PARAM_INT);
-			$sth->bindValue(':id_dishes', $this->id_dishes, PDO::PARAM_INT);
-			$sth->bindValue(':id_reservations', $this->id_reservations, PDO::PARAM_INT);
-			$sth->bindValue(':id', $id, PDO::PARAM_INT);
-
-			if($sth->execute()) {
-				return ($sth->rowCount() == 1) ?  true : false;
-			}
-		}
-
-		/**
-		 * Méthode permettant de supprimer une commande
-		 * 
-		 * @param int $id
-		 * 
-		 * @return true si la commande a été supprimée, @return false sinon
-		 */
-		public static function delete(int $id):bool {
-			$query = "DELETE FROM `orders` WHERE `id` = ':id';";
-
-			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
-
-			$sth->bindValue(':id', $id, PDO::PARAM_INT);
-
-			if($sth->execute()) {
-				return ($sth->rowCount() == 1) ?  true : false;
-			}
-		}
-
-		/**
-		 * Méthode permettant de récupérer une commande
-		 * 
-		 * @param int $id
-		 * 
-		 * @return PDOStatement si la commande a été récupérée, @return false sinon
-		 */
-		public static function get(int $id):mixed {
-			$query = "SELECT * FROM `orders` WHERE `id` = ':id';";
-
-			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
-
-			$sth->bindValue(':id', $id, PDO::PARAM_INT);
-
-			if($sth->execute()) {
-				return ($sth->fetch() === false) ?  false : $sth->fetch();
 			}
 		}
 
 		/**
 		 * Méthode permettant de récupérer toutes les commandes
 		 * 
-		 * @return array si les commandes ont été récupérées, @return false sinon
+		 * @return array $orders
 		 */
-		public static function getAll():mixed {
-			$query = "SELECT * FROM `orders`;";
-
+		public static function getAll():array {
 			$pdo = Database::getInstance();
+
+			$query = 
+			"SELECT orders.id, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity FROM `orders` 
+			INNER JOIN reservations ON orders.id_reservations = reservations.id
+			INNER JOIN dishes ON orders.id_dishes = dishes.id
+			INNER JOIN users ON reservations.id_users = users.id;";
+
 			$sth = $pdo->prepare($query);
 
 			if($sth->execute()) {
-				return ($sth->fetchAll() === false) ?  false : $sth->fetchAll();
+				return $sth->fetchAll();
 			}
+			return false;
 		}
 
 		/**
 		 * Méthode permettant de récupérer toutes les commandes d'une réservation
 		 * 
-		 * @param int $id_reservations
-		 * 
-		 * @return array si les commandes ont été récupérées, @return false sinon
+		 * @return array $orders
 		 */
-		public static function getAllByReservation(int $id_reservations):mixed {
-			$query = 
-			"SELECT `dishes`.`title`, `dishes`.`price`, `orders`.`quantity` 
-			FROM `orders` 
-			INNER JOIN `dishes`
-			ON `dishes`.`id` = `orders`.`id_dishes` 
-			WHERE `orders`.`id_reservations` = ':id_reservations';";
-
+		public static function get(int $id):array {
 			$pdo = Database::getInstance();
+
+			$query = 
+			"SELECT orders.id, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity FROM `orders` 
+			INNER JOIN reservations ON orders.id_reservations = reservations.id
+			INNER JOIN dishes ON orders.id_dishes = dishes.id
+			INNER JOIN users ON reservations.id_users = users.id
+			WHERE reservations.id = :id;";
+
 			$sth = $pdo->prepare($query);
 
-			$sth->bindValue(':id_reservations', $id_reservations, PDO::PARAM_INT);
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 
 			if($sth->execute()) {
-				return ($sth->fetchAll() === false) ?  false : $sth->fetchAll();
+				return $sth->fetchAll();
 			}
+			return false;
 		}
 
 		/**
-		 * Méthode permettant de récupérer toutes les commandes à une date donnée
+		 * Méthode permettant de modifier une commande
 		 * 
-		 * @param int $date
-		 * 
-		 * @return array si les commandes ont été récupérées, @return false sinon
+		 * @return true si la commande a été modifiée, @return false sinon
 		 */
-		public static function getAllByDate(string $date):mixed {
-			$query = "SELECT * FROM `orders` INNER JOIN `reservations` WHERE `reservations`.`reservation_date` = ':date';";
+		public function update($id):bool {
+			$query = "UPDATE `orders` SET `quantity` = :quantity, `id_dishes` = :id_dishes, `id_reservations` = :id_reservations WHERE `orders`.`id` = :id;";
 
-			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
+			$sth = $this->pdo->prepare($query);
 
-			$sth->bindValue(':date', $date);
+			$sth->bindValue(':quantity', $this->quantity, PDO::PARAM_INT);
+			$sth->bindValue(':id_dishes', $this->id_dishes, PDO::PARAM_INT);
+			$sth->bindValue(':id_reservations', $this->id_reservations, PDO::PARAM_INT);
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 
 			if($sth->execute()) {
-				return ($sth->fetchAll() === false) ?  false : $sth->fetchAll();
+				return ($sth->rowCount() == 1) ?  true : false;
 			}
+			return false;
+		}
+
+		/**
+		 * Méthode permettant de supprimer une commande
+		 * 
+		 * @return true si la commande a été supprimée, @return false sinon
+		 */
+		public static function delete(int $id):bool {
+			$pdo = Database::getInstance();
+
+			$query = "DELETE FROM `reservations` WHERE `reservations`.`id` = :id;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return ($sth->rowCount() == 1) ?  true : false;
+			}
+			return false;
 		}
 	}

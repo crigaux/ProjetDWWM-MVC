@@ -18,6 +18,9 @@
 			$this->validated_at = $validated_at;
 		}
 
+		public function setId($id) {
+			$this->id = $id;
+		}
 		public function setNbOfClients($nbOfClients) {
 			$this->nbOfClients = $nbOfClients;
 		}
@@ -34,6 +37,9 @@
 			$this->validated_at = $validated_at;
 		}
 
+		public function getId() {
+			return $this->id;
+		}
 		public function getNbOfClients() {
 			return $this->nbOfClients;
 		}
@@ -74,11 +80,14 @@
 		 * 
 		 * @return array $reservations
 		 */
-		public static function getAll() {
+		public static function getAll($order = NULL) {
 
 			$pdo = Database::getInstance();
-
-			$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` ORDER BY `reservation_date` DESC;";
+			if($order == NULL) {
+				$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`number_of_persons` != 0 ORDER BY `reservation_date` DESC;";
+			} else {
+				$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`number_of_persons` = 0 ORDER BY `reservation_date` DESC;";
+			}
 
 			$sth = $pdo->prepare($query);
 
@@ -99,7 +108,7 @@
 			
 			$pdo = Database::getInstance();
 
-			$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`id` = :id;";
+			$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`firstname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at`, `reservations`.`id_users` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`id` = :id;";
 
 			$sth = $pdo->prepare($query);
 
@@ -132,6 +141,7 @@
 			if($sth->execute()) {
 				return ($sth->rowCount() == 1) ?  true : false;
 			}
+			return false;
 		}
 
 		/**

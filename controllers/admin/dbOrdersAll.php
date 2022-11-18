@@ -9,6 +9,8 @@
 	require_once(__DIR__ . '/../../config/config.php');
 	require_once(__DIR__ . '/../../helpers/testInputs.php');
 	require_once(__DIR__ . '/../../models/Reservation.php');
+	require_once(__DIR__ . '/../../models/Order.php');
+	require_once(__DIR__ . '/../../models/Dish.php');
 	require_once(__DIR__ . '/../../helpers/SessionFlash.php');
 
 	if(explode('/', $_SERVER['REQUEST_URI'])[3] == 'edit'){
@@ -16,6 +18,7 @@
 		$id = intval($id);
 
 		$reservation = Reservation::get($id);
+
 		$date = date('Y-m-d', strtotime($reservation->reservation_date));
 		$time = date('H:i', strtotime($reservation->reservation_date));
 		if($time == '12:00'){
@@ -24,17 +27,19 @@
 			$time = '2';
 		}
 
+		$orders = Order::get($reservation->id);
+		$dishes = Dish::getAll();
+
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$validation = intval(filter_input(INPUT_POST, 'validation', FILTER_SANITIZE_NUMBER_INT));
-			$nbOfClients = intval(filter_input(INPUT_POST, 'nbOfClients', FILTER_SANITIZE_NUMBER_INT));
+			$userId = intval(filter_input(INPUT_POST, 'userId', FILTER_SANITIZE_NUMBER_INT));
 			$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_NUMBER_INT);
 			$time = intval(filter_input(INPUT_POST, 'time', FILTER_SANITIZE_NUMBER_INT));
-			
+			$dishesList = filter_input(INPUT_POST, 'dishesNames', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
+			$quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY);
+
 			if(testInput($validation, TIME_REGEX) != 'true') {
 				$errors['validation'] = testInput($validation, TIME_REGEX);
-			}
-			if(testInput($nbOfClients, NB_REGEX) != 'true') {
-				$errors['nbOfClients'] = testInput($nbOfClients, NB_REGEX);
 			}
 			if(testInput($date, DATE_REGEX) != 'true') {
 				$errors['date'] = testInput($date, DATE_REGEX);
@@ -51,17 +56,36 @@
 				$validation = $reservation->validated_at;
 			}
 
-
 			if($time == 1) {
 				$datetime = $date . ' 12:00:00';
 			} else {
 				$datetime = $date . ' 19:00:00';
 			}
 
+			
 			if(empty($errors)) {
-				$reservationUpdated = new Reservation($nbOfClients, $datetime, $id, $validation);
-				if($reservationUpdated->update($id)){
+				$error = [];
+				for($i = 0 ; $i < count($dishesList) ; $i++) {
+					$orderUpdated = new Order($quantity[$i], $dishesList[$i], $id);
+					if($orderUpdated->update($orders[$i]->id) == false) {
+						$error['update'] = true;
+					}
+				}
+
+				$reservationUpdated = new Reservation(0, $datetime, $reservation->id_users, $validation);
+				if($reservationUpdated->update($id) == false) {
+					$error['update'] = true;
+				}
+
+				if($error['update'] == true){
 					if($reservation->validated_at == NULL && $validation != NULL){
+						$message ='Bonjour ' . $reservation->firstname . ' ' . $reservation->lastname . ', <br> Votre réservation du ' . $formatDate->format(strtotime($reservation->reservation_date)) . ' a été validée. <br>
+						Détail de votre commande : <br><br>';
+						foreach ($orders as $order) {
+							$message .= $order->quantity . ' x <strong>' . $order->title . '</strong><br>';
+						}
+						$message .= '<br>Votre commande sera prête à votre arrivée !';
+
 						$mail = new PHPMailer(true);
 
 						try {
@@ -91,7 +115,7 @@
 							//Content
 							$mail->isHTML(true);                                  //Set email format to HTML
 							$mail->Subject = 'Votre réservation a été validée';
-							$mail->Body    = 'Bonjour ' . $reservation->firstname . ' ' . $reservation->lastname . ', <br> Votre réservation du ' . $formatDate->format(strtotime($reservation->reservation_date)) . ' a été validée. <br> Nous vous attendons avec impatience !';
+							$mail->Body    = $message;
 							// $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 					
 							$mail->send();
@@ -100,30 +124,30 @@
 							echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 						}
 					}
-					SessionFlash::set('updated', 'Votre réservation a bien été modifiée.');
-					header('Location: /admin/reservations');
+					SessionFlash::set('updated', 'Votre commande a bien été modifiée.');
+					header('Location: /admin/commandes');
 					exit();
 				} else {
-					SessionFlash::set('error', 'La réservation n\'a pas pu être modifiée.');
-					header('Location: /admin/reservations');
+					SessionFlash::set('errorMessage', 'La commande n\'a pas pu être modifiée.');
+					header('Location: /admin/commandes');
 					exit();
 				}
 			}
 		}
 		include(__DIR__ . '/../../views/admin/dashboard.php');
-		include(__DIR__ . '/../../views/admin/dbModifyReservation.php');
+		include(__DIR__ . '/../../views/admin/dbModifyOrders.php');
 	} else if(explode('/', $_SERVER['REQUEST_URI'])[3] == 'delete'){
 		$id = intval($id);
 
-		$reservation = Reservation::get($id);
+		$reservation = Order::get($id);
 
-		if(Reservation::delete($id) === true) {
+		if(Order::delete($id) === true) {
 			SessionFlash::set('deleted', 'La réservation a bien été supprimée.');
-			header('Location: /admin/reservations');
+			header('Location: /admin/commandes');
 			exit();
 		} else {
 			SessionFlash::set('error', 'La réservation n\'a pas pu être supprimée.');
-			header('Location: /admin/reservations');
+			header('Location: /admin/commandes');
 			exit();
 		}
 	}

@@ -54,6 +54,11 @@ footer h2 {
     ################ Design d'un élément de la carte ###############
     ################################################################*/
 
+.dishesContainerMain {
+    width: 100%;
+    max-width: 1200px;
+}
+
 .foodCardContainer {
     display: flex;
     justify-content: space-around;
@@ -76,7 +81,8 @@ footer h2 {
     object-fit: cover;
     height: 100%;
     width: 100%;
-    border-radius: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .foodCard .foodCardDesc h3 {

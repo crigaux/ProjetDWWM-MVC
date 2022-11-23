@@ -165,4 +165,19 @@
 				return ($sth->rowCount() == 1) ?  true : false;
 			}
 		}
+
+		public static function validate(int $id):bool {
+			$pdo = Database::getInstance();
+
+			$query = "UPDATE `reservations` SET `validated_at` = NOW() WHERE `id` = :id;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return ($sth->rowCount() == 1) ?  true : false;
+			}
+			return false;
+		}
 	}

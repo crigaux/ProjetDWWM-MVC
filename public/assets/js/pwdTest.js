@@ -20,7 +20,7 @@ let passwordNumber = document.querySelector('.passwordNumber');
 // Le mot de passe contient au moins une majuscule
 let testPasswordUpper = new RegExp('^(?=.*[A-Z])');
 // Le mot de passe contient au moins un caractère spécial
-let testPasswordSpecial = new RegExp('^(?=.*[!@#$&*])');
+let testPasswordSpecial = new RegExp('^(?=.*[!@#$&*,;:?./§ù%*µ^¨£$€])');
 // Le mot de passe contient au moins 8 caractères
 let testPasswordLength = new RegExp('^.{8,}$');
 // Le mot de passe contient au moins un nombre

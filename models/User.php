@@ -14,15 +14,13 @@
 		private string $validated_at;
 		private object $pdo;
 
-		public function __construct($id, $lastname, $firstname, $email, $password, $phone, $admin, $newsletter) {
+		public function __construct($lastname, $firstname, $email, $phone, $admin, $newsletter) {
 
 			$this->pdo = Database::getInstance();
 
-			$this->id = $id;
 			$this->lastname = $lastname;
 			$this->firstname = $firstname;
 			$this->email = $email;
-			$this->password = $password;
 			$this->phone = $phone;
 			$this->admin = $admin;
 			$this->newsletter = $newsletter;
@@ -94,11 +92,11 @@
 		 *
 		 */
 		public function create():bool{
-			$query = 
+			$sql = 
 			"INSERT INTO `users` (`lastname`, `firstname`, `email`, `password`, `phone`, `admin`, `newsletter`) 
-			VALUES (':lastname', ':firstname', ':email', ':password', ':phone', ':admin', ':newsletter');";
+			VALUES (:lastname, :firstname, :email, :password, :phone, :admin, :newsletter);";
 
-			$sth = $this->pdo->prepare($query);
+			$sth = $this->pdo->prepare($sql);
 
 			$sth->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
 			$sth->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
@@ -121,13 +119,24 @@
 		 * @return PDOStatement si l'utilisateur existe, @return false sinon.
 		 *
 		 */
-		public static function get(int $id):mixed {
-			$query = "SELECT * FROM `users` WHERE `id` = ':id';";
-
-			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
-
-			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+		public static function get(int $id = NULL, string $email = NULL):mixed {
+			if($id != NULL && $email == NULL) {
+				$sql = "SELECT * FROM `users` WHERE `id` = :id;";
+	
+				$pdo = Database::getInstance();
+				$sth = $pdo->prepare($sql);
+	
+				$sth->bindValue(':id', $id, PDO::PARAM_INT);
+			} else if ($email != NULL && $id == NULL) {
+				$sql = "SELECT * FROM `users` WHERE `email` = :email;";
+	
+				$pdo = Database::getInstance();
+				$sth = $pdo->prepare($sql);
+	
+				$sth->bindValue(':email', $email);
+			} else {
+				return false;
+			}
 
 			if($sth->execute()) {
 				return $sth->fetch();
@@ -141,10 +150,10 @@
 		 *
 		 */
 		public static function getAll():mixed {
-			$query = "SELECT * FROM `users`;";
+			$sql = "SELECT * FROM `users`;";
 
 			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
+			$sth = $pdo->prepare($sql);
 
 			if($sth->execute()) {
 				return $sth->fetchAll();
@@ -160,18 +169,17 @@
 		 *
 		 */
 		public function update($id):bool {
-			$query = 
+			$sql = 
 			"UPDATE `users` 
-			SET `lastname` = ':lastname', `firstname` = ':firstname', `email` = ':email', `password` = ':password', `phone` = ':phone', `admin` = ':admin', `newsletter` = ':newsletter' 
-			WHERE `id` = ':id';";
+			SET `lastname` = :lastname, `firstname` = :firstname, `email` = :email, `phone` = :phone, `admin` = :admin, `newsletter` = :newsletter 
+			WHERE `id` = :id;";
 
-			$sth = $this->pdo->prepare($query);
+			$sth = $this->pdo->prepare($sql);
 
 			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 			$sth->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
 			$sth->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
 			$sth->bindValue(':email', $this->email, PDO::PARAM_STR);
-			$sth->bindValue(':password', $this->password, PDO::PARAM_STR);
 			$sth->bindValue(':phone', $this->phone, PDO::PARAM_STR);
 			$sth->bindValue(':admin', $this->admin, PDO::PARAM_BOOL);
 			$sth->bindValue(':newsletter', $this->newsletter, PDO::PARAM_BOOL);
@@ -190,10 +198,10 @@
 		 *
 		 */
 		public static function delete(int $id):bool {
-			$query = "DELETE FROM `users` WHERE `id` = ':id';";
+			$sql = "DELETE FROM `users` WHERE `id` = :id;";
 
 			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
+			$sth = $pdo->prepare($sql);
 
 			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 
@@ -211,10 +219,10 @@
 		 *
 		 */
 		public static function validate(int $id):bool {
-			$query = "UPDATE `users` SET `validated_at` = NOW() WHERE `id` = ':id';";
+			$sql = "UPDATE `users` SET `validated_at` = NOW() WHERE `id` = :id;";
 
 			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
+			$sth = $pdo->prepare($sql);
 
 			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 
@@ -232,10 +240,10 @@
 		 *
 		 */
 		public static function isExist(string $email):bool {
-			$query = "SELECT * FROM `users` WHERE `email` = ':email';";
+			$sql = "SELECT * FROM `users` WHERE `email` = :email;";
 
 			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
+			$sth = $pdo->prepare($sql);
 
 			$sth->bindValue(':email', $email, PDO::PARAM_STR);
 
@@ -249,19 +257,20 @@
 		 *
 		 * @param string $email
 		 * 
-		 * @return PDOStatement (le mot de passe) si l'email existe, @return false sinon.
+		 * @return string (le mot de passe) si l'email existe, @return false sinon.
 		 *
 		 */
 		public static function passwordVerification(string $email):mixed {
-			$query = "SELECT `password` FROM `users` WHERE `email` = ':email';";
+			$sql = "SELECT `password` FROM `users` WHERE `email` = :email;";
 
 			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
+			$sth = $pdo->prepare($sql);
 
 			$sth->bindValue(':email', $email, PDO::PARAM_STR);
 
 			if($sth->execute()) {
-				return $sth->fetch();
+				$object = $sth->fetch();
+				return $object->password;
 			}
 		}
 
@@ -275,10 +284,10 @@
 		 *
 		 */
 		public static function idExist(int $id):bool {
-			$query = "SELECT * FROM `users` WHERE `id` = ':id';";
+			$sql = "SELECT * FROM `users` WHERE `id` = :id;";
 
 			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
+			$sth = $pdo->prepare($sql);
 
 			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 

@@ -17,32 +17,40 @@ get('/galerie', 'controllers/galeryCtrl.php');
 any('/connexion', 'controllers/connectionCtrl.php');
 any('/inscription', 'controllers/registerCtrl.php');
 any('/oubli-mot-de-passe', 'controllers/forgotPwdCtrl.php');
-any('/admin/menu', 'controllers/admin/dbMenuCtrl.php');
-any('/admin/commentaires', 'controllers/admin/dbReviewsCtrl.php');
-any('/admin/membres', 'controllers/admin/dbRegistersCtrl.php');
-any('/admin/reservations', 'controllers/admin/dbReservationsCtrl.php');
-any('/reservation/add', 'controllers/admin/dbReservationAllCtrl.php');
-any('/admin/commandes', 'controllers/admin/dbOrdersCtrl.php');
 get('/getDishesAjax', 'helpers/ajax/dishes.php');
+get('/disconnect', 'controllers/disconnectCtrl.php');
+any('/profil', 'controllers/user/userCtrl.php');
+any('/reservation/add', 'controllers/admin/dbReservationAllCtrl.php');
+
+get('/admin/menu', 'controllers/admin/dbDishesCtrl.php');
+any('/admin/menu/ajout', 'controllers/admin/dbDishesCtrl.php');
+
+any('/admin/reservations', 'controllers/admin/dbReservationsCtrl.php');
+
+any('/admin/commandes', 'controllers/admin/dbOrdersCtrl.php');
+
+any('/admin/commentaires', 'controllers/admin/dbReviewsCtrl.php');
+
+any('/admin/membres', 'controllers/admin/dbRegistersCtrl.php');
 
 // Dynamic GET or POST. Example with 1 variable
 // The $id will be available in user.php
-any('/admin/menu/edit/$id', 'controllers/admin/dbMenuAllCtrl.php');
-any('/admin/menu/add/$type', 'controllers/admin/dbMenuAllCtrl.php');
-any('/admin/menu/delete/$id', 'controllers/admin/dbMenuAllCtrl.php');
-any('/admin/reservation/edit/$id', 'controllers/admin/dbReservationAllCtrl.php');
-any('/admin/reservation/delete/$id', 'controllers/admin/dbReservationAllCtrl.php');
-any('/admin/commande/edit/$id', 'controllers/admin/dbOrdersAll.php');
+any('/admin/menu/add/$type', 'controllers/admin/dbDishesCtrl.php');
+any('/admin/menu/edit/$id', 'controllers/admin/dbDishesCtrl.php');
+any('/admin/menu/edit/img/$id', 'controllers/admin/dbDishesCtrl.php');
+any('/admin/menu/edit/active/$id', 'controllers/admin/dbDishesCtrl.php');
+any('/admin/menu/delete/$id', 'controllers/admin/dbDishesCtrl.php');
+
+any('/admin/reservation/edit/validate/$id', 'controllers/admin/dbReservationsCtrl.php');
+
+any('/admin/commande/edit/$id', 'controllers/admin/dbDishesCtrl.php');
 any('/admin/commande/delete/$id', 'controllers/admin/dbOrdersAll.php');
 
 // Dynamic GET or POST. Example with 2 variables
 // The $name will be available in full_name.php
 // The $last_name will be available in full_name.php
 // In the browser point to: localhost/user/X/Y
-get('/detail-rdv/$edit/$id', 'controllers/appointmentDetailsController.php');
-get('/rendez-vous/$del/$id', 'controllers/allAppointmentController.php');
-get('/patient/$edit/$id', 'controllers/patientProfileController.php');
-get('/patients/$del/$id', 'controllers/allPatientsController.php');
+// get('/detail-rdv/$edit/$id', 'controllers/appointmentDetailsController.php');
 
 // Dynamic GET. Example with 2 variables with static
 // In the URL -> http://localhost/product/shoes/color/blue

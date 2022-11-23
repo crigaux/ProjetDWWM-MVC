@@ -429,7 +429,7 @@ td.desc {
     }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .content {
         justify-content: flex-start;
     }

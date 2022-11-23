@@ -9,9 +9,9 @@
 		private int $active;
 		private int $id_users;
 		private int $id_dishes_types;
-		private object $pdo;
+		private PDO $pdo;
 
-		public function __construct($title, $price, $description, $id_users, $id_dishes_types, $active = false) {
+		public function __construct($title, $price, $description, $id_users, $id_dishes_types, $active = 1) {
 
 			$this->pdo = Database::getInstance();
 
@@ -57,14 +57,14 @@
 		public function getId_users():int {
 			return $this->id_users;
 		}
-		public function getid_dishes_types():int {
+		public function getId_dishes_types():int {
 			return $this->id_dishes_types;
 		}
 
 		/**
 		 * Méthode permettant de créer un nouveau plat
 		 * 
-		 * @return true si l'avis a été créé, false sinon
+		 * @return true si l'avis a été créé, @return false sinon
 		 */
 		public function create():bool {
 			$query = 
@@ -91,7 +91,7 @@
 		 * 
 		 * @return array ou @return false si aucun plat n'a été trouvé
 		 */
-		public static function getAll(int $type = NULL):mixed {
+		public static function getAll(int $type = NULL):array|false {
 			$pdo = Database::getInstance();
 			if($type == NULL) {
 				$query = "SELECT * FROM `dishes`";
@@ -110,9 +110,9 @@
 		/**
 		 * Méthode permettant de récupérer un plat avec son id
 		 * 
-		 * @return object si le plat existe, false sinon
+		 * @return object si le plat existe, @return false sinon
 		 */
-		public static function getById(int $id):mixed {
+		public static function getById(int $id):object|false {
 			$pdo = Database::getInstance();
 
 			$query = "SELECT * FROM `dishes` WHERE `id` = :id;";
@@ -130,7 +130,7 @@
 		/**
 		 * Méthode permettant de modifier un plat
 		 * 
-		 * @return true si le plat a été modifié, false sinon
+		 * @return true si le plat a été modifié, @return false sinon
 		 */
 		public function update($id):bool {
 			$query = 
@@ -157,7 +157,7 @@
 		/**
 		 * Méthode permettant de supprimer un plat
 		 * 
-		 * @return true si le plat a été supprimé, false sinon
+		 * @return true si le plat a été supprimé, @return false sinon
 		 */
 		public static function delete(int $id):bool {
 			$pdo = Database::getInstance();

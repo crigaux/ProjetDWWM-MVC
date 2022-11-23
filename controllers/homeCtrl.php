@@ -43,7 +43,7 @@
             }
 
             if(empty($errors)) {
-                $reservation = new Reservation($nbOfClients, $datetime, 2);
+                $reservation = new Reservation($nbOfClients, $datetime, 1);
                 $reservation->create();
                 SessionFlash::set('added', 'Votre réservation a bien été prise en compte.');
             }

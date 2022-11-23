@@ -1076,3 +1076,17 @@ label {
         font-size: 1.8rem;
     }
 }
+
+.logOutIcon svg {
+    width: 20px;
+    height: 20px;
+    fill: #A57D5C;
+}
+
+.logOutIconDesk svg {
+    width: 30px;
+    height: 30px;
+    fill: #fff;
+    margin-right: 1rem;
+    cursor: pointer;
+}

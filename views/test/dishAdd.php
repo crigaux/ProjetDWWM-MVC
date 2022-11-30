@@ -23,7 +23,7 @@
 		<div class="errorMessage">
 			<?= $errors['description'] ?? '' ;?>
 		</div>
-		<input type="file" name="img" required required>
+		<input type="file" name="img" required>
 		<div class="errorMessage">
 			<?= $errors['img'] ?? '' ;?>
 		</div>

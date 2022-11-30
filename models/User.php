@@ -15,7 +15,6 @@
 		private object $pdo;
 
 		public function __construct($lastname, $firstname, $email, $phone, $admin, $newsletter) {
-
 			$this->pdo = Database::getInstance();
 
 			$this->lastname = $lastname;
@@ -277,7 +276,6 @@
 				return $object->password;
 			}
 		}
-
 
 		/**
 		 * Méthode permettant de vérifier si un id existe et de valider le compte correspondant

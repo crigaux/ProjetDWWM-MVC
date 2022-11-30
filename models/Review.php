@@ -131,6 +131,29 @@
 		}
 
 		/**
+		 * Récupère les 3 derniers avis
+		 * 
+		 * @return array
+		 */
+		public static function getLast():array|bool {
+			$query =
+			"SELECT `reviews`.`id`, `reviews`.`title`, `reviews`.`content`, `users`.`firstname` FROM `reviews`
+			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id`
+			WHERE `reviews`.`moderated_at` IS NOT NULL
+			ORDER BY `reviews`.`moderated_at` DESC
+			LIMIT 3;";
+
+			$pdo = Database::getInstance();
+
+			$sth = $pdo->prepare($query);
+
+			if($sth->execute()) {
+				return $sth->fetchAll();
+			}
+			return false;
+		}
+
+		/**
 		 * Méthode permettant de modifier un avis
 		 * 
 		 * @return true si l'avis a été modifié, @return false sinon

@@ -22,9 +22,9 @@
 	if($_SERVER['REQUEST_URI'] == '/admin/commandes') {
 		$reservations = Reservation::getAll('orders');
 		
-		include(__DIR__ . '/../../views/test/dbHeader.php');
+		include(__DIR__ . '/../../views/test/templates/dbHeader.php');
 		include(__DIR__ . '/../../views/test/dbOrders.php');
-		include(__DIR__ . '/../../views/test/dbFooter.php');
+		include(__DIR__ . '/../../views/test/templates/dbFooter.php');
 
 	// ###############################################################################
 	// ###                           VALIDE UNE COMMANDES                          ###	

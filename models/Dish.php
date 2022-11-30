@@ -81,7 +81,7 @@
 			$sth->bindValue(':id_dishes_types', $this->id_dishes_types, PDO::PARAM_INT);
 
 			if($sth->execute()) {
-				return ($sth->rowCount() == 1) ?  true : false;
+				return ($sth->rowCount() >= 0) ?  true : false;
 			}
 			return false;
 		}
@@ -100,6 +100,31 @@
 				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :id_dishes_types";
 				$sth = $pdo->prepare($query);
 				$sth->bindValue(':id_dishes_types', $type, PDO::PARAM_INT);
+			}
+			if($sth->execute()) {
+				return $sth->fetchAll();
+			}
+			return false;
+		}
+
+		/**
+		 * Récupère les 3 derniers plats en fonction du type
+		 * 
+		 * @param string $type
+		 * 
+		 * @return array
+		 */
+		public static function getLast(string $type):array|false {
+			$pdo = Database::getInstance();
+			if($type == 'starters') {
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 1 ORDER BY `id` DESC LIMIT 3";
+				$sth = $pdo->prepare($query);
+			} else if($type == 'dishes') {
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 2 ORDER BY `id` DESC LIMIT 3";
+				$sth = $pdo->prepare($query);
+			} else if($type == 'desserts') {
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 3 ORDER BY `id` DESC LIMIT 3";
+				$sth = $pdo->prepare($query);
 			}
 			if($sth->execute()) {
 				return $sth->fetchAll();

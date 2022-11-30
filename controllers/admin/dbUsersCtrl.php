@@ -22,9 +22,9 @@ if ((isset($_SESSION) && $_SESSION['user']->admin != 1) || !isset($_SESSION)) {
 if ($_SERVER['REQUEST_URI'] == '/admin/membres') {
 	$users = User::getAll();
 
-	include(__DIR__ . '/../../views/test/dbHeader.php');
+	include(__DIR__ . '/../../views/test/templates/dbHeader.php');
 	include(__DIR__ . '/../../views/test/dbUsers.php');
-	include(__DIR__ . '/../../views/test/dbFooter.php');
+	include(__DIR__ . '/../../views/test/templates/dbFooter.php');
 }
 
 // ###############################################################################
@@ -35,9 +35,9 @@ else if ($_SERVER['REQUEST_URI'] == '/admin/membres/search') {
 	$search = trim(filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS));
 	$users = User::getAll($search);
 
-	include(__DIR__ . '/../../views/test/dbHeader.php');
+	include(__DIR__ . '/../../views/test/templates/dbHeader.php');
 	include(__DIR__ . '/../../views/test/dbUsers.php');
-	include(__DIR__ . '/../../views/test/dbFooter.php');
+	include(__DIR__ . '/../../views/test/templates/dbFooter.php');
 }
 
 // ###############################################################################
@@ -97,9 +97,9 @@ else if ($_SERVER['REQUEST_URI'] == '/admin/membre/edit/' . $id) {
 		}
 	}
 
-	include(__DIR__ . '/../../views/test/dbHeader.php');
+	include(__DIR__ . '/../../views/test/templates/dbHeader.php');
 	include(__DIR__ . '/../../views/test/dbUserModify.php');
-	include(__DIR__ . '/../../views/test/dbFooter.php');
+	include(__DIR__ . '/../../views/test/templates/dbFooter.php');
 }
 
 // ###############################################################################

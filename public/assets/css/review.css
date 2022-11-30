@@ -35,11 +35,15 @@ header h3 {
 }
 
 .reviews hr {
-    width: 80%;
+    width: 20%;
     max-width: 800px;
     margin: 1rem;
     border: none;
     border-bottom: 1px solid #69696962;
+}
+
+.reviews hr:last-of-type {
+    display: none;
 }
 
 .review h4 {

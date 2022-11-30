@@ -107,5 +107,14 @@ any('/profil/commentaire/edit/$id', 'controllers/user/userCtrl.php');
 // Supprime un commentaire (user)
 any('/profil/commentaire/delete/$id', 'controllers/user/userCtrl.php');
 
+// ######################################
+// Gestion de l'ajax de la page d'accueil
+// ######################################
+
+any('/getLastStartersAjax', 'helpers/ajax/startersPreview.php');
+any('/getLastDishesAjax', 'helpers/ajax/dishesPreview.php');
+any('/getLastDessertsAjax', 'helpers/ajax/dessertsPreview.php');
+any('/getLastReviewsAjax', 'helpers/ajax/lastReviews.php');
+
 // Page not found
 any('/404','/404.php');

@@ -2,7 +2,6 @@
     <h2>Livre d'or</h2>
     <h3>Commentaires client</h3>
     <div class="stars">&#x2605;<span>&#x2605;</span>&#x2605;</div>
-    <hr>
     <?php
     foreach ($reviews as $review) {
     ?>

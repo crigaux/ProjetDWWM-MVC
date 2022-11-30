@@ -258,7 +258,7 @@ header .whiteBrush {
 }
 
 .presentation .about {
-    margin: 2rem 1rem;
+    margin: 2rem 5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -535,6 +535,7 @@ option {
 .menuPreview .menuPreviewContainer {
     width: 100%;
     padding: 0 1rem;
+    margin: 2rem 0;
     display: flex;
     justify-content: space-evenly;
     color: white;
@@ -544,8 +545,6 @@ option {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 3rem;
-    height: 22vh;
     font-weight: 600;
 }
 
@@ -553,6 +552,7 @@ option {
     display: flex;
     justify-content: space-between;
     padding-right: 0.5rem;
+    margin: 1rem 0;
 }
 
 .menuPreview .menuPreviewContainer .categoriesItem:hover {
@@ -609,6 +609,10 @@ option {
 
 .reviewPreview {
     margin: 0 1rem 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .reviewPreview h2 {
@@ -635,6 +639,27 @@ option {
     color: #A57D5C;
 }
 
+#displayedReview h3 {
+    margin: 2rem 0;
+    font-size: 1.2rem;
+}
+
+#displayedReview hr:nth-child(1) {
+    display: none;
+}
+
+#displayedReview hr {
+    margin: 2rem 0;
+    width: 80%;
+    margin-left: 10%;
+    border: none;
+    border-bottom: 1px solid #6969697a;
+}
+
+.reviewsPreviewBtn {
+    margin-top: 2rem;
+}
+
 /*  ################################################################ 
     #######################     Footer     #########################
     ################################################################*/
@@ -650,15 +675,20 @@ footer {
 }
 
 footer h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     text-transform: uppercase;
     font-family: 'UnicaOne';
     margin-top: 1.5rem;
 }
 
 footer a {
+    cursor: pointer;
     text-decoration: none;
     color: white;
+}
+
+footer a:hover {
+    color: #A57D5C;
 }
 
 footer .contact {
@@ -675,9 +705,23 @@ footer .contact a {
     color: #f3f3f3;
 }
 
+footer .contact a:hover {
+    color: #A57D5C;
+}
+
 footer .social img{
     height: 30px;
     margin: 0 1rem;
+}
+
+footer .social svg {
+    fill: #fff;
+    height: 30px;
+    margin: 0.3rem 1rem;
+}
+
+footer .social svg:hover {
+    fill: #A57D5C;
 }
 
 footer .legal {

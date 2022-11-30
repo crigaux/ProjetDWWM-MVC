@@ -27,9 +27,9 @@ if ((isset($_SESSION) && $_SESSION['user']->admin != 1) || !isset($_SESSION)) {
 if ($_SERVER['REQUEST_URI'] == '/admin/commentaires') {
 	$reviews = Review::getAll();
 
-	include(__DIR__ . '/../../views/test/dbHeader.php');
+	include(__DIR__ . '/../../views/test/templates/dbHeader.php');
 	include(__DIR__ . '/../../views/test/dbReview.php');
-	include(__DIR__ . '/../../views/test/dbFooter.php');
+	include(__DIR__ . '/../../views/test/templates/dbFooter.php');
 }
 
 // ###############################################################################

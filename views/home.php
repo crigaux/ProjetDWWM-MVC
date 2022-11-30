@@ -45,10 +45,10 @@
 
 
             <form method="POST" action="/accueil#reservation" class="reservationOnSpot">
-                <input type="text" placeholder="Nom" name="name" value="<?= $name ?? '' ?>" pattern="^[A-Za-z-' ]+$" required>
+                <input type="text" placeholder="Nom" name="name" value="<?= $name ?? $_SESSION['user']->lastname ?>" pattern="^[A-Za-z-' ]+$" required>
                 <?= empty($errors['name']) ? '' : '<div class="errorMessage">' . $errors['name'] . '</div>' ?>
 
-                <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? '' ?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
+                <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? $_SESSION['user']->phone ?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
                 <?= empty($errors['phoneNb']) ? '' : '<div class="errorMessage">' . $errors['phoneNb'] . '</div>' ?>
 
                 <input type="number" min="1" max="8" step="1" placeholder="Nombre de personne (max 8 personnes)" name="nbOfClients" value="<?= $nbOfClients ?? '' ?>" pattern="^[1-8]$" required>
@@ -70,10 +70,10 @@
             </form>
 
             <form method="POST" action="/accueil#reservation" class="reservationToGo">
-                <input type="text" placeholder="Nom" name="name" value="<?= $name ?? '' ?>" pattern="^[A-Za-z-' ]+$" required>
+                <input type="text" placeholder="Nom" name="name" value="<?= $name ?? $_SESSION['user']->lastname ?>" pattern="^[A-Za-z-' ]+$" required>
                 <?= empty($errors['name']) ? '' : '<div class="errorMessage">' . $errors['name'] . '</div>' ?>
 
-                <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? '' ?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
+                <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? $_SESSION['user']->phone ?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
                 <?= empty($errors['phoneNb']) ? '' : '<div class="errorMessage">' . $errors['phoneNb'] . '</div>' ?>
 
                 <input type="date" name="date" value="<?= $date ?? '' ?>" pattern="^<?= date('Y', time()) ?>-<?= date('m', time()) ?>-[0-3][0-9]$" required>
@@ -186,34 +186,24 @@
             </div>
         </div>
         <div class="catDishesContainer">
-            <div class="catDishiesItem">
-                <div class="catDishiesItemTitle">
-                    <h4>Entrée 1</h4>
-                    <span>25€</span>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur.</p>
-            </div>
-            <div class="catDishiesItem">
-                <div class="catDishiesItemTitle">
-                    <h4>Entrée 2</h4>
-                    <span>25€</span>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur.</p>
-            </div>
-            <div class="catDishiesItem">
-                <div class="catDishiesItemTitle">
-                    <h4>Entrée 3</h4>
-                    <span>25€</span>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur.</p>
-            </div>
-            <div class="catDishiesItem">
-                <div class="catDishiesItemTitle">
-                    <h4>Entrée 4</h4>
-                    <span>25€</span>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur.</p>
-            </div>
+            <script>
+                fetch(`/getLastStartersAjax`)
+                    .then(response => response.json())
+                    .then(data => {
+                        container.innerHTML = '';
+                        data.forEach(element => {
+                            container.innerHTML +=
+                                `<div class="catDishiesItem">
+                                <div class="catDishiesItemTitle">
+                                    <h4>${element.title}</h4>
+                                    <span>${element.price}€</span>
+                                </div>
+                                <p>${element.description}</p>
+                            </div>
+                            `
+                        })
+                    })
+            </script>
         </div>
     </div>
 
@@ -226,9 +216,25 @@
 
 <section class="reviewPreview">
     <h2>Livre d'or</h2>
-    <h3>Commentaire client</h3>
+    <h3>Commentaires client</h3>
     <div class="stars">&#x2605;<span>&#x2605;</span>&#x2605;</div>
-    <img src="" alt="">
-    <p id="displayedReview">&ldquo;C’était excellent, merci infiniment pour ce service avec des plats et une présentation impeccable ! Le choix des produits et leur assemblage est très judicieux. Merci à toute l’équipe et au chef d’avoir bien pensé ces plats.&rdquo;</p>
-    <h4>M. John Doe</h4>
+    <div id="displayedReview">
+        <script>
+            fetch(`/getLastReviewsAjax`)
+            .then(response => response.json())
+            .then(data => {
+                displayedReview.innerHTML = '';
+                data.forEach(element => {
+                    displayedReview.innerHTML +=
+                        `
+                        <hr>
+                        <h3>${element.title}</h3>
+                        <p>&ldquo;${element.content}&rdquo;</p>
+                        <h4>${element.firstname}</h4>
+                        `
+                    })
+                })
+        </script>
+    </div>
+    <a href="../commentaires" class="reviewsPreviewBtn"><button>Voir tout</button></a>
 </section>

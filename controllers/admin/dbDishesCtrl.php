@@ -20,9 +20,9 @@
 		$dishes = Dish::getAll(2);
 		$desserts = Dish::getAll(3);
 	
-		include(__DIR__ . '/../../views/test/dbHeader.php');
+		include(__DIR__ . '/../../views/test/templates/dbHeader.php');
 		include(__DIR__ . '/../../views/test/dbdishes.php');
-		include(__DIR__ . '/../../views/test/dbFooter.php');
+		include(__DIR__ . '/../../views/test/templates/dbFooter.php');
 	} 
 
 	// ###############################################################################
@@ -62,7 +62,7 @@
 
 			if(empty($_FILES["img"]["name"])){
 				$errors['img'] = 'Veuillez entrer une image';
-			} else if($_FILES["img"]["type"] != 'img/jpeg'){
+			} else if($_FILES["img"]["type"] != 'image/jpeg'){
 				$errors['img'] =  "Le fichier doit avoir l'extension JPG ou JPEG";
 			} else {
 				$target_file = strtolower(str_replace(' ', '', $title)). '.' . pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
@@ -73,22 +73,21 @@
 				if($_FILES["img"]["size"] > 5 * 1024 * 1024) {
 					$errors['img'] =  "Le fichier est trop volumineux.";
 				}
-
 				// Vérifie si il y a eu une erreur
 				if(empty($errors)) {
 					if(move_uploaded_file($_FILES["img"]["tmp_name"], $target_path)) {
 						$dish = new Dish($title, $price, $description, $_SESSION['user']->id, $dish_type);
 						$dish->create();
-						SessionFlash::set('message', 'Le plat a été ajouté.');
-						header('Location: /admin/menu');
+						SessionFlash::set('message', 'Le plat a été ajouté.');					
+						header('Location: /admin/commentaires');
 						exit();
 					}
 				}
 			}
 		}
-		include(__DIR__ . '/../../views/test/dbHeader.php');
+		include(__DIR__ . '/../../views/test/templates/dbHeader.php');
 		include(__DIR__ . '/../../views/test/dishAdd.php');
-		include(__DIR__ . '/../../views/test/dbFooter.php');
+		include(__DIR__ . '/../../views/test/templates/dbFooter.php');
 	}
 
 	// ###############################################################################
@@ -118,7 +117,7 @@
 			SessionFlash::set('message', 'Le plat n\'est désormais plus visible sur l\'accueil.');
 		}
 
-		header('Location: /admin/menu');
+		header('location: /admin/menu');
 		exit();
 	} 
 
@@ -172,9 +171,9 @@
 			}
 		}
 
-		include(__DIR__ . '/../../views/test/dbHeader.php');
+		include(__DIR__ . '/../../views/test/templates/dbHeader.php');
 		include(__DIR__ . '/../../views/test/dishModify.php');
-		include(__DIR__ . '/../../views/test/dbFooter.php');
+		include(__DIR__ . '/../../views/test/templates/dbFooter.php');
 		
 	}
 

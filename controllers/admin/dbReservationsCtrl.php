@@ -27,9 +27,9 @@
 	if($_SERVER['REQUEST_URI'] == '/admin/reservations'){
 		$reservations = Reservation::getAll();
 
-		include(__DIR__ . '/../../views/test/dbHeader.php');
+		include(__DIR__ . '/../../views/test/templates/dbHeader.php');
 		include(__DIR__ . '/../../views/test/dbReservations.php');
-		include(__DIR__ . '/../../views/test/dbFooter.php');
+		include(__DIR__ . '/../../views/test/templates/dbFooter.php');
 	}
 
 	// ###############################################################################

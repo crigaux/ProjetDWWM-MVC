@@ -2,13 +2,12 @@ let deleteBtn = document.querySelectorAll('.btnDeleteConf');
 let modale = document.querySelector('.modale');
 let backBtn = document.querySelector('.modaleBtn button');
 let deleteMenuLink = document.querySelector('.deleteMenuLink');
-let deleteReservationLink = document.querySelector('.deleteReservationLink');
-let deleteOrderLink = document.querySelector('.deleteOrderLink');
+let deleteReservationLink = document.querySelector('.deleteReviewLink');
 
 deleteBtn.forEach((btn) => {
 	btn.addEventListener('click', (e) => {
 		modale.classList.add('active');
-		deleteMenuLink.href = '/admin/menu/delete/' + e.target.id
+		deleteReservationLink.href = '/profil/commentaire/delete/' + e.target.id;
 	})
 })
 

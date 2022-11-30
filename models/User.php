@@ -149,12 +149,16 @@
 		 * @return array si il y a des utilisateurs, @return false sinon.
 		 *
 		 */
-		public static function getAll():mixed {
-			$sql = "SELECT * FROM `users`;";
-
+		public static function getAll($search = ''):mixed {
 			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($sql);
-
+			if($search == '') {
+				$sql = "SELECT * FROM `users`;";
+				$sth = $pdo->prepare($sql);
+			} else {
+				$sql = "SELECT * FROM `users` WHERE `lastname` LIKE :search OR `firstname` LIKE :search OR `email` LIKE :search;";
+				$sth = $pdo->prepare($sql);
+				$sth->bindValue(':search', '%'.$search.'%', PDO::PARAM_STR);
+			}
 			if($sth->execute()) {
 				return $sth->fetchAll();
 			}

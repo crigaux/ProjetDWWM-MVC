@@ -50,7 +50,6 @@
             <a href="../commentaires" class="linkNav"><h3>Galerie</h3></a>
             <div class="connect">
                 <a href="../connexion"><button>Connexion</button></a>
-                <!-- <a href="../inscription"><button>Inscription</button></a> -->
             </div>
         </div>
     </nav>

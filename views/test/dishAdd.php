@@ -2,7 +2,7 @@
 	<h1>MENU</h1>
 	<h2>Ajouter un plat</h2>
 
-	<form action="/admin/menu/ajout" class="dishEditForm" method="POST" enctype="multipart/form-data">
+	<form action="/admin/menu/ajout" class="dishEditForm" method="POST" enctype="multipart/form-data" >
 		<select type="text" name="dish_type" required placeholder="Titre du plat">
 			<option value="1" <?= (isset($dish_type) && $dish_type == 1) ? 'selected' : ''?>>Entrée</option>
 			<option value="2" <?= (isset($dish_type) && $dish_type == 2) ? 'selected' : ''?>>Plat</option>

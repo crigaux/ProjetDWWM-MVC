@@ -3,7 +3,7 @@
             <?= ($message == '') ? '' : '<div class="errorContainer"><div class="error">'.$message.'</div></div>'; ?>
             <form method="POST" action="">
                 <legend>Inscription</legend>
-                <input type="text" name="name" placeholder="Nom*" value="<?=$name ?? ''?>" required pattern="^[A-Za-z-' ]+$">
+                <input type="text" name="name" placeholder="Nom*" value="<?=$lastname ?? ''?>" required pattern="^[A-Za-z-' ]+$">
                 <div class="errorMessage"><?= $errors['name'] ?? '' ?></div>
                 <input type="text" name="firstname" placeholder="Prénom*" value="<?=$firstname ?? ''?>" required pattern="^[A-Za-z-' ]+$">
                 <div class="errorMessage"><?= $errors['firstname'] ?? '' ?></div>
@@ -11,7 +11,7 @@
                 <div class="errorMessage"><?= $errors['email'] ?? '' ?></div>
                 <input type="phone" name="phone" placeholder="Numéro de téléphone*" value="<?=$phoneNb ?? ''?>" required pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$">
                 <div class="errorMessage"><?= $errors['phone'] ?? '' ?></div>
-                <input type="password" id="password" name="password" placeholder="Mot de passe*" required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*])[A-Za-z\d!@#$&*]{8,}">
+                <input type="password" id="password" name="password" placeholder="Mot de passe*" required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[\W])[A-Za-z\d\W]{8,}">
                 <div class="errorMessage"><?= $errors['password'] ?? '' ?></div>
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmation*" required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*])[A-Za-z\d!@#$&*]{8,}">
                 <div class="errorMessage"><?= $errors['confirmPassword'] ?? '' ?></div>

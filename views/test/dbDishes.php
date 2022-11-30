@@ -156,4 +156,3 @@
 
 <script src="../../public/assets/js/deleteConfirm.js"></script>
 <script src="../../public/assets/js/modifyImg.js"></script>
-<script src="../../public/assets/js/menuBurger.js"></script>

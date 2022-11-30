@@ -15,8 +15,10 @@
             </div>
         </footer>
     </main>
-    <script src="../../public/assets/js/script.js"></script>
+
+    <?= (!empty($isOnHome) && isset($_SESSION['user'])) ? '<script src="../../public/assets/js/script.js"></script>' : '' ; ?>
     <?= (!empty($isOnHome)) ? '<script src="../../public/assets/js/menu.js"></script>' : '' ; ?>
     <script src="../../public/assets/js/activeLinksMenu.js"></script>
+    <script src="../../public/assets/js/menuBurger.js"></script>
 </body>
 </html>

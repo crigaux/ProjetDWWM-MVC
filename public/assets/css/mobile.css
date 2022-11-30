@@ -166,6 +166,15 @@ nav {
     transition: 0.4s;
 }
 
+.logNeeded {
+    color: #fff;
+    margin: 1rem;
+    font-size: 1.4rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'UnicaOne';
+}
+
 nav button {
     display: flex;
     justify-content: center;
@@ -278,6 +287,10 @@ header .whiteBrush {
     ################################################################*/
 
 .reservation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../img/banner.png');
 }
 
@@ -295,6 +308,10 @@ header .whiteBrush {
     align-items: center;
     flex-wrap: wrap;
     margin: 1rem 1rem 2rem 1rem;
+}
+
+.reservation button {
+    margin-bottom: 3.5rem;
 }
 
 .reservation form input,
@@ -1032,6 +1049,10 @@ label {
 }
 
 .messageContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1050,6 +1071,10 @@ label {
 }
 
 .errorContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1065,6 +1090,23 @@ label {
     padding: 1rem 2rem;
     border-radius: 2px;
     color: #f3f3f3;
+}
+
+.messageContainer,
+.errorContainer {
+	animation: fade 2s linear forwards;
+}
+
+@keyframes fade {
+	0% {
+		opacity: 1;
+	}
+	70% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 
 @media (min-width:500px) and (max-width:900px) {

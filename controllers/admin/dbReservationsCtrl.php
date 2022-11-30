@@ -29,7 +29,12 @@
 
 		include(__DIR__ . '/../../views/test/dbHeader.php');
 		include(__DIR__ . '/../../views/test/dbReservations.php');
+		include(__DIR__ . '/../../views/test/dbFooter.php');
 	}
+
+	// ###############################################################################
+	// ###                      VALIDATION DE LA RÉSERVATION                       ###	
+	// ###############################################################################
 
 	else if($_SERVER['REQUEST_URI'] == '/admin/reservation/edit/validate/'.$id){
 		if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -92,5 +97,23 @@
 				header('Location: /admin/reservations');
 				exit;
 			}
+		}
+	}
+
+	// ###############################################################################
+	// ###                        SUPPRIME UNE RÉSERVATION                         ###	
+	// ###############################################################################
+
+	else if($_SERVER['REQUEST_URI'] == '/admin/reservation/delete/'.$id){
+		$id = intval($id);
+
+		if(Reservation::delete($id) == true) {
+			SessionFlash::set('message', 'La réservation a bien été supprimée');
+			header('Location: /admin/reservations');
+			exit;
+		} else {
+			SessionFlash::set('error', 'La réservation n\'a pas pu être supprimée');
+			header('Location: /admin/reservations');
+			exit;
 		}
 	}

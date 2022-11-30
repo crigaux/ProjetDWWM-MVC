@@ -65,33 +65,11 @@
 		 * 
 		 * @return array $orders
 		 */
-		public static function getAll():array {
+		public static function getAll($id):array {
 			$pdo = Database::getInstance();
 
 			$query = 
-			"SELECT orders.id, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity FROM `orders` 
-			INNER JOIN reservations ON orders.id_reservations = reservations.id
-			INNER JOIN dishes ON orders.id_dishes = dishes.id
-			INNER JOIN users ON reservations.id_users = users.id;";
-
-			$sth = $pdo->prepare($query);
-
-			if($sth->execute()) {
-				return $sth->fetchAll();
-			}
-			return false;
-		}
-
-		/**
-		 * Méthode permettant de récupérer toutes les commandes d'une réservation
-		 * 
-		 * @return array $orders
-		 */
-		public static function get(int $id):array {
-			$pdo = Database::getInstance();
-
-			$query = 
-			"SELECT orders.id, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity FROM `orders` 
+			"SELECT orders.id, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity, dishes.price FROM `orders` 
 			INNER JOIN reservations ON orders.id_reservations = reservations.id
 			INNER JOIN dishes ON orders.id_dishes = dishes.id
 			INNER JOIN users ON reservations.id_users = users.id
@@ -144,6 +122,56 @@
 
 			if($sth->execute()) {
 				return ($sth->rowCount() == 1) ?  true : false;
+			}
+			return false;
+		}
+
+		/**
+		 * Méthode permettant de récupérer les commandes d'un utilisateur
+		 * 
+		 * @return array $order
+		 */
+		public static function getByUser(int $id):array {
+			$pdo = Database::getInstance();
+
+			$query = 
+			"SELECT orders.id, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity, dishes.price FROM `orders` 
+			INNER JOIN reservations ON orders.id_reservations = reservations.id
+			INNER JOIN dishes ON orders.id_dishes = dishes.id
+			INNER JOIN users ON reservations.id_users = users.id
+			WHERE users.id = :id;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return $sth->fetchAll();
+			}
+			return false;
+		}
+
+		/**
+		 * Méthode permettant de récupérer les commandes d'une réservation
+		 * 
+		 * @return array $order
+		 */
+		public static function getByReservation(int $id):array {
+			$pdo = Database::getInstance();
+
+			$query = 
+			"SELECT orders.id, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity, dishes.price FROM `orders` 
+			INNER JOIN reservations ON orders.id_reservations = reservations.id
+			INNER JOIN dishes ON orders.id_dishes = dishes.id
+			INNER JOIN users ON reservations.id_users = users.id
+			WHERE reservations.id = :id;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return $sth->fetchAll();
 			}
 			return false;
 		}

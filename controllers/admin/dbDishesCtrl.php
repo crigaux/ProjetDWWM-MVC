@@ -22,6 +22,7 @@
 	
 		include(__DIR__ . '/../../views/test/dbHeader.php');
 		include(__DIR__ . '/../../views/test/dbdishes.php');
+		include(__DIR__ . '/../../views/test/dbFooter.php');
 	} 
 
 	// ###############################################################################
@@ -61,19 +62,16 @@
 
 			if(empty($_FILES["img"]["name"])){
 				$errors['img'] = 'Veuillez entrer une image';
+			} else if($_FILES["img"]["type"] != 'img/jpeg'){
+				$errors['img'] =  "Le fichier doit avoir l'extension JPG ou JPEG";
 			} else {
 				$target_file = strtolower(str_replace(' ', '', $title)). '.' . pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
 				$target_path = $target_dir . $target_file;
 				$imageFileType = strtolower(pathinfo($target_path, PATHINFO_EXTENSION));
 
-				// Vérifie la taille du fichier
-				if($_FILES["img"]["size"] > 5000000) {
+				// Vérifie la taille du fichier (max 5Mo)
+				if($_FILES["img"]["size"] > 5 * 1024 * 1024) {
 					$errors['img'] =  "Le fichier est trop volumineux.";
-				}
-
-				// Filtre les extensions du fichier
-				if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-					$errors['img'] =  "Le fichier doit avoir l'extension JPG, JPEG, PNG & GIF.";
 				}
 
 				// Vérifie si il y a eu une erreur
@@ -90,6 +88,7 @@
 		}
 		include(__DIR__ . '/../../views/test/dbHeader.php');
 		include(__DIR__ . '/../../views/test/dishAdd.php');
+		include(__DIR__ . '/../../views/test/dbFooter.php');
 	}
 
 	// ###############################################################################
@@ -175,6 +174,7 @@
 
 		include(__DIR__ . '/../../views/test/dbHeader.php');
 		include(__DIR__ . '/../../views/test/dishModify.php');
+		include(__DIR__ . '/../../views/test/dbFooter.php');
 		
 	}
 

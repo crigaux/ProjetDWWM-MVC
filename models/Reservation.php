@@ -2,15 +2,15 @@
 	require_once(__DIR__ . '/../config/Database.php');
 
 	class Reservation {
-		private $id;
-		private $nbOfClients;
-		private $datetime;
-		private $id_users;
-		private $created_at;
-		private $validated_at;
-		private $pdo;
+		private int $id;
+		private int $nbOfClients;
+		private string $datetime;
+		private int $id_users;
+		private string $created_at;
+		private string|NULL $validated_at;
+		private PDO $pdo;
 
-		public function __construct($nbOfClients, $datetime, $id_users, $validated_at = NULL) {
+		public function __construct(int $nbOfClients, string $datetime, int $id_users, string|NULL $validated_at = NULL) {
 			$this->pdo = Database::getInstance();
 			$this->nbOfClients = $nbOfClients;
 			$this->datetime = $datetime;
@@ -84,9 +84,9 @@
 
 			$pdo = Database::getInstance();
 			if($order == NULL) {
-				$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`number_of_persons` != 0 ORDER BY `reservation_date` DESC;";
+				$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`number_of_persons` != 0 AND `reservations`.`reservation_date` > NOW() ORDER BY `reservations`.`reservation_date`;";
 			} else {
-				$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`number_of_persons` = 0 ORDER BY `reservation_date` DESC;";
+				$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`number_of_persons` = 0 AND `reservations`.`reservation_date` > NOW() ORDER BY `reservations`.`reservation_date`;";
 			}
 
 			$sth = $pdo->prepare($query);
@@ -166,6 +166,13 @@
 			}
 		}
 
+		/**
+		 * Méthode permettant de valider une réservation
+		 * 
+		 * @param int $id
+		 * 
+		 * @return bool
+		 */
 		public static function validate(int $id):bool {
 			$pdo = Database::getInstance();
 
@@ -177,6 +184,43 @@
 
 			if($sth->execute()) {
 				return ($sth->rowCount() == 1) ?  true : false;
+			}
+			return false;
+		}
+
+		/**
+		 * Méthode permettant de récupérer les réservations d'un utilisateur
+		 * 
+		 * @param int $id
+		 * 
+		 * @return array $reservations
+		 */
+		public static function getByUser(int $id):array {
+			$pdo = Database::getInstance();
+
+			$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`id_users` = :id AND `reservations`.`number_of_persons` != 0;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return $sth->fetchAll();
+			}
+			return false;
+		}
+
+		public static function getOrders(int $id):array {
+			$pdo = Database::getInstance();
+
+			$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`id_users` = :id AND `reservations`.`number_of_persons` = 0;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return $sth->fetchAll();
 			}
 			return false;
 		}

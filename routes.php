@@ -2,87 +2,110 @@
 
 require_once __DIR__.'/router.php';
 
-// ##################################################
-// ##################################################
-// ##################################################
-
-// Static GET OR POST
-// In the URL -> http://localhost
-// The output -> Home
 any('/accueil', 'controllers/homeCtrl.php');
 get('/', 'controllers/homeCtrl.php');
 get('/menu', 'controllers/menuCtrl.php');
 get('/commentaires', 'controllers/reviewCtrl.php');
 get('/galerie', 'controllers/galeryCtrl.php');
-any('/connexion', 'controllers/connectionCtrl.php');
-any('/inscription', 'controllers/registerCtrl.php');
-any('/oubli-mot-de-passe', 'controllers/forgotPwdCtrl.php');
 get('/getDishesAjax', 'helpers/ajax/dishes.php');
+
+// Inscription
+any('/inscription', 'controllers/registerCtrl.php');
+// Connexion
+any('/connexion', 'controllers/connectionCtrl.php');
+// Déconnexion
 get('/disconnect', 'controllers/disconnectCtrl.php');
+// Mot de passe oublié
+any('/oubli-mot-de-passe', 'controllers/forgotPwdCtrl.php');
+
+// #############################
+// Gestion du profil utilisateur
+// #############################
+
+// Membres (admin)
+any('/admin/membres', 'controllers/admin/dbUsersCtrl.php');
+// Modifier un utilisateur (admin)
+any('/admin/membre/edit/$id', 'controllers/admin/dbUsersCtrl.php');
+// Modifier un utilisateur (admin)
+any('/admin/membre/delete/$id', 'controllers/admin/dbUsersCtrl.php');
+// Profil
 any('/profil', 'controllers/user/userCtrl.php');
-any('/reservation/add', 'controllers/admin/dbReservationAllCtrl.php');
+// Modification du profil
+any('/profil/edit', 'controllers/user/userCtrl.php');
+// Recherche d'un utilisateur
+any('/admin/membres/search', 'controllers/admin/dbUsersCtrl.php');
 
-get('/admin/menu', 'controllers/admin/dbDishesCtrl.php');
-any('/admin/menu/ajout', 'controllers/admin/dbDishesCtrl.php');
+// ########################
+// Gestion des réservations
+// ########################
 
+// Réservations (admin)
 any('/admin/reservations', 'controllers/admin/dbReservationsCtrl.php');
+// Ajout d'une réservation (user)
+any('/reservation/add', 'controllers/admin/dbReservationAllCtrl.php');
+// Validation d'une réservation (admin)
+any('/admin/reservation/edit/validate/$id', 'controllers/admin/dbReservationsCtrl.php');
+// Suppression d'une réservation (admin)
+any('/admin/reservation/delete/$id', 'controllers/admin/dbReservationsCtrl.php');
+// Réservations (user)
+any('/profil/reservations', 'controllers/user/userCtrl.php');
+// Suppression d'une réservation (user)
+any('/profil/reservation/delete', 'controllers/user/dbReservationsCtrl.php');
+// Modification d'une réservation (user)
+any('/profil/reservation/edit/$id', 'controllers/user/userCtrl.php');
 
-any('/admin/commandes', 'controllers/admin/dbOrdersCtrl.php');
+// ############################
+// Gestion du menu et des plats
+// ############################
 
-any('/admin/commentaires', 'controllers/admin/dbReviewsCtrl.php');
-
-any('/admin/membres', 'controllers/admin/dbRegistersCtrl.php');
-
-// Dynamic GET or POST. Example with 1 variable
-// The $id will be available in user.php
-any('/admin/menu/add/$type', 'controllers/admin/dbDishesCtrl.php');
+// Menu
+get('/admin/menu', 'controllers/admin/dbDishesCtrl.php');
+// Ajout d'un plat
+any('/admin/menu/ajout', 'controllers/admin/dbDishesCtrl.php');
+// Modification d'un plat
 any('/admin/menu/edit/$id', 'controllers/admin/dbDishesCtrl.php');
+// Modification de l'image d'un plat
 any('/admin/menu/edit/img/$id', 'controllers/admin/dbDishesCtrl.php');
+// Acitve la visibilité d'un plat sur le menu
 any('/admin/menu/edit/active/$id', 'controllers/admin/dbDishesCtrl.php');
+// Suppression d'un plat
 any('/admin/menu/delete/$id', 'controllers/admin/dbDishesCtrl.php');
 
-any('/admin/reservation/edit/validate/$id', 'controllers/admin/dbReservationsCtrl.php');
+// #####################
+// Gestion des commandes
+// #####################
 
-any('/admin/commande/edit/$id', 'controllers/admin/dbDishesCtrl.php');
-any('/admin/commande/delete/$id', 'controllers/admin/dbOrdersAll.php');
+// Commandes (admin)
+any('/admin/commandes', 'controllers/admin/dbOrdersCtrl.php');
+// Valide une commande
+any('/admin/commandes/validate', 'controllers/admin/dbOrdersCtrl.php');
+// Supprime une commande
+any('/admin/commande/delete/$id', 'controllers/admin/dbOrdersCtrl.php');
+// Commandes (user)
+any('/profil/commandes', 'controllers/user/userCtrl.php');
+// Modifier une commande (user)
+any('/profil/commande/edit/$id', 'controllers/user/userCtrl.php');
+// Supprimer une commande (user)
+any('/profil/commande/delete/$id', 'controllers/user/userCtrl.php');
 
-// Dynamic GET or POST. Example with 2 variables
-// The $name will be available in full_name.php
-// The $last_name will be available in full_name.php
-// In the browser point to: localhost/user/X/Y
-// get('/detail-rdv/$edit/$id', 'controllers/appointmentDetailsController.php');
+// ########################
+// Gestion des commentaires
+// ########################
 
-// Dynamic GET. Example with 2 variables with static
-// In the URL -> http://localhost/product/shoes/color/blue
-// The $type will be available in product.php
-// The $color will be available in product.php
-// get('/product/$type/color/$color', 'product.php');
+// Commentaires (admin)
+any('/admin/commentaires', 'controllers/admin/dbReviewsCtrl.php');
+// Valide un commentaire (admin)
+any('/admin/commentaire/edit/validate/$id', 'controllers/admin/dbReviewsCtrl.php');
+// Supprime un commentaire (admin)
+any('/admin/commentaire/delete/$id', 'controllers/admin/dbReviewsCtrl.php');
+// Ajoute un commentaires (user)
+any('/commentaires/ajout', 'controllers/reviewCtrl.php');
+// Commentaires (user)
+any('/profil/commentaires', 'controllers/user/userCtrl.php');
+// Modifie un commentaire (user)
+any('/profil/commentaire/edit/$id', 'controllers/user/userCtrl.php');
+// Supprime un commentaire (user)
+any('/profil/commentaire/delete/$id', 'controllers/user/userCtrl.php');
 
-// A route with a callback
-get('/callback', function(){
-  echo 'Callback executed';
-});
-
-// A route with a callback passing a variable
-// To run this route, in the browser type:
-// http://localhost/user/A
-get('/callback/$name', function($name){
-  echo "Callback executed. The name is $name";
-});
-
-// A route with a callback passing 2 variables
-// To run this route, in the browser type:
-// http://localhost/callback/A/B
-get('/callback/$name/$last_name', function($name, $last_name){
-  echo "Callback executed. The full name is $name $last_name";
-});
-
-// ##################################################
-// ##################################################
-// ##################################################
-// any can be used for GETs or POSTs
-
-// For GET or POST
-// The 404.php which is inside the views folder will be called
-// The 404.php has access to $_GET and $_POST
+// Page not found
 any('/404','/404.php');

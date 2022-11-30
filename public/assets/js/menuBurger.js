@@ -1,12 +1,14 @@
-let openBtn = document.querySelector('.openBurger');
-let closeBtn = document.querySelector('.closeBurger');
+let openBtn = document.querySelector('.menu');
+let closeBtn = document.querySelector('.close');
 
-let sidebar = document.querySelector('.sidebar');
+let overlay = document.querySelector('.overlayMenuBurger');
 
-openBtn.addEventListener('click', function() {
-	sidebar.classList.add('open');
+openBtn.addEventListener('click', () => {
+	overlay.classList.add('open');
+	overlay.classList.remove('close');
 });
 
-closeBtn.addEventListener('click', function() {
-	sidebar.classList.remove('open');
+closeBtn.addEventListener('click', () => {
+	overlay.classList.remove('open');
+	overlay.classList.add('close');
 });

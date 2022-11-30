@@ -595,6 +595,7 @@ button:hover {
 	border-bottom-right-radius: 10px;
 	padding: 0.8rem;
 	height: 150px;
+	width: 100%;
 }
 
 .reservations .reservationCardBody .contact {
@@ -645,6 +646,13 @@ button:hover {
 	display: none;
 }
 
+.btnDeleteConf {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
 @media (min-width: 900px) {
 	.reservations {
 		margin-left: 220px;
@@ -663,9 +671,586 @@ button:hover {
 	margin-left: 0;
 }
 
+.orders .orderContainer {
+		position: relative;
+	border: #A1A1A1 solid 1px;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 1.5rem 0;
+	width: 90%;
+}
+
+.orders .name {
+	font-size: var(--title-font-size);
+	color: var(--tertiary-color);
+	font-weight: var(--bold-weight);
+	text-transform: uppercase;
+	font-family: 'UnicaOne';
+}
+
+.orders .date {
+	margin: 0.5rem;
+	margin-top: 1rem;
+	text-transform: uppercase;
+}
+
+.orders .time {
+	margin: 0;
+	margin-bottom: .5rem;
+}
+
+.orders .time,
+.orders .date {
+	font-weight: var(--title-weight);
+	font-family: 'UnicaOne';
+	font-size: 1.2rem;
+}
+
+.orders .orderHead {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+}
+
+.orders.admin .orderHead {
+	justify-content: space-between;
+}
+
+.orders .contact {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.orders .contact a {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	margin: .2rem;
+	color: #696969;
+	font-style: italic;
+}
+
+.orders .contact a:hover {
+	color: var(--tertiary-color);
+}
+
+.orders .contact a:hover svg{
+	fill: var(--tertiary-color);
+}
+
+.orders .contact svg {
+	width: 15px;
+	margin-right: .5rem;
+	fill: #696969;
+}
+
+.orders .order {
+	display: flex;
+	width: 80%;
+	margin: .75rem 0 .75rem 10%;
+	box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.247);
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.orders .orderBody {
+	display: flex;
+	flex-direction: column;
+}
+
+.orders img {
+	height: 100px;
+	width: 100px;
+	object-fit: cover;
+	object-position: center;
+	border-top-left-radius: 12px ;
+	border-bottom-right-radius: 10px ;
+}
+
+.orders .orderInfo {
+	display: flex;
+	justify-content: space-between;
+	height: 100px;
+	width: 60vw;
+}
+
+.orders .dish,
+.orders .orderPrice {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.orders .orderPrice {
+	margin-right: 1rem;
+}
+
+.orders .dish {
+	margin-left: 1rem;
+}
+
+.orders .title {
+	font-weight: var(--logo-weight);
+	font-size: 1.2rem;
+	text-transform: capitalize;
+}
+
+.orders .quantity {
+	font-size: 1.2rem;
+	font-weight: var(--logo-weight);
+}
+
+.orders .price {
+	font-weight: var(--logo-weight);
+	font-size: 1rem;;
+	color: #696969;
+}
+
+.orders .totalPrice {
+	font-weight: var(--logo-weight);
+	font-size: 1.2rem;
+	color: #696969;
+}
+
+.orders form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100px;
+}
+
+.orders form button {
+	width: 150px;
+}
+
+.orders .totalCart {
+	font-size: var(--text-font-size);
+	font-weight: var(--logo-weight);
+	color: #696969;
+}
+
+.orders .totalCart span {
+	color: var(--primary-color);
+	font-size: 1.5rem;
+}
+
+/* .user .btnDeleteConf {
+	position: absolute;
+	top: .6rem;
+	right: .6rem;
+	height: 45px;
+	width: 45px;
+}
+
+.user .btnDeleteConf svg {
+	fill: #d33913;
+	height: 100%;
+} */
+
+.validatedBtn {
+	background-color:#41D888;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: #41D888 2px solid;
+}
+
+.validatedBtn:hover {
+	background-color:#41D888;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: #41D888 2px solid;
+	cursor: text;
+	color: var(--secondary-color);
+
+}
+
+.validatedBtn svg {
+	height: 22px;
+	margin-right: 0.5rem;
+	fill: var(--secondary-color);
+}
+
+.orders .btnDeleteConf {
+	margin-bottom: 1rem;
+}
+
 @media (min-width: 900px) {
 	.orders {
 		margin-left: 220px;
 		width: calc(100vw - 220px);
+	}
+
+	.orders .orderHead {
+		display: flex;
+		height: 100px;
+		flex-direction: row;
+		width: 80%;
+	}
+
+	.orders .contact {
+		align-items: end;
+	}
+
+	.orders .orderContainer {
+		width: auto;
+	}
+
+	.orders .totalCart {
+		font-size: var(--subtitle-font-size);
+		font-weight: var(--logo-weight);
+		color: #696969;
+	}
+	
+	.orders .totalCart span {
+		color: var(--primary-color);
+		font-size: 1.8rem;
+	}
+
+	.orders .title,
+	.orders .quantity,
+	.orders .totalPrice {
+		font-size: var(--subtitle-font-size);
+	}
+
+	.orders .price {
+		font-size: 1.2rem;;
+	}
+
+	.orders .time,
+	.orders .date {
+		font-size: var(--subtitle-font-size);
+	}
+
+	.user .btnDeleteConf {
+		top: 1.2rem;
+		right: 1.2rem;
+	}
+}
+
+.user .reservationCardBody .reservationLabelUser svg {
+	cursor: auto !important;
+}
+
+.user .userCardBody {
+	height: 120px;
+	width: 100%;
+}
+
+.user .reservationCard {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.user .reservationCard button {
+	margin-top: 0;
+}
+
+.userProfil form {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.userProfil form button {
+	width: 150px;
+}
+
+.user .reservationLabelUser svg {
+	cursor: auto;
+}
+
+.userProfil .orderSelect {
+	width: 100%;
+}
+
+.userProfil .orderSelect select:nth-child(odd) {
+	width: 70%;
+}
+
+.userProfil .orderSelect select:nth-child(even) {
+	width: 25%;
+}
+
+.userProfil label {
+	margin: .5rem;
+	font-weight: var(--logo-weight);
+	color: #696969;
+	font-style: italic;
+}
+
+/* Commentaires */
+
+.userReviews {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-left: 0;
+}
+
+.userReviews .reviewContainer {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 60%;
+	margin: 1rem 0 2rem 0;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.247);
+}
+
+.userReviews .reviewBody {
+	text-align: center;
+	padding: 1rem;
+	line-height: 1.5rem;
+}
+
+.userReviews h3 {
+	font-size: 1.5rem;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: 'UnicaOne';
+	color: var(--tertiary-color);
+	margin: 1rem;
+}
+
+.userReviews .btnDeleteConf {
+	position: initial;
+	width: auto;
+	height: auto;
+}
+
+.userReviews .reviewSvg {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	width: 50px;
+	height: 50px;
+	fill: #A1A1A1;
+}
+
+.userReviews .reviewBody .name {
+	margin-top: 1rem;
+	font-style: italic;
+	font-weight: var(--bold-weight);
+}
+
+.userReviews label{
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.userReviews label svg {
+	cursor: pointer;
+	fill: #696969;
+	height: 30px;
+	width: 30px;
+}
+
+.reviewContainer .svgContainer {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	height: 30px;
+	width: 30px;
+}
+
+.reviewContainer .reviewSvg {
+	height: 30px;
+	width: 30px;
+	position: initial;
+}
+
+.reviewContainer input {
+	display: none;
+}
+
+@media (min-width: 900px) {
+	.userReviews {
+		margin-left: 220px;
+		width: calc(100vw - 220px);
+	}
+
+	.userReviews h3 {
+		font-size: 2rem;
+		text-align:left;
+	}
+
+	.userReviews label {
+		bottom: 15px;
+		right: 30px;
+	}
+
+	.userReviews label svg {
+		height: 50px;
+		width: 50px;
+	}
+
+	.reviewContainer .svgContainer {
+		bottom: 15px;
+		right: 30px;
+		height: 50px;
+		width: 50px;
+	}
+	
+	.reviewContainer .reviewSvg {
+		height: 50px;
+		width: 50px;
+	}
+}
+
+/* Membres Admin */
+
+.users {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-left: 0;
+}
+
+.users .userContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.users .userCard {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 300px;
+	margin: 1rem;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.247);
+	padding: 0.5rem;
+}
+
+.users .userCardHead {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: .5rem;
+}
+
+.users .userCardBody {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	padding: 1rem;
+}
+
+.users .userCardHead .name {
+	font-size: 1.4rem;
+	color: var(--tertiary-color);
+	font-weight: var(--bold-weight);
+}
+
+.users .userCardBody .email {
+	margin-bottom: .5rem;
+}
+
+.users .userCard a {
+	color: var(--primary-color);
+}
+
+.users .userCard a:hover {
+	color: var(--tertiary-color);
+}
+
+.users .userCard a:hover svg {
+	fill: var(--tertiary-color);
+}
+
+.users .btnDeleteConf {
+	margin: 0;
+	padding: .5rem;
+}
+
+.users button {
+	margin: 0;
+}
+
+.users form {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.users form input {
+	margin: 1rem;
+}
+
+/* .users form.searchBar {
+	width: 30%;
+	display: flex;
+	flex-direction: row;
+	align-self: flex-end;
+	margin-right: ;
+} */
+
+.users form.searchBar {
+	width: 80%;
+	display: flex;
+	flex-direction: row;
+}
+
+.users .searchBar button {
+	padding: 0.3rem 0.4rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.users .searchBar button svg {
+	fill: var(--secondary-color);
+	height: 20px;
+	padding: 0;
+}
+
+.users .searchBar button:hover svg {
+	fill: var(--tertiary-color);
+}
+
+@media (min-width: 900px) {
+	.users {
+		margin-left: 220px;
+		width: calc(100vw - 220px);
+	}
+
+	.users form.searchBar {
+		width: 30%;
+		display: flex;
+		flex-direction: row;
+		align-self: flex-end;
+		margin-right: 2rem;
 	}
 }

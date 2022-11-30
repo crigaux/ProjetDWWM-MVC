@@ -9,6 +9,12 @@
     $isOnHome = true;
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        if(!isset($_SESSION['user'])) {
+            header('Location: /');
+            exit;
+        }
+        
         $errors =[];
 
         $form = trim(filter_input(INPUT_POST, 'form', FILTER_SANITIZE_NUMBER_INT));
@@ -46,6 +52,8 @@
                 $reservation = new Reservation($nbOfClients, $datetime, 1);
                 $reservation->create();
                 SessionFlash::set('added', 'Votre réservation a bien été prise en compte.');
+                header('Location: /');
+                exit;
             }
 
         } else if($form == 2) {
@@ -79,7 +87,7 @@
                 try {
                     $pdo = Database::getInstance();
                     $pdo->beginTransaction();
-                    $reservation = new Reservation(0, $datetime, 2);
+                    $reservation = new Reservation(0, $datetime, $_SESSION['user']->id);
                     
                     $reservation->create();
                     $lastId = $pdo->lastInsertId();

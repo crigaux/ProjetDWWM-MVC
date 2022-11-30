@@ -8,7 +8,7 @@ let deleteOrderLink = document.querySelector('.deleteOrderLink');
 deleteBtn.forEach((btn) => {
 	btn.addEventListener('click', (e) => {
 		modale.classList.add('active');
-		deleteMenuLink.href = '/admin/menu/delete/' + e.target.id
+		deleteOrderLink.href = '/profil/commande/delete/' + e.target.id
 	})
 })
 

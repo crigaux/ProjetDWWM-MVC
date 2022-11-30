@@ -24,7 +24,7 @@ try {
       if(!strpos($path_to_include, '.php')){
         $path_to_include.='.php';
       }
-    }    
+    }
     if($route == "/404"){
       include_once __DIR__."/$path_to_include";
       exit();

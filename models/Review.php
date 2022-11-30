@@ -3,14 +3,16 @@
 
 	class Review {
 		private int $id;
+		private string $title;
 		private string $content;
-		private string $moderated_at;
+		private string|NULL $moderated_at;
 		private int $id_users;
 		private object $pdo;
 
-		public function __construct(string $content, int $id_users, string $moderated_at = '') {
+		public function __construct(string $title, string $content, int $id_users, string|NULL $moderated_at = NULL) {
 			$this->pdo = Database::getInstance();
 
+			$this->title = $title;
 			$this->content = $content;
 			$this->id_users = $id_users;
 			$this->moderated_at = $moderated_at;
@@ -49,13 +51,13 @@
 		 */
 		public function create():bool {
 			$query = 
-			"INSERT INTO `reviews` (`content`, `validated_at`, `id_users`) 
-			VALUES (':content', ':validated_at', ':id_users');";
+			"INSERT INTO `reviews` (`title`, `content`, `id_users`) 
+			VALUES (:title, :content, :id_users);";
 
 			$sth = $this->pdo->prepare($query);
 
+			$sth->bindValue(':title', $this->title, PDO::PARAM_STR);
 			$sth->bindValue(':content', $this->content, PDO::PARAM_STR);
-			$sth->bindValue(':validated_at', $this->validated_at, PDO::PARAM_STR);
 			$sth->bindValue(':id_users', $this->id_users, PDO::PARAM_INT);
 
 			if($sth->execute()) {
@@ -70,16 +72,38 @@
 		 */
 		public static function getAll():mixed {
 			$query = 
-			"SELECT * FROM `reviews` 
-			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id` 
-			ORDER BY `reviews`.`validated_at` DESC;";
+			"SELECT `reviews`.`id`, `reviews`.`title`, `reviews`.`content`, `reviews`.`moderated_at`, `users`.`firstname`, `users`.`lastname`, `users`.`email` FROM `reviews` 
+			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id`
+			ORDER BY `reviews`.`moderated_at`;";
 
 			$pdo = Database::getInstance();
 			$sth = $pdo->prepare($query);
 
 			if($sth->execute()) {
-				return ($sth->fetchAll() === false) ? false : $sth->fetchAll();
+				return $sth->fetchAll();
 			}
+			return false;
+		}
+
+				/**
+		 * Méthode permettant de récupérer tous les avis et les trier par date de validation
+		 * 
+		 * @return array si les avis ont été récupérés, @return false sinon
+		 */
+		public static function getAllModerated():mixed {
+			$query = 
+			"SELECT `reviews`.`id`, `reviews`.`title`, `reviews`.`content`, `reviews`.`moderated_at`, `users`.`firstname`, `users`.`lastname`, `users`.`email` FROM `reviews` 
+			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id`
+			WHERE `reviews`.`moderated_at` IS NOT NULL
+			ORDER BY `reviews`.`moderated_at`;";
+
+			$pdo = Database::getInstance();
+			$sth = $pdo->prepare($query);
+
+			if($sth->execute()) {
+				return $sth->fetchAll();
+			}
+			return false;
 		}
 
 		/**
@@ -87,13 +111,13 @@
 		 * 
 		 * @param $id identifiant de l'avis
 		 * 
-		 * @return array si l'avis a été récupéré, @return false sinon
+		 * @return object si l'avis a été récupéré, @return false sinon
 		 */
 		public static function get(int $id):mixed {
 			$query = 
-			"SELECT * FROM `reviews` 
-			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id` 
-			WHERE `reviews`.`id` = ':id';";
+			"SELECT `reviews`.`id`, `reviews`.`title`, `reviews`.`content`, `reviews`.`moderated_at`, `users`.`firstname`, `users`.`lastname`, `users`.`email` FROM `reviews` 
+			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id`
+			WHERE `reviews`.`id` = :id;";
 
 			$pdo = Database::getInstance();
 			$sth = $pdo->prepare($query);
@@ -101,8 +125,9 @@
 			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 
 			if($sth->execute()) {
-				return ($sth->fetch() === false) ? false : $sth->fetch();
+				return $sth->fetch();
 			}
+			return false;
 		}
 
 		/**
@@ -110,18 +135,19 @@
 		 * 
 		 * @return true si l'avis a été modifié, @return false sinon
 		 */
-		public function update():bool {
+		public function update($id):bool {
 			$query = 
 			"UPDATE `reviews` 
-			SET `content` = ':content', `validated_at` = ':validated_at', `id_users` = ':id_users' 
-			WHERE `reviews`.`id` = ':id';";
+			SET `title` = :title, `content` = :content, `moderated_at` = :moderated_at, `id_users` = :id_users 
+			WHERE `reviews`.`id` = :id;";
 
 			$sth = $this->pdo->prepare($query);
 
+			$sth->bindValue(':title', $this->title, PDO::PARAM_STR);
 			$sth->bindValue(':content', $this->content, PDO::PARAM_STR);
-			$sth->bindValue(':validated_at', $this->validated_at, PDO::PARAM_STR);
+			$sth->bindValue(':moderated_at', $this->moderated_at, PDO::PARAM_STR);
 			$sth->bindValue(':id_users', $this->id_users, PDO::PARAM_INT);
-			$sth->bindValue(':id', $this->id, PDO::PARAM_INT);
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 
 			if($sth->execute()) {
 				return ($sth->rowCount() == 1) ?  true : false;
@@ -136,7 +162,7 @@
 		public static function delete(int $id):bool {
 			$query = 
 			"DELETE FROM `reviews` 
-			WHERE `reviews`.`id` = ':id';";
+			WHERE `reviews`.`id` = :id;";
 
 			$pdo = Database::getInstance();
 			$sth = $pdo->prepare($query);
@@ -145,26 +171,6 @@
 
 			if($sth->execute()) {
 				return ($sth->rowCount() == 1) ?  true : false;
-			}
-		}
-
-		/**
-		 * Méthode permettant de récupérer tous les avis non modérés
-		 * 
-		 * @return array si les avis ont été récupérés, @return false sinon
-		 */
-		public static function getUnmoderated():mixed {
-			$query = 
-			"SELECT * FROM `reviews` 
-			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id` 
-			WHERE `reviews`.`moderated_at` IS NULL 
-			ORDER BY `reviews`.`validated_at` DESC;";
-
-			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
-
-			if($sth->execute()) {
-				return ($sth->fetchAll() === false) ? false : $sth->fetchAll();
 			}
 		}
 
@@ -177,7 +183,7 @@
 			$query = 
 			"UPDATE `reviews` 
 			SET `moderated_at` = NOW() 
-			WHERE `reviews`.`id` = ':id';";
+			WHERE `reviews`.`id` = :id;";
 
 			$pdo = Database::getInstance();
 			$sth = $pdo->prepare($query);
@@ -190,38 +196,18 @@
 		}
 
 		/**
-		 * Méthode permettant de récupérer tous les avis modérés
-		 * 
-		 * @return array si les avis ont été récupérés, @return false sinon
-		 */
-		public static function getModerated():mixed {
-			$query = 
-			"SELECT * FROM `reviews` 
-			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id` 
-			WHERE `reviews`.`moderated_at` IS NOT NULL 
-			ORDER BY `reviews`.`validated_at` DESC;";
-
-			$pdo = Database::getInstance();
-			$sth = $pdo->prepare($query);
-
-			if($sth->execute()) {
-				return ($sth->fetchAll() === false) ? false : $sth->fetchAll();
-			}
-		}
-
-		/**
 		 * Méthode permettant de récupérer tous les avis d'un utilisateur
 		 * 
 		 * @param $id_users identifiant de l'utilisateur
 		 * 
 		 * @return array si les avis ont été récupérés, @return false sinon
 		 */
-		public static function getByUser(int $id_users):mixed {
+		public static function getByUser(int $id_users):array|bool {
 			$query = 
-			"SELECT * FROM `reviews` 
-			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id` 
-			WHERE `reviews`.`id_users` = ':id_users' 
-			ORDER BY `reviews`.`validated_at` DESC;";
+			"SELECT `reviews`.`title`, `reviews`.`content`, `reviews`.`id`, `reviews`.`moderated_at` FROM `reviews`
+			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id`
+			WHERE `reviews`.`id_users` = :id_users
+			ORDER BY `reviews`.`moderated_at` DESC;";
 
 			$pdo = Database::getInstance();
 			$sth = $pdo->prepare($query);
@@ -229,7 +215,8 @@
 			$sth->bindValue(':id_users', $id_users, PDO::PARAM_INT);
 
 			if($sth->execute()) {
-				return ($sth->fetchAll() === false) ? false : $sth->fetchAll();
+				return $sth->fetchAll();
 			}
+			return false;
 		}
 	}

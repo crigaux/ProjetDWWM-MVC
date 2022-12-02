@@ -6,6 +6,13 @@
                 <a href="../connexion">Connexion</a>
             </form>
         </section>
+
+        <?php $message = SessionFlash::get('message') ?>
+        <?= ($message == '') ? '' : '<div class="messageContainer"><div class="message">' . $message . '</div></div>'; ?>
+
+        <?php $message = SessionFlash::get('error') ?>
+        <?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorMessage">' . $message . '</div></div>'; ?>
+
     </main>
     <script src="../../public/assets/js/script.js"></script>
 </body>

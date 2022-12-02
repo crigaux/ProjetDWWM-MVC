@@ -69,7 +69,7 @@
 			$pdo = Database::getInstance();
 
 			$query = 
-			"SELECT orders.id, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity, dishes.price FROM `orders` 
+			"SELECT orders.id, orders.id_dishes, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity, dishes.price FROM `orders` 
 			INNER JOIN reservations ON orders.id_reservations = reservations.id
 			INNER JOIN dishes ON orders.id_dishes = dishes.id
 			INNER JOIN users ON reservations.id_users = users.id
@@ -114,7 +114,7 @@
 		public static function delete(int $id):bool {
 			$pdo = Database::getInstance();
 
-			$query = "DELETE FROM `reservations` WHERE `reservations`.`id` = :id;";
+			$query = "DELETE FROM `orders` WHERE `orders`.`id` = :id;";
 
 			$sth = $pdo->prepare($query);
 
@@ -135,7 +135,7 @@
 			$pdo = Database::getInstance();
 
 			$query = 
-			"SELECT orders.id, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity, dishes.price FROM `orders` 
+			"SELECT orders.id, orders.id_dishes, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity, dishes.price FROM `orders` 
 			INNER JOIN reservations ON orders.id_reservations = reservations.id
 			INNER JOIN dishes ON orders.id_dishes = dishes.id
 			INNER JOIN users ON reservations.id_users = users.id

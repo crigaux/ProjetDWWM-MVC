@@ -299,4 +299,26 @@
 				}
 			}
 		}
+		
+		/**
+		 * Méthode de réinitialisation du mot de passe
+		 * 
+		 * @param int $id
+		 * @param string $password
+		 * 
+		 * @return bool
+		 */
+		public static function resetPassword(int $id, string $password):bool {
+			$sql = "UPDATE `users` SET `password` = :password WHERE `id` = :id;";
+
+			$pdo = Database::getInstance();
+			$sth = $pdo->prepare($sql);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+			$sth->bindValue(':password', $password, PDO::PARAM_STR);
+
+			if($sth->execute()) {
+				return ($sth->rowCount() == 1) ?  true : false;
+			}
+		}
 }

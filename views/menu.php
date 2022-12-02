@@ -7,7 +7,7 @@
                 foreach ($starters as $starter) {
                     echo '<div class="foodCard">
                             <div class="foodCardImg">
-                                <img src="../public/assets/galery/'. strtolower(str_replace(' ', '', $starter->title)) .'.jpg" alt="">
+                                <img src="../public/assets/galery/'. strtolower(str_replace(' ', '', $starter->id)) .'.jpg" alt="">
                             </div>
                             <div class="foodCardDesc">
                                 <h3>' . $starter->title . '</h3>
@@ -31,7 +31,7 @@
                 foreach ($dishes as $dish) {
                     echo '<div class="foodCard">
                             <div class="foodCardImg">
-                                <img src="../public/assets/galery/'. strtolower(str_replace(' ', '', $dish->title)) .'.jpg" alt="">
+                                <img src="../public/assets/galery/'. strtolower(str_replace(' ', '', $dish->id)) .'.jpg" alt="">
                             </div>
                             <div class="foodCardDesc">
                                 <h3>' . $dish->title . '</h3>
@@ -54,7 +54,7 @@
                 foreach ($desserts as $dessert) {
                     echo '<div class="foodCard">
                             <div class="foodCardImg">
-                                <img src="../public/assets/galery/'. strtolower(str_replace(' ', '', $dessert->title)) .'.jpg" alt="">
+                                <img src="../public/assets/galery/'. strtolower(str_replace(' ', '', $dessert->id)) .'.jpg" alt="">
                             </div>
                             <div class="foodCardDesc">
                                 <h3>' . $dessert->title . '</h3>

@@ -2,6 +2,7 @@
     require_once(__DIR__ . '/../models/User.php');
     require_once(__DIR__ . '/../config/regex.php');
     require_once(__DIR__ . '/../helpers/testInputs.php');
+    require_once(__DIR__ . '/../helpers/SessionFlash.php');
 
     if(isset($_SESSION['user'])) {
         header('Location: /');
@@ -15,21 +16,24 @@
         }
 
         $password = $_POST['password'];
-
-        if(User::passwordVerification($email) != false){
-            $hash = User::passwordVerification($email);
-
-            if(password_verify($password, $hash) == true) {
-                $user = User::get(email: $email);
-                $user->password = NULL;
-                $_SESSION['user'] = $user;
-                header('Location: /');
-                exit();
-            } else {
-                $errors['password'] = 'Mot de passe incorrect';
-            }
+        if(User::get(NULL, $email)->validated_at == NULL) {
+            $errors['email'] = 'Votre compte n\'a pas été validé';
         } else {
-            $errors['email'] = 'Cet email n\'existe pas';
+            if(User::passwordVerification($email) != false){
+                $hash = User::passwordVerification($email);
+    
+                if(password_verify($password, $hash) == true) {
+                    $user = User::get(email: $email);
+                    $user->password = NULL;
+                    $_SESSION['user'] = $user;
+                    header('Location: /');
+                    exit();
+                } else {
+                    $errors['password'] = 'Mot de passe incorrect';
+                }
+            } else {
+                $errors['email'] = 'Cet email n\'existe pas';
+            }
         }
     }
 

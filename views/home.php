@@ -238,3 +238,9 @@
     </div>
     <a href="../commentaires" class="reviewsPreviewBtn"><button>Voir tout</button></a>
 </section>
+
+<?php $message = SessionFlash::get('message') ?>
+<?= ($message == '') ? '' : '<div class="messageContainer"><div class="message">' . $message . '</div></div>'; ?>
+
+<?php $message = SessionFlash::get('error') ?>
+<?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorMessage">' . $message . '</div></div>'; ?>

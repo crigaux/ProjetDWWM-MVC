@@ -198,7 +198,7 @@
 		public static function getByUser(int $id):array {
 			$pdo = Database::getInstance();
 
-			$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`id_users` = :id AND `reservations`.`number_of_persons` != 0;";
+			$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`id_users` = :id AND `reservations`.`number_of_persons` != 0 AND  `reservations`.`reservation_date` > NOW() ORDER BY `reservations`.`reservation_date`;";
 
 			$sth = $pdo->prepare($query);
 
@@ -210,10 +210,17 @@
 			return false;
 		}
 
+		/**
+		 * Récupère les commandes d'un utilisateur
+		 * 
+		 * @param int $id
+		 * 
+		 * @return array
+		 */
 		public static function getOrders(int $id):array {
 			$pdo = Database::getInstance();
 
-			$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`id_users` = :id AND `reservations`.`number_of_persons` = 0;";
+			$query = "SELECT `reservations`.`id`, `users`.`lastname`, `users`.`phone`, `users`.`email`, `reservations`.`reservation_date`, `reservations`.`number_of_persons`, `reservations`.`validated_at` FROM `reservations` INNER JOIN `users` ON `reservations`.`id_users` = `users`.`id` WHERE `reservations`.`id_users` = :id AND `reservations`.`number_of_persons` = 0 AND  `reservations`.`reservation_date` > NOW() ORDER BY `reservations`.`reservation_date`;";
 
 			$sth = $pdo->prepare($query);
 
@@ -221,6 +228,50 @@
 
 			if($sth->execute()) {
 				return $sth->fetchAll();
+			}
+			return false;
+		}
+
+		/**
+		 * Récupère les commandes d'une réservation
+		 * 
+		 * @param int $id
+		 * 
+		 * @return array
+		 */
+		public static function getOrdersByReservation(int $id):array {
+			$pdo = Database::getInstance();
+
+			$query = "SELECT `orders`.`id`, `orders`.`id_reservations` FROM `orders` INNER JOIN `reservations` ON `orders`.`id_reservations` = `reservations`.`id` WHERE `orders`.`id` = :id;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return $sth->fetchAll();
+			}
+			return false;
+		}
+
+		/**
+		 * Récupère les réservations d'une commande
+		 * 
+		 * @param int $id
+		 * 
+		 * @return object ou false
+		 */
+		public static function getByOrder(int $id):object|bool {
+			$pdo = Database::getInstance();
+
+			$query = "SELECT * FROM `orders` INNER JOIN `reservations` ON `orders`.`id_reservations` = `reservations`.`id` WHERE `orders`.`id` = :id;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return $sth->fetch();
 			}
 			return false;
 		}

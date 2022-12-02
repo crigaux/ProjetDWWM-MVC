@@ -11,6 +11,13 @@
             </form>
         </section>
     </main>
+
+    <?php $message = SessionFlash::get('message') ?>
+    <?= ($message == '') ? '' : '<div class="messageContainer"><div class="message">'.$message.'</div></div>'; ?>
+
+    <?php $message = SessionFlash::get('error') ?>
+    <?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorMessage">'.$message.'</div></div>'; ?>
+
     <script src="../../public/assets/js/script.js"></script>
 </body>
 </html>

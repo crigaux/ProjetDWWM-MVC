@@ -20,7 +20,7 @@
 				</div>
 				<?php
 				foreach ($orders as $order) {
-					$target_file = strtolower(str_replace(' ', '', $order->title)) . '.jpg';
+					$target_file = $order->id_dishes . '.jpg';
 				?>
 					<div class="order">
 						<img src="<?= "/public/assets/galery/" . $target_file ?>" alt="photo du plat : <?= $order->title ?>">
@@ -33,6 +33,9 @@
 								<div class="quantity">x <?= $order->quantity ?></div>
 								<div class="totalPrice"><?= $order->price * $order->quantity ?>€</div>
 							</div>
+						</div>
+						<div class="delOrderBtn btnDeleteOrderConf" id="<?=$order->id?>">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
 						</div>
 					</div>
 				<?php
@@ -52,7 +55,7 @@
 			<a href="/profil/commande/edit/<?= $reservation->id ?>"><button type="submit">
 				Modifier
 			</button></a>
-			<div class="btnDeleteConf" id="<?=$reservation->id?>">Supprimer</div>
+			<div class="btnDeleteConf" id="<?= $reservation->id ?>">Supprimer</div>
 		</div>
 	<?php
 	}
@@ -68,10 +71,20 @@
 
 <div class="modale">
 	<div class="modaleContent">
-		<h2>Supprimer le plat</h2>
+		<h2>Supprimer la commande</h2>
 		<div class="modaleBtn">
 			<button>Annuler</button>
 			<a class="deleteOrderLink" href="">Supprimer</a>
+		</div>
+	</div>
+</div>
+
+<div class="modale modale2">
+	<div class="modaleContent">
+		<h2>Supprimer le plat</h2>
+		<div class="modaleBtn">
+			<button>Annuler</button>
+			<a class="deleteOneOrderLink" href="">Supprimer</a>
 		</div>
 	</div>
 </div>
@@ -82,5 +95,6 @@
 <?php $message = SessionFlash::get('error') ?>
 <?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorMessage">' . $message . '</div></div>'; ?>
 
-<script src="../../public/assets/js/menuBurger.js"></script>
+<script src="../../public/assets/js/menuBurgerDB.js"></script>
 <script src="../../public/assets/js/confirmOrderUserDelete.js"></script>
+<script src="../../public/assets/js/confirmOneOrderDelete.js"></script>

@@ -15,3 +15,7 @@
 		locale: 'fr_FR',
 		pattern: 'EEEE d MMMM yyyy'
 	);
+
+	// Définition de 'secret'
+
+	define('SECRET', 'Annexe_Restaurant753951');

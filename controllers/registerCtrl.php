@@ -6,10 +6,13 @@ use PHPMailer\PHPMailer\Exception;
 
 require_once(__DIR__ . '/../vendor/autoload.php');
 
+require_once(__DIR__ . '/../config/config.php');
 require_once(__DIR__ . '/../config/regex.php');
+require_once(__DIR__ . '/../config/Database.php');
 require_once(__DIR__ . '/../helpers/testInputs.php');
 require_once(__DIR__ . '/../helpers/SessionFlash.php');
 require_once(__DIR__ . '/../models/User.php');
+require_once(__DIR__ . '/../helpers/JWT.php');
 
 if (isset($_SESSION['user'])) {
     header('Location: /');
@@ -65,17 +68,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($errors)) {
+        $pdo = Database::getInstance();
         $user = new User($lastname, $firstname, $email, $phoneNb, 0, $newsletter);
         $password = password_hash($password, PASSWORD_DEFAULT);
         $user->setPassword($password);
 
         if ($user->create() == true) {
+            // Création du header
+            $header = [
+                'typ' => 'JWT',
+                'alg' => 'HS256'
+            ];
+
+            // Création du payload
+            $payload = [
+                'user_id' => $pdo->lastInsertId(),
+            ];
+
+            $token = JWT::generate($header, $payload, 900);
+
             $mail = new PHPMailer(true);
 
             try {
                 //Server settings
                 $mail->CharSet = 'UTF-8';
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                $mail->SMTPDebug = false;                      //Enable verbose debug output
                 $mail->isSMTP();                                            //Send using SMTP
                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -98,15 +115,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'Votre inscription a bien été prise en compte';
-                $mail->Body    = 'Bonjour ' . $firstname . ' ' . $lastname . ',<br> Nous sommmes ravis de vous compter parmis nos clients. <br> Nous vous attendons avec impatience !';
+                $mail->Subject = 'Veuillez confirmer votre inscription';
+                $mail->Body    = 'Bonjour ' . $firstname . ' ' . $lastname . ',<br> Veuillez cliquer sur le lien suivant pour confirmer votre inscription. <br> <a href="' . $_SERVER['HTTP_ORIGIN'] . '/jwtverif?token=' . $token .'">Valider mon inscription</a> !';
                 // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 $mail->send();
-                echo 'Message has been sent';
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
+            SessionFlash::set('message', 'Un email de confirmation vous a été envoyé');
             header('Location: /connexion');
             exit();
         } else {

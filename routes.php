@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__.'/router.php';
-
 any('/accueil', 'controllers/homeCtrl.php');
 get('/', 'controllers/homeCtrl.php');
 get('/menu', 'controllers/menuCtrl.php');
@@ -34,6 +33,8 @@ any('/profil', 'controllers/user/userCtrl.php');
 any('/profil/edit', 'controllers/user/userCtrl.php');
 // Recherche d'un utilisateur
 any('/admin/membres/search', 'controllers/admin/dbUsersCtrl.php');
+// Suppression du profil
+any('/profil/user/delete', 'controllers/user/userCtrl.php');
 
 // ########################
 // Gestion des réservations
@@ -57,7 +58,6 @@ any('/profil/reservation/edit/$id', 'controllers/user/userCtrl.php');
 // ############################
 // Gestion du menu et des plats
 // ############################
-
 // Menu
 get('/admin/menu', 'controllers/admin/dbDishesCtrl.php');
 // Ajout d'un plat
@@ -87,6 +87,8 @@ any('/profil/commandes', 'controllers/user/userCtrl.php');
 any('/profil/commande/edit/$id', 'controllers/user/userCtrl.php');
 // Supprimer une commande (user)
 any('/profil/commande/delete/$id', 'controllers/user/userCtrl.php');
+// Supprimer une plat d'une commande (user)
+any('/admin/commande/plat/delete/$id', 'controllers/user/userCtrl.php');
 
 // ########################
 // Gestion des commentaires
@@ -116,5 +118,9 @@ any('/getLastDishesAjax', 'helpers/ajax/dishesPreview.php');
 any('/getLastDessertsAjax', 'helpers/ajax/dessertsPreview.php');
 any('/getLastReviewsAjax', 'helpers/ajax/lastReviews.php');
 
+get('/jwtverif', 'controllers/JWTVerifCtrl.php');
+any('/modif-mdp', 'controllers/resetPwdCtrl.php');
+
+get('/cgu', 'controllers/cguCtrl.php');
 // Page not found
 any('/404','/404.php');

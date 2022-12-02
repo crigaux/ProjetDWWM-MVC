@@ -23,7 +23,7 @@
 		<?= empty($errors['time']) ? '' : '<div class="errorMessage">' . $errors['time'] . '</div>' ?>
 
 		<label>Plats et quantités</label>
-		<div class="orderSelect">
+		<div class="orderSelect" id="orderSelect">
 			<?php
 			$orders = Order::getAll($id);
 			foreach ($orders as $order) {
@@ -32,7 +32,7 @@
 					<?php
 					foreach ($dishes as $dish) {
 					?>
-						<option <?= ($dish->title == $order->title) ? 'selected' : '' ; ?> value="<?= $dish->id ?>"><?= $dish->title ?></option>
+						<option <?= ($dish->title == $order->title) ? 'selected' : ''; ?> value="<?= $dish->id ?>"><?= $dish->title ?></option>
 					<?php
 					}
 					?>
@@ -41,7 +41,7 @@
 					<?php
 					for ($i = 1; $i < 9; $i++) {
 					?>
-						<option <?= ($order->quantity == $i) ? 'selected' : '' ; ?>><?= $i ?></option>
+						<option <?= ($order->quantity == $i) ? 'selected' : ''; ?>><?= $i ?></option>
 					<?php
 					}
 					?>
@@ -50,8 +50,10 @@
 			}
 			?>
 		</div>
+		<div class="addDish">+</div>
 		<button type="submit">Modifier</button>
 	</form>
 </div>
 
-<script src="/../public/assets/js/menuBurger.js"></script>
+<script src="/../public/assets/js/menuBurgerDB.js"></script>
+<script src="/../public/assets/js/addDishOrder.js"></script>

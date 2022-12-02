@@ -49,7 +49,7 @@
             }
 
             if(empty($errors)) {
-                $reservation = new Reservation($nbOfClients, $datetime, 1);
+                $reservation = new Reservation($nbOfClients, $datetime, $_SESSION['user']->id);
                 $reservation->create();
                 SessionFlash::set('added', 'Votre réservation a bien été prise en compte.');
                 header('Location: /');

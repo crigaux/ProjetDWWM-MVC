@@ -166,6 +166,8 @@
     }
 
     .reservationType button {
+        width: 40%;
+        font-size: 1.4rem;
         margin: 1rem 3rem;
         width: 45%;
     }

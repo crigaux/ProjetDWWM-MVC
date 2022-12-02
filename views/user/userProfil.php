@@ -19,7 +19,19 @@
 		</fieldset>
 		<div class="errorMessage"><?= $errors['newsletter'] ?? '' ?></div>
 		<button type="submit">Modifier</button>
+		<div class="btnDeleteConf">Supprimer</div>
 	</form>
 </div>
 
-<script src="../../public/assets/js/menuBurger.js"></script>
+<div class="modale">
+	<div class="modaleContent">
+		<h2>Supprimer votre profil</h2>
+		<div class="modaleBtn">
+			<button>Annuler</button>
+			<a class="deleteUserLink" href="">Supprimer</a>
+		</div>
+	</div>
+</div>
+
+<script src="../../public/assets/js/menuBurgerDB.js"></script>
+<script src="../../public/assets/js/confirmProfilDelete.js"></script>

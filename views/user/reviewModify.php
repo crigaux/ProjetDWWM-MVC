@@ -1,5 +1,5 @@
 <div class="userProfil">
-	<h1>MES RÉSERVATIONS</h1>
+	<h1>COMMENTAIRES</h1>
 
 	<h2>Modifier</h2>
 	<div class="openBurger">
@@ -16,4 +16,4 @@
 	</form>
 </div>
 
-<script src="/../public/assets/js/menuBurger.js"></script>
+<script src="../../../public/assets/js/menuBurgerDB.js"></script>

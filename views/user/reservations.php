@@ -55,7 +55,7 @@
 
 <div class="modale">
 	<div class="modaleContent">
-		<h2>Supprimer le plat</h2>
+		<h2>Supprimer la réservation</h2>
 		<div class="modaleBtn">
 			<button>Annuler</button>
 			<a class="deleteReservationLink" href="">Supprimer</a>
@@ -69,5 +69,5 @@
 <?php $message = SessionFlash::get('error') ?>
 <?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorMessage">' . $message . '</div></div>'; ?>
 
-<script src="../../public/assets/js/menuBurger.js"></script>
+<script src="../../public/assets/js/menuBurgerDB.js"></script>
 <script src="../../public/assets/js/confirmReservationDeleteUser.js"></script>

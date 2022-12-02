@@ -73,4 +73,5 @@ try {
   }
 } catch (\Throwable $ex) {
   header('location: /erreur');
+  exit();
 }

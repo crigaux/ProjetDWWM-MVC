@@ -27,9 +27,9 @@ if ((isset($_SESSION) && $_SESSION['user']->admin != 1) || !isset($_SESSION)) {
 if ($_SERVER['REQUEST_URI'] == '/admin/commentaires') {
 	$reviews = Review::getAll();
 
-	include(__DIR__ . '/../../views/test/templates/dbHeader.php');
-	include(__DIR__ . '/../../views/test/dbReview.php');
-	include(__DIR__ . '/../../views/test/templates/dbFooter.php');
+	include(__DIR__ . '/../../views/admin/templates/dbHeader.php');
+	include(__DIR__ . '/../../views/admin/dbReview.php');
+	include(__DIR__ . '/../../views/admin/templates/dbFooter.php');
 }
 
 // ###############################################################################
@@ -74,7 +74,7 @@ else if ($_SERVER['REQUEST_URI'] == '/admin/commentaire/edit/validate/' . $id) {
 
 					//Content
 					$mail->isHTML(true);                                  //Set email format to HTML
-					$mail->Subject = 'Votre réservation a été validée';
+					$mail->Subject = 'Votre commentaire a été validé';
 					$mail->Body    = 'Bonjour ' . $review->firstname . ' ' . $review->lastname . ',<br> nous avons bien reçu votre commentaire. <br> Nous vous remercions pour l\'intérêt que vous portez à notre établissement et espérons vous revoir bientôt!';
 					// $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 

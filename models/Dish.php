@@ -66,7 +66,7 @@
 		 * 
 		 * @return true si l'avis a été créé, @return false sinon
 		 */
-		public function create():bool {
+		public function create() {
 			$query = 
 			"INSERT INTO `dishes` (`title`, `price`, `description`, `active`, `id_users`, `id_dishes_types`) 
 			VALUES (:title, :price, :description, :active, :id_users, :id_dishes_types);";
@@ -83,7 +83,6 @@
 			if($sth->execute()) {
 				return ($sth->rowCount() >= 0) ?  true : false;
 			}
-			return false;
 		}
 
 		/**
@@ -97,7 +96,7 @@
 				$query = "SELECT * FROM `dishes`";
 				$sth = $pdo->prepare($query);
 			} else {
-				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :id_dishes_types";
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :id_dishes_types;";
 				$sth = $pdo->prepare($query);
 				$sth->bindValue(':id_dishes_types', $type, PDO::PARAM_INT);
 			}
@@ -117,13 +116,13 @@
 		public static function getLast(string $type):array|false {
 			$pdo = Database::getInstance();
 			if($type == 'starters') {
-				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 1 ORDER BY `id` DESC LIMIT 3";
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 1 ORDER BY `id` DESC LIMIT 3;";
 				$sth = $pdo->prepare($query);
 			} else if($type == 'dishes') {
-				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 2 ORDER BY `id` DESC LIMIT 3";
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 2 ORDER BY `id` DESC LIMIT 3;";
 				$sth = $pdo->prepare($query);
 			} else if($type == 'desserts') {
-				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 3 ORDER BY `id` DESC LIMIT 3";
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = 3 ORDER BY `id` DESC LIMIT 3;";
 				$sth = $pdo->prepare($query);
 			}
 			if($sth->execute()) {

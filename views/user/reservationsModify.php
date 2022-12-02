@@ -27,4 +27,4 @@
 	</form>
 </div>
 
-<script src="/../public/assets/js/menuBurger.js"></script>
+<script src="/../public/assets/js/menuBurgerDB.js"></script>

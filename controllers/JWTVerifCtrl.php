@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../models/User.php');
 
 $token = filter_input(INPUT_GET, 'token', FILTER_SANITIZE_SPECIAL_CHARS);
 
-if(JWT::check($token) == true && JWT::isValid($token) == true) {
+if(JWT::check($token) == true) {
 	$id = JWT::getPayload($token)['user_id'];
 	User::validate($id);
 	SessionFlash::set('message', 'Votre compte a bien été validé');

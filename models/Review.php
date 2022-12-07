@@ -115,7 +115,7 @@
 		 */
 		public static function get(int $id):mixed {
 			$query = 
-			"SELECT `reviews`.`id`, `reviews`.`title`, `reviews`.`content`, `reviews`.`moderated_at`, `users`.`firstname`, `users`.`lastname`, `users`.`email` FROM `reviews` 
+			"SELECT `reviews`.`id`, `reviews`.`title`, `reviews`.`content`, `reviews`.`id_users`, `reviews`.`moderated_at`, `users`.`firstname`, `users`.`lastname`, `users`.`email` FROM `reviews` 
 			INNER JOIN `users` ON `reviews`.`id_users` = `users`.`id`
 			WHERE `reviews`.`id` = :id;";
 

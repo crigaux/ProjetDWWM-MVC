@@ -41,11 +41,16 @@ else if ($_SERVER['REQUEST_URI'] == '/admin/membres/search') {
 }
 
 // ###############################################################################
-// ###                       AFFICHAGE DES UTILISATEURS                        ###	
+// ###                     MODIFICATION DES UTILISATEURS                       ###	
 // ###############################################################################
 
 else if ($_SERVER['REQUEST_URI'] == '/admin/membre/edit/' . $id) {
 	$id = intval($id);
+	if(User::idExist($id) == false){
+		SessionFlash::set('error', 'L\'utilisateur n\'existe pas');
+		header('Location: /admin/membres');
+		exit;
+	}
 
 	$user = User::get($id);
 

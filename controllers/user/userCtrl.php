@@ -94,27 +94,6 @@ else if ($_SERVER['REQUEST_URI'] == '/profil/reservations') {
 }
 
 // ###############################################################################
-// ###                        SUPPRIME UNE RÉSERVATION                          ###	
-// ###############################################################################
-
-else if ($_SERVER['REQUEST_URI'] == '/profil/reservation/delete') {
-	$id = intval($_SESSION['user']->id);
-
-	if (Reservation::delete($id) == true) {
-		SessionFlash::set('message', 'Votre réservation a bien été supprimée');
-		header('Location: /profil/reservations');
-		exit();
-	} else {
-		SessionFlash::set('error', 'Une erreur est survenue lors de la suppression de votre réservation');
-		header('Location: /profil/reservations');
-		exit();
-	}
-
-	include(__DIR__ . '/../../views/user/userHeader.php');
-	include(__DIR__ . '/../../views/user/reservations.php');
-}
-
-// ###############################################################################
 // ###                         AFFICHE LES COMMANDES                           ###	
 // ###############################################################################
 
@@ -171,6 +150,7 @@ else if ($_SERVER['REQUEST_URI'] == '/profil/reservation/edit/' . $id) {
 	$id = intval($id);
 
 	$reservations = Reservation::getByUser($_SESSION['user']->id);
+
 	foreach ($reservations as $reservation) {
 		if ($reservation->id == $id) {
 			$reservation = Reservation::get($id);
@@ -216,6 +196,10 @@ else if ($_SERVER['REQUEST_URI'] == '/profil/reservation/edit/' . $id) {
 					}
 				}
 			}
+		} else {
+			SessionFlash::set('error', 'Vous ne pouvez pas modifier cette réservation');
+			header('Location: /profil/reservations');
+			exit();
 		}
 	}
 
@@ -253,6 +237,10 @@ else if ($_SERVER['REQUEST_URI'] == '/profil/commentaire/edit/' . $id) {
 					}
 				}
 			}
+		} else {
+			SessionFlash::set('error', 'Vous ne pouvez pas modifier ce commentaire');
+			header('Location: /profil/commentaires');
+			exit();
 		}
 	}
 
@@ -300,6 +288,10 @@ else if ($_SERVER['REQUEST_URI'] == '/profil/commande/edit/' . $id) {
 				$dishId = filter_input(INPUT_POST, 'dishes', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
 				$quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
 
+				if(empty($dishId)) {
+					$errors['dishes'] = 'Vous devez choisir au moins un plat';
+				}
+				
 				if (testInput($date, DATE_REGEX) != 'true') {
 					$errors['date'] = testInput($date, DATE_REGEX);
 				}
@@ -319,6 +311,10 @@ else if ($_SERVER['REQUEST_URI'] == '/profil/commande/edit/' . $id) {
 					exit;
 				}
 			}
+		} else {
+			SessionFlash::set('error', 'Vous ne pouvez pas modifier cette commande');
+			header('Location: /profil/commandes');
+			exit;
 		}
 	}
 
@@ -327,27 +323,53 @@ else if ($_SERVER['REQUEST_URI'] == '/profil/commande/edit/' . $id) {
 }
 
 // ###############################################################################
-// ###                        SUPPRIME UNE RÉSERVATION                         ###	
+// ###                        SUPPRIME UNE COMMANDE                         ###	
 // ###############################################################################
 
 else if ($_SERVER['REQUEST_URI'] == '/profil/commande/delete/' . $id) {
-
-	$reservations = Order::getByUser($_SESSION['user']->id);
-	foreach ($reservations as $reservation) {
-		if ($reservation->id == $id) {
-			if(Reservation::delete($id)) {
-				SessionFlash::set('message', 'Votre commande a bien été supprimée.');
-				header('Location: /profil/commandes');
-				exit;
-			} else {
-				SessionFlash::set('error', 'Une erreur est survenue lors de la suppression de votre commande.');
-				header('Location: /profil/commandes');
-				exit;
-			}
+	$id = intval($id);
+	$reservation = Order::get($id);
+	if($reservation->id_users == $_SESSION['user']->id) {
+		if(Reservation::delete($id) == true) {
+			SessionFlash::set('message', 'Votre commande a bien été supprimée.');
+			header('Location: /profil/commandes');
+			exit;
+		} else {
+			SessionFlash::set('error', 'Une erreur est survenue lors de la suppression de votre commande.');
+			header('Location: /profil/commandes');
+			exit;
 		}
+	} else {
+		SessionFlash::set('error', 'Vous ne pouvez pas supprimer cette commande');
+		header('Location: /profil/commandes');
+		exit;
 	}
 }
 
+// ###############################################################################
+// ###                        SUPPRIME UNE RÉSERVATION                         ###	
+// ###############################################################################
+
+else if ($_SERVER['REQUEST_URI'] == '/profil/reservation/delete/' . $id) {
+	$id = intval($id);
+	$reservation = Reservation::get($id);
+	if($reservation->id_users == $_SESSION['user']->id) {
+		if(Reservation::delete($id) == true) {
+			SessionFlash::set('message', 'Votre commande a bien été supprimée.');
+			header('Location: /profil/reservations');
+			exit;
+		} else {
+			SessionFlash::set('error', 'Une erreur est survenue lors de la suppression de votre commande.');
+			header('Location: /profil/reservations');
+			exit;
+		}
+	} else {
+		SessionFlash::set('error', 'Vous ne pouvez pas supprimer cette commande');
+		header('Location: /profil/reservations');
+		exit;
+	}
+}
+		
 // ###############################################################################
 // ###                     SUPPRIME UN PLAT D'UNE COMMANDE                     ###	
 // ###############################################################################
@@ -364,7 +386,7 @@ else if ($_SERVER['REQUEST_URI'] == '/admin/commande/plat/delete/' . $id) {
 	foreach ($orders as $order) {
 		if ($order->id == $id) {
 			if(Order::delete($id)) {
-				if(empty(Reservation::getOrdersByReservation($id_reservation))) {
+				if((Reservation::getOrdersByReservation($id_reservation)) == false) {
 					Reservation::delete($id_reservation);
 				}
 				SessionFlash::set('message', 'Votre plat a bien été supprimée.');
@@ -375,6 +397,8 @@ else if ($_SERVER['REQUEST_URI'] == '/admin/commande/plat/delete/' . $id) {
 				header('Location: /profil/commandes');
 				exit;
 			}
+			header('Location: /profil/commandes');
+			exit;
 		}
 	}
 }
@@ -397,6 +421,10 @@ else if ($_SERVER['REQUEST_URI'] == '/profil/commentaire/delete/' . $id) {
 				header('Location: /profil/commentaires');
 				exit;
 			}
+		} else {
+			SessionFlash::set('error', 'Vous ne pouvez pas supprimer ce commentaire');
+			header('Location: /profil/commentaires');
+			exit;
 		}
 	}
 }

@@ -13,8 +13,8 @@
         text-decoration: none;
     }
 
-    /*  ################################################################ 
-    ####################### Gestion Menu Desktop #######################
+    /* ################################################################ 
+    ####################### Gestion Menu Desktop ######################
     ################################################################*/
 
     .overlayMenuBurger {
@@ -54,6 +54,12 @@
         color: white;
         text-transform: uppercase;
         font-size: 1.2rem;
+    }
+
+    .logOutIconDesk {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     nav button {
@@ -330,4 +336,10 @@
     left: 0;
     right: 0;
     opacity: 1;
+}
+
+/* CGU */
+
+.cgu h2 {
+    font-size: 3rem;
 }

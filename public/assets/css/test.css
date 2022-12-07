@@ -480,6 +480,10 @@ button:hover {
 }
 
 .errorContainer {
+	position: fixed;
+	top: 5%;
+	left: 50%;
+	transform: translateX(-50%);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -488,7 +492,14 @@ button:hover {
 	font-weight: 600;
 	margin-top: 2rem;
 	height: fit-content;
-	z-index: 5;
+	z-index: 20;
+}
+
+.errorSession {
+	background-color: #F94416;
+	padding: 1rem 2rem;
+	border-radius: 2px;
+	color: #f3f3f3;
 }
 
 .reservation .errorMessage {
@@ -695,7 +706,7 @@ button:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-right: .2rem;
+	margin-right: 1rem;
 }
 
 .delOrderBtn svg {
@@ -820,6 +831,7 @@ button:hover {
 .orders img {
 	height: 100px;
 	width: 100px;
+	min-width: 100px;
 	object-fit: cover;
 	object-position: center;
 	border-top-left-radius: 12px ;
@@ -857,6 +869,7 @@ button:hover {
 
 .orders .quantity {
 	font-size: 1.2rem;
+	text-align: right;
 	font-weight: var(--logo-weight);
 }
 

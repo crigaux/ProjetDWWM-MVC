@@ -242,7 +242,7 @@
 		public static function getOrdersByReservation(int $id):array {
 			$pdo = Database::getInstance();
 
-			$query = "SELECT `orders`.`id`, `orders`.`id_reservations` FROM `orders` INNER JOIN `reservations` ON `orders`.`id_reservations` = `reservations`.`id` WHERE `orders`.`id` = :id;";
+			$query = "SELECT `orders`.`id`, `orders`.`id_reservations` FROM `orders` INNER JOIN `reservations` ON `orders`.`id_reservations` = `reservations`.`id` WHERE `reservations`.`id` = :id;";
 
 			$sth = $pdo->prepare($query);
 

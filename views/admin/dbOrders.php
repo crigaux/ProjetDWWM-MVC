@@ -3,8 +3,6 @@
 
 	<?php
 		foreach ($reservations as $reservation) {
-			echo '<pre>' , var_dump($reservations) , '</pre>';
-			die();
 			$orders = Order::getAll($reservation->id);
 	?>
 		<div class="orderContainer">
@@ -31,7 +29,7 @@
 				</div>
 				<?php
 					foreach($orders as $order) {
-						$target_file = strtolower(str_replace(' ', '', $order->title)) . '.jpg';
+						$target_file = $order->id_dishes . '.jpg';
 				?>
 						<div class="order">
 							<img src="<?= "/public/assets/galery/" . $target_file ?>" alt="photo du plat : <?= $order->title ?>">
@@ -94,7 +92,7 @@
 
 <div class="modale">
 	<div class="modaleContent">
-			<h2>Supprimer le plat</h2>
+			<h2>Supprimer la commande</h2>
 			<div class="modaleBtn">
 				<button>Annuler</button>
 				<a class="deleteOrderLink" href="">Supprimer</a>

@@ -13,8 +13,8 @@
 		<input type="phone" name="phone" placeholder="Numéro de téléphone*" value="<?= $phoneNb ?? $user->phone ?>" required pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$">
 		<div class="errorMessage"><?= $errors['phone'] ?? '' ?></div>
 		<select name="role">
-			<option value="1">Admin</option>
-			<option value="2">Utilisateur</option>
+			<option <?= ($user->admin == 1) ? 'selected' : '' ?> value="1">Admin</option>
+			<option <?= ($user->admin == 0) ? 'selected' : '' ?> value="2">Utilisateur</option>
 		</select>
 		<button type="submit">Modifier</button>
 	</form>

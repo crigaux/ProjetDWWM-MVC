@@ -48,7 +48,7 @@
 
 <div class="modale">
 	<div class="modaleContent">
-		<h2>Supprimer le plat</h2>
+		<h2>Supprimer le commentaire</h2>
 		<div class="modaleBtn">
 			<button>Annuler</button>
 			<a class="deleteReviewLink" href="">Supprimer</a>
@@ -60,7 +60,7 @@
 <?= ($message == '') ? '' : '<div class="messageContainer"><div class="message">' . $message . '</div></div>'; ?>
 
 <?php $message = SessionFlash::get('error') ?>
-<?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorMessage">' . $message . '</div></div>'; ?>
+<?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorSession">' . $message . '</div></div>'; ?>
 
 <script src="../../public/assets/js/validateReview.js"></script>
 <script src="../../public/assets/js/confirmReviewDelete.js"></script>

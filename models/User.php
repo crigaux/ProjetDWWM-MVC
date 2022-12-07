@@ -251,8 +251,11 @@
 			$sth->bindValue(':email', $email, PDO::PARAM_STR);
 
 			if($sth->execute()) {
-				return ($sth->fetch() === false) ? false : true;
+				if($sth->fetch() != false) {
+					return true;
+				}
 			}
+			return false;
 		}
 
 		/**
@@ -294,10 +297,11 @@
 			$sth->bindValue(':id', $id, PDO::PARAM_INT);
 
 			if($sth->execute()) {
-				if (empty($sth->fetch())){
-					return ((self::validate($id)) ? true : false);
+				if($sth->fetch() != false) {
+					return true;
 				}
 			}
+			return false;
 		}
 		
 		/**

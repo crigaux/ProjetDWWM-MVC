@@ -13,10 +13,10 @@ header h3 {
 }
 
 .reviews h2 {
-    margin: 1rem 0 0.5rem 0;
+    margin: 2rem 0 2rem 0;
     color: #A57D5C;
     text-align: center;
-    margin: 1.5rem;
+    font-size: 2.5rem;
 }
 
 .review {

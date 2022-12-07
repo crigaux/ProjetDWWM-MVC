@@ -8,11 +8,11 @@ require_once(__DIR__ . '/../../vendor/autoload.php');
 
 require_once(__DIR__ . '/../../models/Review.php');
 require_once(__DIR__ . '/../../helpers/SessionFlash.php');
-require_once(__DIR__ . '/../../helpers/testinputs.php');
+require_once(__DIR__ . '/../../helpers/testInputs.php');
 require_once(__DIR__ . '/../../config/regex.php');
 
 // ###############################################################################
-// ###                    TEST SI L'UTILISATEUR EST UN ADMIN                   ###	
+// ###                    TEST SI L'UTILISATEUR EST UN ADMIN                   ###
 // ###############################################################################
 
 if ((isset($_SESSION) && $_SESSION['user']->admin != 1) || !isset($_SESSION)) {

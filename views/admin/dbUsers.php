@@ -53,7 +53,7 @@
 
 <div class="modale">
 	<div class="modaleContent">
-		<h2>Supprimer le plat</h2>
+		<h2>Supprimer l'utilisateur</h2>
 		<div class="modaleBtn">
 			<button>Annuler</button>
 			<a class="deleteUserLink" href="">Supprimer</a>
@@ -65,6 +65,6 @@
 <?= ($message == '') ? '' : '<div class="messageContainer"><div class="message">' . $message . '</div></div>'; ?>
 
 <?php $message = SessionFlash::get('error') ?>
-<?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorMessage">' . $message . '</div></div>'; ?>
+<?= ($message == '') ? '' : '<div class="errorContainer"><div class="errorSession">' . $message . '</div></div>'; ?>
 
 <script src="../../public/assets/js/confirmUserDelete.js"></script>

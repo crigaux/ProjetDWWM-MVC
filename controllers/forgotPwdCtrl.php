@@ -18,6 +18,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (testInput($email, MAIL_REGEX) != 'true') {
         $errors['email'] = testInput($email, MAIL_REGEX);
     }
+
+    if(User::isExist($email) == false) {
+        SessionFlash::set('error', 'Cet email n\'existe pas');
+        header('Location: /oubli-mot-de-passe');
+        exit();
+    }
     
     $user = User::get(NULL, $email);
 

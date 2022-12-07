@@ -11,7 +11,7 @@
         <?= ($message == '') ? '' : '<div class="messageContainer"><div class="message">' . $message . '</div></div>'; ?>
 
         <?php $message = SessionFlash::get('error') ?>
-        <?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorMessage">' . $message . '</div></div>'; ?>
+        <?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorSession">' . $message . '</div></div>'; ?>
 
     </main>
     <script src="../../public/assets/js/script.js"></script>

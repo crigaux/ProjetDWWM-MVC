@@ -51,7 +51,7 @@ any('/admin/reservation/delete/$id', 'controllers/admin/dbReservationsCtrl.php')
 // Réservations (user)
 any('/profil/reservations', 'controllers/user/userCtrl.php');
 // Suppression d'une réservation (user)
-any('/profil/reservation/delete', 'controllers/user/dbReservationsCtrl.php');
+any('/profil/reservation/delete/$id', 'controllers/user/userCtrl.php');
 // Modification d'une réservation (user)
 any('/profil/reservation/edit/$id', 'controllers/user/userCtrl.php');
 
@@ -59,6 +59,7 @@ any('/profil/reservation/edit/$id', 'controllers/user/userCtrl.php');
 // Gestion du menu et des plats
 // ############################
 // Menu
+get('/admin/', 'controllers/admin/dbDishesCtrl.php');
 get('/admin/menu', 'controllers/admin/dbDishesCtrl.php');
 // Ajout d'un plat
 any('/admin/menu/ajout', 'controllers/admin/dbDishesCtrl.php');

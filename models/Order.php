@@ -63,9 +63,9 @@
 		/**
 		 * Méthode permettant de récupérer toutes les commandes
 		 * 
-		 * @return array $orders
+		 * @return array $orders ou false
 		 */
-		public static function getAll($id):array {
+		public static function getAll($id):array|bool {
 			$pdo = Database::getInstance();
 
 			$query = 
@@ -85,6 +85,29 @@
 			return false;
 		}
 
+		/**
+		 * Méthode permettant de récupérer une commande
+		 * 
+		 * @return object $order ou false
+		 */
+		public static function get($id):object|bool {
+			$pdo = Database::getInstance();
+
+			$query = 
+			"SELECT * FROM `orders` 
+			INNER JOIN reservations ON `orders`.`id_reservations` = `reservations`.`id` 
+			INNER JOIN users ON `reservations`.`id_users` = `users`.`id` 
+			WHERE `reservations`.`id` = :id;";
+
+			$sth = $pdo->prepare($query);
+
+			$sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+			if($sth->execute()) {
+				return $sth->fetch();
+			}
+			return false;
+		}
 		/**
 		 * Méthode permettant de modifier une commande
 		 * 
@@ -135,11 +158,11 @@
 			$pdo = Database::getInstance();
 
 			$query = 
-			"SELECT orders.id, orders.id_dishes, reservations.validated_at, users.lastname, users.phone, reservations.reservation_date, dishes.title, orders.quantity, dishes.price FROM `orders` 
-			INNER JOIN reservations ON orders.id_reservations = reservations.id
-			INNER JOIN dishes ON orders.id_dishes = dishes.id
-			INNER JOIN users ON reservations.id_users = users.id
-			WHERE users.id = :id;";
+			"SELECT `orders`.`id`, `orders`.`id_dishes`, `reservations`.`validated_at`, `users`.`id` AS `id_user`, `users`.`lastname`, `users`.`phone`, `reservations`.`reservation_date`, `dishes`.`title`, `orders`.`quantity`, `dishes`.`price` FROM `orders` 
+			INNER JOIN reservations ON `orders`.`id_reservations` = `reservations`.`id`
+			INNER JOIN dishes ON `orders`.`id_dishes` = `dishes`.`id`
+			INNER JOIN users ON `reservations`.`id_users` = `users`.`id`
+			WHERE `users`.`id` = :id;";
 
 			$sth = $pdo->prepare($query);
 

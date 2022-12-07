@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                 $mail->Username   = 'contact.annexe.restaurant@gmail.com';                     //SMTP username
-                $mail->Password   = 'fldfoxotvybsynuo';                               //SMTP password
+                $mail->Password   = 'ctaikohsrkluybqu';                               //SMTP password
                 $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
                 $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -120,12 +120,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 $mail->send();
+                SessionFlash::set('message', 'Un email de confirmation vous a été envoyé');
+                header('Location: /connexion');
+                exit();
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
-            SessionFlash::set('message', 'Un email de confirmation vous a été envoyé');
-            header('Location: /connexion');
-            exit();
         } else {
             SessionFlash::set('error', 'Une erreur est survenue lors de l\'enregistrement de votre compte');
             header('Location: /inscription');

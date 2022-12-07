@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '/../helpers/JWT.php');
 require_once(__DIR__ . '/../helpers/SessionFlash.php');
-require_once(__DIR__ . '/../helpers/testinputs.php');
+require_once(__DIR__ . '/../helpers/testInputs.php');
 require_once(__DIR__ . '/../config/regex.php');
 require_once(__DIR__ . '/../config/config.php');
 require_once(__DIR__ . '/../models/User.php');

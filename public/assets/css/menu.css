@@ -37,11 +37,12 @@ header h3 {
 
 .menuLinks .connect {
     display: flex;
-    margin-bottom: 1rem;
 }
 
 .menuLinks .connect h3 {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: none;
     align-self: flex-end;
     font-family: 'UnicaOne', Courier, monospace;
 }

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_URI'] == '/admin/menu') {
 	$desserts = Dish::getAll(3);
 
 	include(__DIR__ . '/../../views/admin/templates/dbHeader.php');
-	include(__DIR__ . '/../../views/admin/dbdishes.php');
+	include(__DIR__ . '/../../views/admin/dbDishes.php');
 	include(__DIR__ . '/../../views/admin/templates/dbFooter.php');
 }
 
@@ -235,14 +235,16 @@ else if ($_SERVER['REQUEST_URI'] == '/admin/menu/edit/img/' . $id) {
 
 		// Vérifie la taille du fichier
 		if ($_FILES["img"]["size"] > 5000000) {
-			$errors['img'] =  "Le fichier est trop volumineux.";
-			$uploadOk = 0;
+			SessionFlash::set('error', 'Le fichier est trop volumineux.');
+			header('location: /admin/menu');
+			exit();
 		}
 
 		// Filtre les extensions du fichier
 		if ($_FILES["img"]["type"] != 'image/jpeg') {
-			$errors['img'] =  "Le fichier doit avoir l'extension JPG, JPEG";
-			$uploadOk = 0;
+			SessionFlash::set('error', 'Le fichier doit avoir l\'extension JPG, JPEG');
+			header('location: /admin/menu');
+			exit();
 		}
 
 		// Vérifie si $uploadOk est mis à 0 suite à une erreur

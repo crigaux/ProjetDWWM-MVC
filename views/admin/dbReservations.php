@@ -50,7 +50,7 @@
 
 <div class="modale">
 	<div class="modaleContent">
-			<h2>Supprimer le plat</h2>
+			<h2>Supprimer la réservation</h2>
 			<div class="modaleBtn">
 				<button>Annuler</button>
 				<a class="deleteReservationLink" href="">Supprimer</a>

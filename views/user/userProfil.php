@@ -6,9 +6,9 @@
 	</div>
 
 	<form method="POST" action="/profil/edit" class="profilForm">
-		<input type="text" name="name" placeholder="Nom*" value="<?= $user->lastname ?? '' ?>" required pattern="^[A-Za-z-' ]+$">
+		<input type="text" name="name" placeholder="Nom*" value="<?= $user->lastname ?? '' ?>" required pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
 		<div class="errorMessage"><?= $errors['name'] ?? '' ?></div>
-		<input type="text" name="firstname" placeholder="Prénom*" value="<?= $user->firstname ?? '' ?>" required pattern="^[A-Za-z-' ]+$">
+		<input type="text" name="firstname" placeholder="Prénom*" value="<?= $user->firstname ?? '' ?>" required pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
 		<div class="errorMessage"><?= $errors['firstname'] ?? '' ?></div>
 		<input type="email" name="email" placeholder="Adresse mail*" value="<?= $user->email ?? '' ?>" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z-]+\.[a-zA-Z-.]+$">
 		<div class="errorMessage"><?= $errors['email'] ?? '' ?></div>

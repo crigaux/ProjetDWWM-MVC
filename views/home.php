@@ -45,7 +45,7 @@
 
 
             <form method="POST" action="/accueil#reservation" class="reservationOnSpot">
-                <input type="text" placeholder="Nom" name="name" value="<?= $name ?? $_SESSION['user']->lastname ?>" pattern="^[A-Za-z-' ]+$" required>
+                <input type="text" placeholder="Nom" name="name" value="<?= $name ?? $_SESSION['user']->lastname ?>" pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$" required>
                 <?= empty($errors['name']) ? '' : '<div class="errorMessage">' . $errors['name'] . '</div>' ?>
 
                 <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? $_SESSION['user']->phone ?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>
@@ -70,7 +70,7 @@
             </form>
 
             <form method="POST" action="/accueil#reservation" class="reservationToGo">
-                <input type="text" placeholder="Nom" name="name" value="<?= $name ?? $_SESSION['user']->lastname ?>" pattern="^[A-Za-z-' ]+$" required>
+                <input type="text" placeholder="Nom" name="name" value="<?= $name ?? $_SESSION['user']->lastname ?>" pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$" required>
                 <?= empty($errors['name']) ? '' : '<div class="errorMessage">' . $errors['name'] . '</div>' ?>
 
                 <input type="tel" placeholder="Numéro de téléphone" name="phoneNb" value="<?= $phoneNb ?? $_SESSION['user']->phone ?>" pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$" required>

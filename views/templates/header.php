@@ -12,7 +12,7 @@
     <?= isset($isOnMenu) ? '<link rel="stylesheet" href="../../public/assets/css/menu.css">' : ''; ?>
     <?= isset($isOnReview) ? '<link rel="stylesheet" href="../../public/assets/css/review.css">' : ''; ?>
     <?= isset($isOnGalery) ? '<link rel="stylesheet" href="../../public/assets/css/galery.css">' : ''; ?>
-    <title>TEST</title>
+    <title>L'Annexe</title>
 </head>
 
 <body>

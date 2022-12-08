@@ -649,6 +649,11 @@ option {
     display: none;
 }
 
+#displayedReview {
+    width: 90%;
+    max-width: 1000px;
+}
+
 #displayedReview hr {
     margin: 2rem 0;
     width: 80%;

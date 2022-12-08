@@ -968,10 +968,6 @@ button:hover {
 		align-items: end;
 	}
 
-	.orders .orderContainer {
-		width: auto;
-	}
-
 	.orders .totalCart {
 		font-size: var(--subtitle-font-size);
 		font-weight: var(--logo-weight);

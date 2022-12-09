@@ -14,6 +14,7 @@
         <?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorSession">' . $message . '</div></div>'; ?>
 
     </main>
-    <script src="../../public/assets/js/script.js"></script>
+    <!-- <script src="../../public/assets/js/script.js"></script> -->
+    <script src="../../public/assets/js/menuBurger.js"></script>
 </body>
 </html>

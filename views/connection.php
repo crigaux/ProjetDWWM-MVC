@@ -18,6 +18,7 @@
     <?php $message = SessionFlash::get('error') ?>
     <?= ($message == '') ? '' : '<div class="messageContainer"><div class="errorMessage">'.$message.'</div></div>'; ?>
 
-    <script src="../../public/assets/js/script.js"></script>
+    <!-- <script src="../../public/assets/js/script.js"></script> -->
+    <script src="../../public/assets/js/menuBurger.js"></script>
 </body>
 </html>

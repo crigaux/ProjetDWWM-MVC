@@ -1,9 +1,9 @@
         <section class="connectForm">
             <form method="POST">
                 <legend>Connexion</legend>
-                <input type="email" name="email" placeholder="Adresse mail" value="<?=$email ?? 'crigaux013@gmail.com'?>" required>
+                <input type="email" name="email" placeholder="Adresse mail" value="<?=$email ?? ''?>" required>
                 <div class="errorMessage"><?= $errors['email'] ?? '' ?></div>
-                <input type="password" name="password" placeholder="Mot de passe" required value="Motdepasse1234!">
+                <input type="password" name="password" placeholder="Mot de passe" required value="">
                 <div class="errorMessage"><?= $errors['password'] ?? '' ?></div>
                 <button type="submit">Connexion</button>
                 <a href="../inscription">Pas de compte ?</a>

@@ -3,17 +3,17 @@
             <?= ($message == '') ? '' : '<div class="errorContainer"><div class="error">'.$message.'</div></div>'; ?>
             <form method="POST" action="">
                 <legend>Inscription</legend>
-                <input type="text" name="name" placeholder="Nom*" value="<?=$lastname ?? 'Rigaux'?>" required pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
+                <input type="text" name="name" placeholder="Nom*" value="<?=$lastname ?? ''?>" required pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
                 <div class="errorMessage"><?= $errors['name'] ?? '' ?></div>
-                <input type="text" name="firstname" placeholder="Prénom*" value="<?=$firstname ?? 'Claude'?>" required pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
+                <input type="text" name="firstname" placeholder="Prénom*" value="<?=$firstname ?? ''?>" required pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
                 <div class="errorMessage"><?= $errors['firstname'] ?? '' ?></div>
-                <input type="email" name="email" placeholder="Adresse mail*" value="<?=$email ?? 'crigaux013@gmail.com'?>" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z-]+\.[a-zA-Z-.]+$">
+                <input type="email" name="email" placeholder="Adresse mail*" value="<?=$email ?? ''?>" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z-]+\.[a-zA-Z-.]+$">
                 <div class="errorMessage"><?= $errors['email'] ?? '' ?></div>
-                <input type="phone" name="phone" placeholder="Numéro de téléphone*" value="<?=$phoneNb ?? '0612345678'?>" required pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$">
+                <input type="phone" name="phone" placeholder="Numéro de téléphone*" value="<?=$phoneNb ?? ''?>" required pattern="^[0][1-9]-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$">
                 <div class="errorMessage"><?= $errors['phone'] ?? '' ?></div>
-                <input type="password" id="password" name="password" placeholder="Mot de passe*" required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*])[A-Za-z\d!@#$&*]{8,}" value="Motdepasse1234!">
+                <input type="password" id="password" name="password" placeholder="Mot de passe*" required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*])[A-Za-z\d!@#$&*]{8,}" value="">
                 <div class="errorMessage"><?= $errors['password'] ?? '' ?></div>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmation*" required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*])[A-Za-z\d!@#$&*]{8,}" value="Motdepasse1234!">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmation*" required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*])[A-Za-z\d!@#$&*]{8,}" value="">
                 <div class="errorMessage"><?= $errors['confirmPassword'] ?? '' ?></div>
                 <fieldset>
                     <input type="checkbox" name="cgu" class="checkbox" value="1" value="<?=$cgu ?? ''?>">

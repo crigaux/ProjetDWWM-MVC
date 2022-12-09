@@ -1,10 +1,10 @@
         <section class="connectForm">
             <form method="POST">
                 <legend>Connexion</legend>
-                <input type="email" name="email" placeholder="Adresse mail" value="<?=$email ?? ''?>" required>
-                <div class="errorMessage"><?= $errors['email'] ?? 'crigaux013@gmail.com' ?></div>
-                <input type="password" name="password" placeholder="Mot de passe" required>
-                <div class="errorMessage"><?= $errors['password'] ?? 'Motdepasse1234!' ?></div>
+                <input type="email" name="email" placeholder="Adresse mail" value="<?=$email ?? 'crigaux013@gmail.com'?>" required>
+                <div class="errorMessage"><?= $errors['email'] ?? '' ?></div>
+                <input type="password" name="password" placeholder="Mot de passe" required value="Motdepasse1234!">
+                <div class="errorMessage"><?= $errors['password'] ?? '' ?></div>
                 <button type="submit">Connexion</button>
                 <a href="../inscription">Pas de compte ?</a>
                 <a href="../oubli-mot-de-passe">Mot de passe oublié</a>

@@ -38,7 +38,8 @@
             </div>
         </section>
     </main>
-    <script src="../../public/assets/js/script.js"></script>
+    <!-- <script src="../../public/assets/js/script.js"></script> -->
+    <script src="../../public/assets/js/menuBurger.js"></script>
     <script src="../../public/assets/js/pwdTest.js"></script>
 </body>
 </html>

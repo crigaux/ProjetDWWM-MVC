@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Notre restaurant l'Annexe situé au coeur de la ville d'Amiens vous propose une large sélection de plats préparés avec des ingrédients frais et de saison. Réservez une table dès aujourd'hui pour venir profiter de la cuisine de notre chef.">
     <script src="https://kit.fontawesome.com/7194bdd5cb.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="/../../public/assets/img/logo.svg">
     <link rel="stylesheet" media="" href="../../public/assets/css/mobile.css">

@@ -391,6 +391,10 @@ option {
     color: #f3f3f3;
 }
 
+.reservation optgroup {
+    background-color: #333;
+}
+
 .reservation form input::placeholder,
 .reservation form textarea::placeholder {
     color: #f3f3f3;

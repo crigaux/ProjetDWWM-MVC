@@ -42,10 +42,10 @@
                 $errors['time'] = testInput($time, TIME_REGEX);
             }
 
-            if($time == 1) {
-                $datetime = $date . ' 12:00:00';
-            } else {
-                $datetime = $date . ' 19:00:00';
+            foreach ($slots as $key => $slot) {
+                if($time == $key) {
+                    $datetime = $date . ' ' . $slot;
+                }
             }
 
             if(empty($errors)) {
@@ -77,10 +77,10 @@
                 $errors['time'] = testInput($time, TIME_REGEX);
             }
 
-            if($time == 1) {
-                $datetime = $date . ' 12:00:00';
-            } else {
-                $datetime = $date . ' 19:00:00';
+            foreach ($slots as $key => $slot) {
+                if($time == $key) {
+                    $datetime = $date . ' ' . $slot;
+                }
             }
 
             if(empty($errors)) {

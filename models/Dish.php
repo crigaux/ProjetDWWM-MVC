@@ -206,10 +206,10 @@
 		public static function getAllValidated(int $type = NULL):array|false {
 			$pdo = Database::getInstance();
 			if($type == NULL) {
-				$query = "SELECT * FROM `dishes` WHERE `validated_at` IS NOT NULL;";
+				$query = "SELECT * FROM `dishes` WHERE `active` = 2;";
 				$sth = $pdo->prepare($query);
 			} else {
-				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :id_dishes_types AND `validated_at` IS NOT NULL;";
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :id_dishes_types AND `active` = 2;";
 				$sth = $pdo->prepare($query);
 				$sth->bindValue(':id_dishes_types', $type, PDO::PARAM_INT);
 			}

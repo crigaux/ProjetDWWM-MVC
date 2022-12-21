@@ -197,4 +197,25 @@
 			}
 			return false;
 		}
+
+		/**
+		 * Méthode permettant de récupérer tous les plats validés
+		 * 
+		 * @return array ou @return false si aucun plat n'a été trouvé
+		 */
+		public static function getAllValidated(int $type = NULL):array|false {
+			$pdo = Database::getInstance();
+			if($type == NULL) {
+				$query = "SELECT * FROM `dishes` WHERE `validated_at` IS NOT NULL;";
+				$sth = $pdo->prepare($query);
+			} else {
+				$query = "SELECT * FROM `dishes` WHERE `id_dishes_types` = :id_dishes_types AND `validated_at` IS NOT NULL;";
+				$sth = $pdo->prepare($query);
+				$sth->bindValue(':id_dishes_types', $type, PDO::PARAM_INT);
+			}
+			if($sth->execute()) {
+				return $sth->fetchAll();
+			}
+			return false;
+		}
 	}
